@@ -603,3 +603,513 @@ const { elementType } = require("prop-types");
 // };
 
 // console.log(handleDataTypes(input));
+
+// #===============================================================================================================================
+//   Merge Sorted Array
+
+// Solution
+// You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m and n, representing the number of elements in nums1 and nums2 respectively.
+
+// Merge nums1 and nums2 into a single array sorted in non-decreasing order.
+
+// The final sorted array should not be returned by the function, but instead be stored inside the array nums1. To accommodate this, nums1 has a length of m + n, where the first m elements denote the elements that should be merged, and the last n elements are set to 0 and should be ignored. nums2 has a length of n.
+
+// Example 1:
+
+// Input: nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
+// Output: [1,2,2,3,5,6]
+// Explanation: The arrays we are merging are [1,2,3] and [2,5,6].
+// The result of the merge is [1,2,2,3,5,6] with the underlined elements coming from nums1.
+// Example 2:
+
+// Input: nums1 = [1], m = 1, nums2 = [], n = 0
+// Output: [1]
+// Explanation: The arrays we are merging are [1] and [].
+// The result of the merge is [1].
+// Example 3:
+
+// Input: nums1 = [0], m = 0, nums2 = [1], n = 1
+// Output: [1]
+// Explanation: The arrays we are merging are [] and [1].
+// The result of the merge is [1].
+// Note that because m = 0, there are no elements in nums1. The 0 is only there to ensure the merge result can fit in nums1.
+
+// Constraints:
+
+// nums1.length == m + n
+// nums2.length == n
+// 0 <= m, n <= 200
+// 1 <= m + n <= 200
+// -109 <= nums1[i], nums2[j] <= 109
+
+// Follow up: Can you come up with an algorithm that runs in O(m + n) time?
+
+// function merginArrays(nums1, m, nums2, n){
+//     let i = m - 1
+//     let j = n - 1
+//     let k = m + n - 1
+
+//     while (i >= 0 && j >= 0){
+//         if(nums1[i] > nums2[j]){
+//             nums1[k] = nums1[i];
+//             i--;
+//         }
+//         else{
+//             nums1[k] = nums2[j]
+//             j--;
+//         }
+//         k--;
+//     }
+//     while(j >= 0){
+//         nums1[k] = nums2[j];
+//         j--;
+//         k--;
+//     }
+
+// }
+
+// let nums1 = [1, 2, 3, 0, 0, 0];
+// let nums2 = [2, 5, 6];
+// let m = 3, n = 3;
+
+// merginArrays(nums1, m, nums2, n);
+// console.log(nums1);  // ➜ [1, 2, 2, 3, 5, 6]
+
+// #===============================================================================================================================
+
+// ## 🚨 HARD EXERCISE 3: Matrix Word Search
+
+// ### ✅ Problem (Both JavaScript & Python):
+
+// You are given a **2D grid** of characters and a **target word**. Write a function that returns `true` if the word exists in the grid.
+//  The word can be constructed from letters of sequentially adjacent cells, where **"adjacent"** cells are those horizontally or vertically neighboring.
+// //   The same letter cell may **not** be used more than once.txt
+// CopyEdit
+// Input:
+// grid = [
+//   ['A','B','C','E'],
+//   ['S','F','C','S'],
+//   ['A','D','E','E']
+// ]
+// word = "ABCCED"
+
+// Output: true
+
+// Explanation: The word is found by going:
+// A → B → C → C → E → D
+// txt
+// CopyEdit
+// Input:
+// word = "ABCB"
+
+// Output: false (B is reused)
+
+// #------------------------------------------------------------------------------------------------------------------------------
+// function findWord(element, word) {
+//   function compareLetters(i, j, index) {
+//     if (index == word.length) {
+//       return true;
+//     } else if (
+//       i < 0 ||
+//       i >= element.length ||
+//       j < 0 ||
+//       j >= element[i].length ||
+//       element[i][j] != word[index]
+//     ) {
+//       return false;
+//     }
+
+//     let temp = element[i][j];
+//     element[i][j] = "#";
+
+//     let wordFound =
+//       compareLetters(i + 1, j, index + 1) ||
+//       compareLetters(i - 1, j, index + 1) ||
+//       compareLetters(i, j + 1, index + 1) ||
+//       compareLetters(i, j - 1, index + 1);
+//     element[i][j] = temp;
+//     return wordFound;
+//   }
+
+//   for (let i = 0; i < element.length; i++) {
+//     for (let j = 0; j < element[i].length; j++) {
+//       if (element[i][j] == word[0]) {
+//           if (compareLetters(i, j, 0)) return true;
+//       }
+//     }
+//   }
+//   return false;
+// }
+
+// let grid = [
+//   ["A", "B", "C", "E"],
+//   ["S", "F", "C", "S"],
+//   ["A", "D", "E", "E"],
+// ];
+// let word = "ABCCED";
+// result = findWord(grid, word);
+// console.log(result);
+
+// // Output: true
+
+// // Explanation: The word is found by going:
+// // A → B → C → C → E → D
+// #===============================================================================================================================
+// 1) SOLUTION 🟡 Top-Down Memoization (Recursive + Cache)
+// let counter = 0;
+// function climbStairs(steps){
+//     counter++;
+//     if(steps in memo) return memo[steps];
+//     if (steps === 1) return 1;
+//     if( steps === 2) return 2;
+
+//     memo[steps] = climbStairs(steps - 1) + climbStairs(steps - 2);
+//     return memo[steps]
+
+// }
+// let memo = {};
+
+// stepsN = 3
+// console.log(climbStairs(30));
+// console.log(counter);
+// // console.log(memo)
+
+// #===============================================================================================================================
+// 2) SOLUTION 🟢 Tabulation (O(1) space):
+// function climbStairs(steps){
+//     if (steps === 1) return 1
+//     if (steps === 2) return 2
+
+//     let first = 1;
+//     let second = 2;
+//     let current;
+
+//     for (let i = 3; i <= steps; i++){
+//         current = first + second
+//         console.log(`Step ${i}: ${first} + ${second} = ${current}`);
+//         first = second;
+//         second = current
+//     }
+//     return current
+
+// }
+// n = 5
+// result = climbStairs(n)
+// console.log(result);
+
+// #===============================================================================================================================
+
+// ## 🚨 HARD OOP EXERCISE: **"Digital Library System"**
+
+// ### 📚 Problem Description
+
+// You're going to build a **Digital Library System** that manages books, users, and the process of borrowing/returning books.
+
+// ---
+
+// ### ✅ Requirements (apply to **both JavaScript and Python**):
+
+// ### 1. **Class `Book`**
+
+// - Attributes: `title`, `author`, `genre`, `available` (boolean)
+// - Method: `toString()` in JS / `__str__()` in Python — prints book info
+
+// ### 2. **Class `User` (Base Class)**
+
+// - Attributes: `name`, `id`, `borrowedBooks` (or `borrowed_books`)
+// - Methods:
+//     - `borrow(book)`: Can borrow the book only if available
+//     - `returnBook(book)`: Removes book from user's list
+//     - `listBooks()`: Lists current borrowed books
+
+// ### 3. **Subclasses**
+
+// - `Student` → inherits from `User`, max 3 books
+// - `Professor` → inherits from `User`, max 5 books
+
+// ### 4. **Class `Library`**
+
+// - Attributes:
+//     - `books`: list of all books
+//     - `users`: list of all users
+// - Methods:
+//     - `addBook(book)`
+//     - `registerUser(user)`
+//     - `findBookByTitle(title)`
+//     - `showAllBooks()`
+//     - `showUsers()`
+
+// ---
+
+// ### ➕ Bonus Challenges (Optional but Advanced)
+
+// - Prevent returning books that weren’t borrowed
+// - Track borrow dates and calculate late return penalties
+// - Use **composition** for a `LoanManager` helper class
+// - Use `static` methods or decorators (Python)
+
+// ---
+
+// class Book {
+//   constructor(title, author, genre) {
+//     this.title = title;
+//     this.author = author;
+//     this.genre = genre;
+//     this.available = true;
+//   }
+//   toString() {
+//     return `${this.title} by ${this.author} - ${this.genre}`;
+//   }
+// }
+
+// class User {
+//   constructor(name, id) {
+//     this.name = name;
+//     this.id = id;
+//     this.borrowedBooks = [];
+//   }
+//   borrow(book) {
+//     if (book.available) {
+//       this.borrowedBooks.push(book);
+//       book.available = false;
+//       console.log(`${this.name} has borrowed '${book.title}'`);
+//     } else {
+//       console.log(`'${book.title}' is not available`);
+//     }
+//   }
+//   returnBook(book) {
+//     const hasBook = this.borrowedBooks.includes(book);
+//     if (hasBook) {
+//       const index = this.borrowedBooks.indexOf(book);
+//       this.borrowedBooks.splice(index, 1);
+//       book.available = true;
+//       console.log(`${this.name} has returned '${book.title}'`);
+//     } else {
+//       console.log(`${this.name} doesn't have '${book.title}' borrowed`);
+//     }
+//   }
+//   toString(){
+//    return `${this.name} (ID: ${this.id}) - Borrowed Books: ${this.borrowedBooks.length}`;
+//   }
+// }
+
+// class Student extends User {
+//   borrow(book) {
+//     if (this.borrowedBooks.length >= 3) {
+//       console.log(`${this.name} has reached the borrowing limit (3 books).`);
+//     } else {
+//       super.borrow(book);
+//     }
+//   }
+// }
+
+// class Professor extends User {
+//   borrow(book) {
+//     if (this.borrowedBooks.length >= 5) {
+//       console.log(`${this.name} has reached the borrowing limit (3 books).`);
+//     } else {
+//       super.borrow(book);
+//     }
+//   }
+// }
+// class Library {
+//   constructor() {
+//     this.books = [];
+//     this.users = [];
+//   }
+//   addBook(book) {
+//     this.books.push(book);
+//     console.log(`'${book.title}' added to the library.`);
+//   }
+//   registerUser(user) {
+//     const alreadyExists = this.users.some((u) => u.id === user.id);
+//     if (alreadyExists) {
+//       console.log(`User with ID ${user.id} is already registered.`);
+//     } else {
+//       this.users.push(user);
+//       console.log(`'${user.name}' registered successfully.`);
+//     }
+//   }
+//   findBookByTitle(title) {
+//     const findBook = this.books.find((b) => b.title == title);
+//     if (findBook) {
+//       return findBook;
+//     } else {
+//       console.log(`No book found with title '${title}'`);
+//       return null;
+//     }
+//   }
+//   showAllBooks() {
+//     if (this.books.length === 0) {
+//       console.log("No books available");
+//     } else {
+//       console.log("Books in the library:");
+//       for (let book of this.books) {
+//         console.log(` - ${book}`);
+//       }
+//     }
+//   }
+//     showAllUsers() {
+//     if (this.users.length === 0) {
+//       console.log("No users registered");
+//     } else {
+//       console.log("Users registered:");
+//       for (let user of this.users) {
+//         console.log(` - ${user}`);
+//       }
+//     }
+//   }
+// }
+
+// // 📚 Create some books
+// const book1 = new Book("1984", "George Orwell", "Dystopian");
+// const book2 = new Book("Clean Code", "Robert C. Martin", "Tech");
+// const book3 = new Book("The Hobbit", "J.R.R. Tolkien", "Fantasy");
+// const book4 = new Book("Sapiens", "Yuval Noah Harari", "Non-fiction");
+// const book5 = new Book("Brave New World", "Aldous Huxley", "Sci-Fi");
+// const book6 = new Book("The Alchemist", "Paulo Coelho", "Fiction");
+
+// // 🧑‍🎓 Create users
+// const student = new Student("Alice", 101);
+// const professor = new Professor("Dr. Smith", 201);
+
+// // 📖 Create the library and register users
+// const library = new Library();
+
+// library.registerUser(student);
+// library.registerUser(professor);
+
+// // 📘 Add books to the library
+// library.addBook(book1);
+// library.addBook(book2);
+// library.addBook(book3);
+// library.addBook(book4);
+// library.addBook(book5);
+// library.addBook(book6);
+
+// // 👓 Show all books and users
+// console.log("\n--- INITIAL STATE ---");
+// library.showAllBooks();
+// library.showAllUsers();
+
+// // 📥 Student borrows up to the limit
+// student.borrow(book1);
+// student.borrow(book2);
+// student.borrow(book3);
+// student.borrow(book4); // ❌ This should fail due to limit
+
+// // 🧪 Show borrowed books
+// console.log("\n--- STUDENT BORROWED ---");
+// student.borrowedBooks.forEach(b => console.log("Student:", b.toString()));
+
+// // 📥 Professor borrows some books
+// professor.borrow(book4); // This was denied to student
+// professor.borrow(book5);
+// professor.borrow(book6);
+
+// // 🔁 Return a book and retry
+// student.returnBook(book2);    // ✔️ Valid return
+// student.returnBook(book5);    // ❌ Not borrowed by student
+
+// #===============================================================================================================================
+
+//   Pascal's Triangle
+
+// Solution
+// Given an integer numRows, return the first numRows of Pascal's triangle.
+
+// In Pascal's triangle, each number is the sum of the two numbers directly above it as shown:
+
+// Example 1:
+
+// Input: numRows = 5
+// Output: [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]]
+// Example 2:
+
+// Input: numRows = 1
+// Output: [[1]]
+
+// Constraints:
+
+// 1 <= numRows <= 30
+
+// function pascalTriangle(rows){
+//     const result = [];
+//     for(let i = 0; i < rows; i++ ){
+//         const row = [];
+//         for(let j =0; j <=i; j++){
+//             if(j === 0 || j === i){
+//                 row.push(1);
+//             }
+//              else{
+//                 const prev = result[i - 1];
+//                 row.push(prev[j-1] + prev[j])
+//              }
+//         }
+//         result.push(row)
+//     }
+//     return result
+// }
+// let numRows = 5
+// console.log(pascalTriangle(numRows));
+
+//===============================================================================================================================
+// function generate(numRows){
+//     const results = [[1]];
+//     for (let i =1; i < numRows; i++){
+//         const prev = results[i-1]
+//         const row = [1]
+//         for(let j=1; j < i; j++){
+//             row[j] = prev[j-1] + prev[j]
+//         }
+//         row.push(1)
+//         results.push(row)
+
+//     }
+//     return results
+// }
+// let n = 5
+// console.log(generate(n));
+
+//===============================================================================================================================
+
+function findWords(s, wordDict) {
+  const result = [];
+  const wordSet = new Set(wordDict);
+
+  function backTrack(start, path) {
+    // Log each recursive call
+    console.log(
+      `🔁 backTrack called with start=${start}, path=[${path.join(" ")}]`
+    );
+    // Base case: reached the end of the string
+    if (start === s.length) {
+      console.log(`✅ Complete sentence found: ${path.join(" ")}`);
+      result.push(path.join(" "));
+      return;
+    }
+    for (let end = start + 1; end <= s.length; end++) {
+      const word = s.slice(start, end);
+      console.log(`🔍 Checking word: '${word}' (from s[${start}:${end}])`);
+
+      if (wordSet.has(word)) {
+        console.log(
+          `✔ Found valid word: '${word}' — calling backTrack(${end}, [...path, '${word}'])`
+        );
+        backTrack(end, [...path, word]);
+      } else {
+        console.log(`❌ '${word}' is not in wordDict`);
+      }
+    }
+  }
+  backTrack(0, []);
+
+  return result;
+}
+
+const s = "catsanddog";
+const wordDict = ["cat", "cats", "and", "sand", "dog"];
+const output = findWords(s, wordDict);
+
+console.log("\n🎉 Final Result:");
+console.log(output);

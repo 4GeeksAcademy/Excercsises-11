@@ -912,7 +912,7 @@ import copy
 # library.showAllBooks()
 # library.showUsers()
 
-#===============================================================================================================================
+# ===============================================================================================================================
 #   Pascal's Triangle
 
 # Solution
@@ -920,8 +920,6 @@ import copy
 
 # In Pascal's triangle, each number is the sum of the two numbers directly above it as shown:
 
-
- 
 
 # Example 1:
 
@@ -931,7 +929,7 @@ import copy
 
 # Input: numRows = 1
 # Output: [[1]]
- 
+
 
 # Constraints:
 
@@ -948,13 +946,56 @@ import copy
 #             else:
 #                 prev = result[i - 1]
 #                 row.append(prev[j-1] + prev[j])
-#         result.append(row)  
-#     return result               
-            
-
-    
+#         result.append(row)
+#     return result
 
 
-# n=5    
+# n=5
 # print(triangle_pascal(n))
-#------------------------------------------------------------------------------------------------------------------------------
+# #------------------------------------------------------------------------------------------------------------------------------
+# def wordBreak(s, wordDict):
+#     word_set = set(wordDict)
+#     result = []
+
+#     def backtrack(start,path):
+#         if start == len(s):
+#             result.append(" ".join(path))
+#             return
+
+#         for end in range(start + 1, len(s) + 1):
+#             word = s[start:end]
+#             if word in word_set:
+#                 backtrack(end, path + [word])
+#         backtrack(0,[])
+#         return result
+
+
+# s = "catsanddog"
+# wordDict = ["cat", "cats", "and", "sand", "dog"]
+
+# print(wordBreak(s, wordDict))
+# //===============================================================================================================================
+def firstBadVersion(n):
+    left = 1
+    right = n
+
+    def isBadVersion(version):
+        return version >= bad  # Simulates that every version from 'bad' onward is bad
+
+    while left < right:
+        mid = (left + right) // 2
+        print(f"Checking version {mid} (left: {left}, right: {right})")
+
+        if isBadVersion(mid):
+            print(f"Version {mid} is bad, moving right to {mid}")
+            right = mid
+        else:
+            print(f"Version {mid} is good, moving left to {mid + 1}")
+            left = mid + 1
+    return left
+
+
+n = 5
+bad = 3
+
+print("First bad version is:", firstBadVersion(n))  # Output: 4

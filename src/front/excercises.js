@@ -1073,43 +1073,104 @@ const { elementType } = require("prop-types");
 
 //===============================================================================================================================
 
-function findWords(s, wordDict) {
-  const result = [];
-  const wordSet = new Set(wordDict);
+// function findWords(s, wordDict) {
+//   const result = [];
+//   const wordSet = new Set(wordDict);
 
-  function backTrack(start, path) {
-    // Log each recursive call
-    console.log(
-      `🔁 backTrack called with start=${start}, path=[${path.join(" ")}]`
-    );
-    // Base case: reached the end of the string
-    if (start === s.length) {
-      console.log(`✅ Complete sentence found: ${path.join(" ")}`);
-      result.push(path.join(" "));
-      return;
+//   function backTrack(start, path) {
+//     // Log each recursive call
+//     console.log(
+//       `🔁 backTrack called with start=${start}, path=[${path.join(" ")}]`
+//     );
+//     // Base case: reached the end of the string
+//     if (start === s.length) {
+//       console.log(`✅ Complete sentence found: ${path.join(" ")}`);
+//       result.push(path.join(" "));
+//       return;
+//     }
+//     for (let end = start + 1; end <= s.length; end++) {
+//       const word = s.slice(start, end);
+//       console.log(`🔍 Checking word: '${word}' (from s[${start}:${end}])`);
+
+//       if (wordSet.has(word)) {
+//         console.log(
+//           `✔ Found valid word: '${word}' — calling backTrack(${end}, [...path, '${word}'])`
+//         );
+//         backTrack(end, [...path, word]);
+//       } else {
+//         console.log(`❌ '${word}' is not in wordDict`);
+//       }
+//     }
+//   }
+//   backTrack(0, []);
+
+//   return result;
+// }
+
+// const s = "catsanddog";
+// const wordDict = ["cat", "cats", "and", "sand", "dog"];
+// const output = findWords(s, wordDict);
+
+// console.log("\n🎉 Final Result:");
+// console.log(output);
+
+//===============================================================================================================================
+//   First Bad Version
+
+// Solution
+// You are a product manager and currently leading a team to develop a new product. Unfortunately, the latest version of your product fails the quality check. Since each version is developed based on the previous version, all the versions after a bad version are also bad.
+
+// Suppose you have n versions [1, 2, ..., n] and you want to find out the first bad one, which causes all the following ones to be bad.
+
+// You are given an API bool isBadVersion(version) which returns whether version is bad. Implement a function to find the first bad version. You should minimize the number of calls to the API.
+
+// Example 1:
+
+// Input: n = 5, bad = 4
+// Output: 4
+// Explanation:
+// call isBadVersion(3) -> false
+// call isBadVersion(5) -> true
+// call isBadVersion(4) -> true
+// Then 4 is the first bad version.
+// Example 2:
+
+// Input: n = 1, bad = 1
+// Output: 1
+
+// Simulate a global bad version value for testing
+let bad = 4;
+
+function findBadVersion(n) {
+    let left = 1;
+    let right = n;
+
+    // Simulated API to test if a version is bad
+    function isBadVersion(version) {
+        return version >= bad;
     }
-    for (let end = start + 1; end <= s.length; end++) {
-      const word = s.slice(start, end);
-      console.log(`🔍 Checking word: '${word}' (from s[${start}:${end}])`);
 
-      if (wordSet.has(word)) {
-        console.log(
-          `✔ Found valid word: '${word}' — calling backTrack(${end}, [...path, '${word}'])`
-        );
-        backTrack(end, [...path, word]);
-      } else {
-        console.log(`❌ '${word}' is not in wordDict`);
-      }
+    console.log(`Initial range: left = ${left}, right = ${right}`);
+    console.log(`Looking for the first bad version out of ${n} versions...`);
+    console.log(`Bad version is simulated as: ${bad}`);
+
+    while (left < right) {
+        let mid = Math.floor((left + right) / 2);
+
+        // Log the current state
+        console.log(`\n🔍 Checking mid = ${mid}`);
+        console.log(`Current range → left = ${left}, right = ${right}`);
+
+        if (isBadVersion(mid)) {
+            console.log(`❌ Version ${mid} is BAD → Move RIGHT to mid = ${mid}`);
+            right = mid;
+        } else {
+            console.log(`✅ Version ${mid} is GOOD → Move LEFT to mid + 1 = ${mid + 1}`);
+            left = mid + 1;
+        }
     }
-  }
-  backTrack(0, []);
 
-  return result;
+    console.log(`\n🎯 First bad version found: ${left}`);
+    return left;
 }
-
-const s = "catsanddog";
-const wordDict = ["cat", "cats", "and", "sand", "dog"];
-const output = findWords(s, wordDict);
-
-console.log("\n🎉 Final Result:");
-console.log(output);
+findBadVersion(5);

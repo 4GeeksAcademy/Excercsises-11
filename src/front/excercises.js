@@ -1139,38 +1139,159 @@ const { elementType } = require("prop-types");
 // Output: 1
 
 // Simulate a global bad version value for testing
-let bad = 4;
+// let bad = 4;
 
-function findBadVersion(n) {
-    let left = 1;
-    let right = n;
+// function findBadVersion(n) {
+//     let left = 1;
+//     let right = n;
 
-    // Simulated API to test if a version is bad
-    function isBadVersion(version) {
-        return version >= bad;
+//     // Simulated API to test if a version is bad
+//     function isBadVersion(version) {
+//         return version >= bad;
+//     }
+
+//     console.log(`Initial range: left = ${left}, right = ${right}`);
+//     console.log(`Looking for the first bad version out of ${n} versions...`);
+//     console.log(`Bad version is simulated as: ${bad}`);
+
+//     while (left < right) {
+//         let mid = Math.floor((left + right) / 2);
+
+//         // Log the current state
+//         console.log(`\n🔍 Checking mid = ${mid}`);
+//         console.log(`Current range → left = ${left}, right = ${right}`);
+
+//         if (isBadVersion(mid)) {
+//             console.log(`❌ Version ${mid} is BAD → Move RIGHT to mid = ${mid}`);
+//             right = mid;
+//         } else {
+//             console.log(`✅ Version ${mid} is GOOD → Move LEFT to mid + 1 = ${mid + 1}`);
+//             left = mid + 1;
+//         }
+//     }
+
+//     console.log(`\n🎯 First bad version found: ${left}`);
+//     return left;
+// }
+// findBadVersion(5);
+
+//===============================================================================================================================
+
+//   Rotate Array
+
+// Solution
+// Given an integer array nums, rotate the array to the right by k steps, where k is non-negative.
+
+// Example 1:
+
+// Input: nums = [1,2,3,4,5,6,7], k = 3
+// Output: [5,6,7,1,2,3,4]
+// Explanation:
+// rotate 1 steps to the right: [7,1,2,3,4,5,6]
+// rotate 2 steps to the right: [6,7,1,2,3,4,5]
+// rotate 3 steps to the right: [5,6,7,1,2,3,4]
+// Example 2:
+
+// Input: nums = [-1,-100,3,99], k = 2
+// Output: [3,99,-1,-100]
+// Explanation:
+// rotate 1 steps to the right: [99,-1,-100,3]
+// rotate 2 steps to the right: [3,99,-1,-100]
+
+// Constraints:
+
+// 1 <= nums.length <= 105
+// -231 <= nums[i] <= 231 - 1
+// 0 <= k <= 105
+
+// Follow up:
+
+// Try to come up with as many solutions as you can. There are at least three different ways to solve this problem.
+// Could you do it in-place with O(1) extra space?
+//    Show Hint #1
+//    Show Hint #2
+//    Show Hint #3
+
+//------------------------------------------------------------------------------------------------------------------------------
+
+// Not in place:
+// function rotateArray(nums, k) {
+//   const createSlotsArray = new Array(nums.length).fill(0);
+//   for (let i = 0; i < nums.length; i++) {
+//     const newIndex = (i + k) % nums.length;
+//     createSlotsArray[newIndex] = nums[i];
+//   }
+//   return createSlotsArray;
+// }
+
+// let nums = [1, 2, 3, 4, 5, 6, 7];
+// let k = 3;
+// let result = rotateArray(nums, k);
+// console.log(result);
+
+//===============================================================================================================================
+//In place
+// function rotate(nums,k){
+//     k = k % nums.length
+//     let count = 0
+//     let start = 0
+
+//     while (count < nums.length){
+//         let currentIndex = start
+//         let prevNumber = nums[start];
+
+//         while(true){
+//             let nextIndex = (currentIndex + k) % nums.length;
+//             let temp = nums[nextIndex]
+//             nums[nextIndex] = prevNumber
+//             prevNumber = temp
+//             currentIndex = nextIndex
+//             count += 1
+
+//             if (currentIndex == start) break;
+//         }
+//         start += 1
+//     }
+// }
+
+// let nums = [1, 2, 3, 4, 5, 6, 7];
+// let k = 3;
+// rotate(nums, k);           // modifies nums in place
+// console.log(nums);         // print the updated array
+
+//===============================================================================================================================
+
+class Account {
+  #balance;
+  constructor(owner,balance) {
+    this.owner = owner;
+    this.#balance = balance;
+  }
+
+  deposit(amount) {
+    if( amount <= 0){
+      throw new Error("Deposit amount must be positive.");
     }
+    this.#balance += amount;
 
-    console.log(`Initial range: left = ${left}, right = ${right}`);
-    console.log(`Looking for the first bad version out of ${n} versions...`);
-    console.log(`Bad version is simulated as: ${bad}`);
-
-    while (left < right) {
-        let mid = Math.floor((left + right) / 2);
-
-        // Log the current state
-        console.log(`\n🔍 Checking mid = ${mid}`);
-        console.log(`Current range → left = ${left}, right = ${right}`);
-
-        if (isBadVersion(mid)) {
-            console.log(`❌ Version ${mid} is BAD → Move RIGHT to mid = ${mid}`);
-            right = mid;
-        } else {
-            console.log(`✅ Version ${mid} is GOOD → Move LEFT to mid + 1 = ${mid + 1}`);
-            left = mid + 1;
-        }
+  }
+  withdraw(amount) {
+    if( amount <= 0){
+      throw new Error("withdraw amount must be positive.")
     }
-
-    console.log(`\n🎯 First bad version found: ${left}`);
-    return left;
+    if(amount > this.#balance ){
+      throw new Error("Insufficient funds")
+    }
+    this.#balance -= amount
+  }
+  getBalance() {
+    return this.#balance
+  }
 }
-findBadVersion(5);
+
+try {
+  const acc = new Account("Israel", 1000);
+  acc.deposit(-50); // ❌ should throw
+} catch (err) {
+  console.error("Caught error:", err.message);
+}

@@ -1263,35 +1263,70 @@ const { elementType } = require("prop-types");
 
 class Account {
   #balance;
-  constructor(owner,balance) {
+  constructor(owner, balance) {
     this.owner = owner;
     this.#balance = balance;
   }
 
   deposit(amount) {
-    if( amount <= 0){
+    if (amount <= 0) {
       throw new Error("Deposit amount must be positive.");
     }
     this.#balance += amount;
-
   }
   withdraw(amount) {
-    if( amount <= 0){
-      throw new Error("withdraw amount must be positive.")
+    if (amount <= 0) {
+      throw new Error("withdraw amount must be positive.");
     }
-    if(amount > this.#balance ){
-      throw new Error("Insufficient funds")
+    if (amount > this.#balance) {
+      throw new Error("Insufficient funds");
     }
-    this.#balance -= amount
+    this.#balance -= amount;
   }
   getBalance() {
-    return this.#balance
+    return this.#balance;
   }
 }
 
-try {
-  const acc = new Account("Israel", 1000);
-  acc.deposit(-50); // ❌ should throw
-} catch (err) {
-  console.error("Caught error:", err.message);
+class CheckingAccount extends Account {
+  constructor(owner, balance) {
+    super(owner, balance);
+  }
+  withdraw(amount) {
+    if (amount <= 0) {
+      throw new Error("Withdrawal amount must be positive.");
+    }
+    const currentBalance = this.getBalance();
+
+    if (amount > currentBalance) {
+      console.log("Overdraft! You will be charged a $10 fee.");
+      super.deposit(-(amount + 10));
+    }
+  }
 }
+class SavingsAccount extends Account {
+  constructor(owner, balance) {
+    super(owner, balance);
+  }
+  withdraw(amount) {
+    if (amount <= 0) {
+      throw new Error("Withdrawal amount must be positive.");
+    }
+    const currentBalance = this.getBalance();
+    if (amount > currentBalance) {
+      throw new Error("Savings accounts do not allow overdrafts.");
+    }
+    super.withdraw(amount);
+  }
+}
+
+const s1 = new SavingsAccount("Isa", 100);
+s1.withdraw(50);   // OK
+console.log(s1.getBalance()); // 50
+
+try {
+  s1.withdraw(100); // ❌ should throw
+} catch (err) {
+  console.error("SavingsAccount Error:", err.message);
+}
+

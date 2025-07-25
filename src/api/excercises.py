@@ -975,27 +975,197 @@ import copy
 
 # print(wordBreak(s, wordDict))
 # //===============================================================================================================================
-def firstBadVersion(n):
-    left = 1
-    right = n
+# def firstBadVersion(n):
+#     left = 1
+#     right = n
 
-    def isBadVersion(version):
-        return version >= bad  # Simulates that every version from 'bad' onward is bad
+#     def isBadVersion(version):
+#         return version >= bad  # Simulates that every version from 'bad' onward is bad
 
-    while left < right:
-        mid = (left + right) // 2
-        print(f"Checking version {mid} (left: {left}, right: {right})")
+#     while left < right:
+#         mid = (left + right) // 2
+#         print(f"Checking version {mid} (left: {left}, right: {right})")
 
-        if isBadVersion(mid):
-            print(f"Version {mid} is bad, moving right to {mid}")
-            right = mid
-        else:
-            print(f"Version {mid} is good, moving left to {mid + 1}")
-            left = mid + 1
-    return left
+#         if isBadVersion(mid):
+#             print(f"Version {mid} is bad, moving right to {mid}")
+#             right = mid
+#         else:
+#             print(f"Version {mid} is good, moving left to {mid + 1}")
+#             left = mid + 1
+#     return left
 
 
-n = 5
-bad = 3
+# n = 5
+# bad = 3
 
-print("First bad version is:", firstBadVersion(n))  # Output: 4
+# print("First bad version is:", firstBadVersion(n))  # Output: 4
+
+# //===============================================================================================================================
+#   Rotate Array
+
+# Solution
+# Given an integer array nums, rotate the array to the right by k steps, where k is non-negative.
+
+ 
+
+# Example 1:
+
+# Input: nums = [1,2,3,4,5,6,7], k = 3
+# Output: [5,6,7,1,2,3,4]
+# Explanation:
+# rotate 1 steps to the right: [7,1,2,3,4,5,6]
+# rotate 2 steps to the right: [6,7,1,2,3,4,5]
+# rotate 3 steps to the right: [5,6,7,1,2,3,4]
+# Example 2:
+
+# Input: nums = [-1,-100,3,99], k = 2
+# Output: [3,99,-1,-100]
+# Explanation: 
+# rotate 1 steps to the right: [99,-1,-100,3]
+# rotate 2 steps to the right: [3,99,-1,-100]
+ 
+
+# Constraints:
+
+# 1 <= nums.length <= 105
+# -231 <= nums[i] <= 231 - 1
+# 0 <= k <= 105
+ 
+
+# Follow up:
+
+# Try to come up with as many solutions as you can. There are at least three different ways to solve this problem.
+# Could you do it in-place with O(1) extra space?
+
+#------------------------------------------------------------------------------------------------------------------------------
+# Aditional array
+# def rotate(nums,k):
+#     result = [0] * len(nums)
+#     for i in range(len(nums)):
+#         new_index = (i + k) % len(nums)
+#         result[new_index] = nums[i]
+#     return result  
+
+
+# nums = [1,2,3,4,5,6,7]
+# k = 3
+# result = rotate(nums,k)
+# print(result)  # ✅ [5, 6, 7, 1, 2, 3, 4]
+# ------------------------------------------------------------------------------------------------------------------------------
+# In place
+# def rotate(nums, k):
+#     k = k % len(nums)
+#     count = 0
+#     start = 0
+
+#     print(f"🔄 Rotating by {k} steps")
+#     print(f"📦 Initial array: {nums}\n")
+
+#     while count < len(nums):
+#         current_index = start
+#         prev = nums[start]
+#         print(f"🚀 Starting new cycle from index {start} (value = {prev})")
+
+#         while True:
+#             next_index = (current_index + k) % len(nums)
+#             print(f"➡️ Moving value {prev} to index {next_index}")
+
+#             temp = nums[next_index]
+#             print(f"🧠 Saving current value at index {next_index}: {temp}")
+
+#             nums[next_index] = prev
+#             print(f"📌 Placing {prev} at index {next_index}")
+
+#             prev = temp
+#             current_index = next_index
+#             count += 1
+
+#             print(f"🔁 Next round: carry = {prev}, new current_index = {current_index}, count = {count}\n")
+
+#             # If we returned to the start of the cycle, break
+#             if current_index == start:
+#                 print("⛔ End of cycle reached. Breaking to start next cycle.\n")
+#                 break
+
+#         start += 1  # try a new cycle if needed (for unvisited elements)
+
+#     print(f"✅ Final rotated array: {nums}")
+
+
+# nums = [1, 2, 3, 4, 5, 6, 7]
+# k = 3
+# rotate(nums, k)
+# print(nums)  # ✅ [5, 6, 7, 1, 2, 3, 4]
+
+#===============================================================================================================================
+    
+#          Contains Duplicate
+
+# Solution
+# Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
+
+ 
+
+# Example 1:
+
+# Input: nums = [1,2,3,1]
+
+# Output: true
+
+# Explanation:
+
+# The element 1 occurs at the indices 0 and 3.
+
+# Example 2:
+
+# Input: nums = [1,2,3,4]
+
+# Output: false
+
+# Explanation:
+
+# All elements are distinct.
+
+# Example 3:
+
+# Input: nums = [1,1,1,3,3,4,3,2,4,2]
+
+# Output: true
+
+ 
+
+# Constraints:
+
+# 1 <= nums.length <= 105
+# -109 <= nums[i] <= 109 
+
+##1)
+# def check_Array(nums):
+#     freq_num = {}
+#     for num in nums:
+#         if num not in freq_num:
+#             freq_num[num] = freq_num.get(num,0) + 1  
+#         else:
+#             return True
+#     return False
+
+# nums = [1, 2, 3, 4]  # You can change this input to test other cases
+# result = check_Array(nums)
+# print("Contains duplicate:", result)
+# #===============================================================================================================================
+# #2)
+# def sorteArray(nums):
+#     set_of_nums = set()
+#     for num in nums:
+#         if num not in set_of_nums:
+#             set_of_nums.add(num)
+#         else:
+#             return True
+#     return False      
+
+
+# nums = [1, 2, 3, 4,5,6,2]  # You can change this input to test other cases
+# result = sorteArray(nums)
+# print("Contains duplicate:", result)  
+
+

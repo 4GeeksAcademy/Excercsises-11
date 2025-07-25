@@ -1,6 +1,6 @@
 //   Reverse Integer
 
-const { elementType } = require("prop-types");
+// const { elementType } = require("prop-types");
 
 // Solution
 // Given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0.
@@ -1261,72 +1261,198 @@ const { elementType } = require("prop-types");
 
 //===============================================================================================================================
 
-class Account {
-  #balance;
-  constructor(owner, balance) {
-    this.owner = owner;
-    this.#balance = balance;
-  }
+// class Account {
+//   #balance;
+//   constructor(owner, balance) {
+//     this.owner = owner;
+//     this.#balance = balance;
+//   }
 
-  deposit(amount) {
-    if (amount <= 0) {
-      throw new Error("Deposit amount must be positive.");
-    }
-    this.#balance += amount;
-  }
-  withdraw(amount) {
-    if (amount <= 0) {
-      throw new Error("withdraw amount must be positive.");
-    }
-    if (amount > this.#balance) {
-      throw new Error("Insufficient funds");
-    }
-    this.#balance -= amount;
-  }
-  getBalance() {
-    return this.#balance;
-  }
-}
+//   deposit(amount) {
+//     if (amount <= 0) {
+//       throw new Error("Deposit amount must be positive.");
+//     }
+//     this.#balance += amount;
+//   }
+//   withdraw(amount) {
+//     if (amount <= 0) {
+//       throw new Error("withdraw amount must be positive.");
+//     }
+//     if (amount > this.#balance) {
+//       throw new Error("Insufficient funds");
+//     }
+//     this.#balance -= amount;
+//   }
+//   getBalance() {
+//     return this.#balance;
+//   }
+// }
 
-class CheckingAccount extends Account {
-  constructor(owner, balance) {
-    super(owner, balance);
-  }
-  withdraw(amount) {
-    if (amount <= 0) {
-      throw new Error("Withdrawal amount must be positive.");
-    }
-    const currentBalance = this.getBalance();
+// class CheckingAccount extends Account {
+//   constructor(owner, balance) {
+//     super(owner, balance);
+//   }
+//   withdraw(amount) {
+//     if (amount <= 0) {
+//       throw new Error("Withdrawal amount must be positive.");
+//     }
+//     const currentBalance = this.getBalance();
 
-    if (amount > currentBalance) {
-      console.log("Overdraft! You will be charged a $10 fee.");
-      super.deposit(-(amount + 10));
-    }
-  }
-}
-class SavingsAccount extends Account {
-  constructor(owner, balance) {
-    super(owner, balance);
-  }
-  withdraw(amount) {
-    if (amount <= 0) {
-      throw new Error("Withdrawal amount must be positive.");
-    }
-    const currentBalance = this.getBalance();
-    if (amount > currentBalance) {
-      throw new Error("Savings accounts do not allow overdrafts.");
-    }
-    super.withdraw(amount);
-  }
-}
+//     if (amount > currentBalance) {
+//       console.log("Overdraft! You will be charged a $10 fee.");
+//       super.deposit(-(amount + 10));
+//     }
+//   }
+// }
 
-const s1 = new SavingsAccount("Isa", 100);
-s1.withdraw(50);   // OK
-console.log(s1.getBalance()); // 50
+// class SavingsAccount extends Account {
+//   constructor(owner, balance) {
+//     super(owner, balance);
+//   }
+//   withdraw(amount) {
+//     if (amount <= 0) {
+//       throw new Error("Withdrawal amount must be positive.");
+//     }
+//     const currentBalance = this.getBalance();
+//     if (amount > currentBalance) {
+//       throw new Error("Savings accounts do not allow overdrafts.");
+//     }
+//     super.withdraw(amount);
+//   }
+// }
 
-try {
-  s1.withdraw(100); // ❌ should throw
-} catch (err) {
-  console.error("SavingsAccount Error:", err.message);
-}
+// class Bank{
+//   constructor(){
+//     this.accounts = {}
+//     this.nextId = 1;
+//   }
+//   createAccount(type,owner,initialBalance){
+//     let account;
+//     if(type === "checking"){
+//       account = new CheckingAccount(owner,initialBalance)
+//     }
+//     else if(type === "savings"){
+//       account = new SavingsAccount ( owner,initialBalance)
+//     }
+//     else{
+//       throw new Error("Invalid Account type")
+//     }
+//     const accountId = this.nextId;
+//     this.accounts[accountId] = account;
+//     this.nextId ++;
+//     return accountId
 
+//   }
+//   getAccount(id){
+//     const account = this.accounts[id];
+//     if(!account){
+//       throw new Error("Account not found")
+//     }
+//     return account
+//   }
+
+//   transfer(fromId,toId,amount){
+//     const fromAccount = this.getAccount(fromId);
+//     const toAccount = this.getAccount(toId);
+
+//     try{
+//       fromAccount.withdraw(amount);
+//       toAccount.deposit(amount)
+//        console.log(`Transferred $${amount} from Account ${fromId} to Account ${toId}`);
+//     }
+//     catch(err){
+
+//     }
+
+//   }
+//   listAccounts(){
+//     for(const [id, account] of Object.entries(this.accounts)){
+//       console.log(`Account ${id} - Owner: ${account.owner}, Type: ${account.constructor.name}, Balance: $${account.getBalance()}`);
+//           }
+
+//   }
+// }
+
+// const bank = new Bank();
+
+// const id1 = bank.createAccount("checking", "Israel", 100);
+// const id2 = bank.createAccount("savings", "Ana", 50);
+
+// bank.transfer(id1, id2, 60); // Should succeed
+// bank.transfer(id2, id1, 200); // ❌ Should fail: overdraft not allowed in savings
+
+// console.log(bank.getAccount(id1).getBalance()); // 40
+// console.log(bank.getAccount(id2).getBalance()); // 110
+
+// bank.listAccounts()
+
+//===============================================================================================================================
+
+//   Contains Duplicate
+
+// Solution
+// Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
+
+// Example 1:
+
+// Input: nums = [1,2,3,1]
+
+// Output: true
+
+// Explanation:
+
+// The element 1 occurs at the indices 0 and 3.
+
+// Example 2:
+
+// Input: nums = [1,2,3,4]
+
+// Output: false
+
+// Explanation:
+
+// All elements are distinct.
+
+// Example 3:
+
+// Input: nums = [1,1,1,3,3,4,3,2,4,2]
+
+// Output: true
+
+// Constraints:
+
+// 1 <= nums.length <= 105
+// -109 <= nums[i] <= 109
+// //===============================================================================================================================
+
+// // 1st solution
+// function checkArray(nums) {
+//   let frequencyOfNums = {};
+//   for (let num of nums) {
+//     if (!(num in frequencyOfNums)) {
+//       frequencyOfNums[num] = (frequencyOfNums[num] || 0) + 1
+//     } else {
+//       return true;
+//     }
+//   }
+//   return false;
+// }
+// let nums1 = [1,1,1,3,3,4,3,2,4,2]
+// let result1 = checkArray(nums1)
+// console.log(result1);
+
+// // ------------------------------------------------------------------------------------------------------------------------------
+// // 2)
+// function checkArray(nums){
+//   let setOfNumbers = new Set()
+//   for(let num of nums){
+//     if(setOfNumbers.has(num))return true 
+//     setOfNumbers.add(num) 
+      
+//   }
+//   return false;
+// }
+
+// let nums = [1,1,1,3,3,4,3,2,4,2]
+// let result = checkArray(nums)
+// console.log(result);

@@ -1006,7 +1006,6 @@ import copy
 # Solution
 # Given an integer array nums, rotate the array to the right by k steps, where k is non-negative.
 
- 
 
 # Example 1:
 
@@ -1020,31 +1019,31 @@ import copy
 
 # Input: nums = [-1,-100,3,99], k = 2
 # Output: [3,99,-1,-100]
-# Explanation: 
+# Explanation:
 # rotate 1 steps to the right: [99,-1,-100,3]
 # rotate 2 steps to the right: [3,99,-1,-100]
- 
+
 
 # Constraints:
 
 # 1 <= nums.length <= 105
 # -231 <= nums[i] <= 231 - 1
 # 0 <= k <= 105
- 
+
 
 # Follow up:
 
 # Try to come up with as many solutions as you can. There are at least three different ways to solve this problem.
 # Could you do it in-place with O(1) extra space?
 
-#------------------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------------------------------
 # Aditional array
 # def rotate(nums,k):
 #     result = [0] * len(nums)
 #     for i in range(len(nums)):
 #         new_index = (i + k) % len(nums)
 #         result[new_index] = nums[i]
-#     return result  
+#     return result
 
 
 # nums = [1,2,3,4,5,6,7]
@@ -1097,14 +1096,13 @@ import copy
 # rotate(nums, k)
 # print(nums)  # ✅ [5, 6, 7, 1, 2, 3, 4]
 
-#===============================================================================================================================
-    
+# ===============================================================================================================================
+
 #          Contains Duplicate
 
 # Solution
 # Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
 
- 
 
 # Example 1:
 
@@ -1132,19 +1130,18 @@ import copy
 
 # Output: true
 
- 
 
 # Constraints:
 
 # 1 <= nums.length <= 105
-# -109 <= nums[i] <= 109 
+# -109 <= nums[i] <= 109
 
-##1)
+# 1)
 # def check_Array(nums):
 #     freq_num = {}
 #     for num in nums:
 #         if num not in freq_num:
-#             freq_num[num] = freq_num.get(num,0) + 1  
+#             freq_num[num] = freq_num.get(num,0) + 1
 #         else:
 #             return True
 #     return False
@@ -1161,11 +1158,138 @@ import copy
 #             set_of_nums.add(num)
 #         else:
 #             return True
-#     return False      
+#     return False
 
 
 # nums = [1, 2, 3, 4,5,6,2]  # You can change this input to test other cases
 # result = sorteArray(nums)
-# print("Contains duplicate:", result)  
+# print("Contains duplicate:", result)
 
+
+# ===============================================================================================================================
+# 1)
+# def find_double(arr):
+#     arr.sort()
+#     for i in range(0, len(arr) - 1, 2):
+#         if arr[i] != arr[i + 1]:
+#             return arr[i]
+#     return arr[len(arr) - 1]
+
+
+# nums = [1,5,6,4,5,6,4,1,8]
+# result = find_double(nums)
+# print(result)
+
+# ------------------------------------------------------------------------------------------------------------------------------
+# #2)
+# def find_double(arr):
+#     result = 0
+#     for num in arr:
+#         result ^= num
+#     return result
+
+# nums = [1,5,6,4,5,6,4,1,8]
+# result = find_double(nums)
+# print(result)
+# //===============================================================================================================================
+
+# 🚗 Exercise: Vehicle Rental System
+# 🧠 Objective:
+# Build a system that allows users to rent vehicles. You should be able to add different types of vehicles (e.g., cars, bikes), track their availability, calculate rental costs based on duration, and manage returns.
+
+# ✅ Requirements:
+# Base Class: Vehicle
+# Properties:
+
+# brand
+
+# model
+
+# rental_rate_per_day
+
+# is_available (default: True)
+
+# Methods:
+
+# rent() → changes availability
+
+# return_vehicle() → changes availability
+
+# calculate_rental_cost(days)
+
+# Subclasses:
+# Car
+
+# Extra property: num_doors
+
+# Override calculate_rental_cost → add 10% tax
+
+# Bike
+
+# Extra property: engine_capacity
+
+# Override calculate_rental_cost → flat discount of $5 if rented for more than 3 days
+
+# 🧪 Sample Behavior:
+# plaintext
+# Copy
+# Edit
+# car = Car("Toyota", "Camry", 50, 4)
+# car.rent() → marks it as not available
+# car.calculate_rental_cost(3) → 50*3 + 10% = $165
+# car.return_vehicle() → now available
+
+# bike = Bike("Yamaha", "MT-07", 30, 700)
+# bike.calculate_rental_cost(4) → (30*4 - 5) = $115
+# 🧩 What You Will Practice:
+# Inheritance and method overriding
+
+# Encapsulation (optional challenge: make attributes private)
+
+# Object instantiation and class interaction
+
+# Logical branching and real-world modeling
+
+
+class Vehicle:
+    def __init__(self,brand,model,is_available,rental_rate_per_day):
+        self.brand = brand
+        self.model = model
+        self.is_available = is_available
+        self.rental_rate_per_day = rental_rate_per_day
+
+    def __str__(self):
+     status = "available" if self.is_available else "not available"
+     return f"{self.brand} {self.model} - {status}, ${self.rental_rate_per_day}/day"
+    
+
+    def rent(self):
+        if self.is_available:
+            self.is_available = False
+            print(f"{self.brand} {self.model} has been rented")
+        else:
+            print(f"{self.brand} {self.model} is not available")
+
+    def return_vehicle(self):
+        self.is_available = True
+        print(f"{self.brand} {self.model} has been returned and is now available.")
+
+
+    def calculate_rental_cost(self,days):    
+        return self.rental_rate_per_day * days
+
+
+car1 = Vehicle("Toyota", "Camry", True, 50)
+
+car1.rent()                    # Toyota Camry has been rented.
+print(car1.is_available)      # False
+
+cost = car1.calculate_rental_cost(3)
+print(f"Total cost: ${cost}") # Total cost: $150
+
+car1.return_vehicle()         # Toyota Camry has been returned...
+print(car1.is_available)      # True
+
+class Car(Vehicle):
+     
 

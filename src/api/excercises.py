@@ -1,5 +1,6 @@
 import random
 import copy
+
 #   Reverse Integer
 
 # Solution
@@ -1251,45 +1252,119 @@ import copy
 # Logical branching and real-world modeling
 
 
-class Vehicle:
-    def __init__(self,brand,model,is_available,rental_rate_per_day):
-        self.brand = brand
-        self.model = model
-        self.is_available = is_available
-        self.rental_rate_per_day = rental_rate_per_day
+# class Vehicle:
+#     def __init__(self,brand,model,is_available,rental_rate_per_day):
+#         self.brand = brand
+#         self.model = model
+#         self.is_available = is_available
+#         self.rental_rate_per_day = rental_rate_per_day
 
-    def __str__(self):
-     status = "available" if self.is_available else "not available"
-     return f"{self.brand} {self.model} - {status}, ${self.rental_rate_per_day}/day"
+#     def __str__(self):
+#      status = "available" if self.is_available else "not available"
+#      return f"{self.brand} {self.model} - {status}, ${self.rental_rate_per_day}/day"
+
+
+#     def rent(self):
+#         if self.is_available:
+#             self.is_available = False
+#             print(f"{self.brand} {self.model} has been rented")
+#         else:
+#             print(f"{self.brand} {self.model} is not available")
+
+#     def return_vehicle(self):
+#         self.is_available = True
+#         print(f"{self.brand} {self.model} has been returned and is now available.")
+
+
+#     def calculate_rental_cost(self,days):
+#         return self.rental_rate_per_day * days
+
+
+# class Car(Vehicle):
+#     def __init__(self, brand, model, is_available, rental_rate_per_day, number_of_doors):
+#         super().__init__(brand, model, is_available, rental_rate_per_day)
+#         self.number_of_doors = number_of_doors
+
+#     def calculate_rental_cost(self, days):
+#         base_cost = super().calculate_rental_cost(days)
+#         tax = base_cost * 0.10
+#         return base_cost + tax
+
+
+# class Bike(Vehicle):
+#         def __init__(self, brand, model, is_available, rental_rate_per_day,engine_capacity):
+#              super().__init__(brand, model, is_available, rental_rate_per_day)
+#              self.engine_capacity = engine_capacity
+
+#         def calculate_rental_cost(self, days):
+#             rental_cost = super().calculate_rental_cost(days)
+#             if days > 3:
+#                 rental_cost -= 0.5
+#             return rental_cost
+
+
+# print("🔧 Testing regular Vehicle:")
+# v1 = Vehicle("Honda", "Civic", True, 40)
+# print(v1)
+# v1.rent()
+# print(v1)
+# print("Rental cost for 2 days:", v1.calculate_rental_cost(2))
+# v1.return_vehicle()
+# print(v1)
+# print("")
+
+# print("🚗 Testing Car (with 10% tax):")
+# car = Car("BMW", "3 Series", True, 100, 4)
+# print(car)
+# car.rent()
+# print("Rental cost for 5 days:", car.calculate_rental_cost(5))  # Should be 550
+# car.return_vehicle()
+# print(car)
+# print("")
+
+# print("🏍️ Testing Bike (with discount after 3 days):")
+# bike = Bike("Yamaha", "MT-07", True, 30, 689)
+# print(bike)
+# bike.rent()
+# print("Rental cost for 4 days:", bike.calculate_rental_cost(4))  # Should be 119.5
+# bike.return_vehicle()
+# print(bike)
+
+
+
+def decode_doc(url):
+    import requests
+    from bs4 import BeautifulSoup
+
+    response = requests.get(url)  # fetch the raw HTML content from the internet.
+    converted_to_read = BeautifulSoup(response.content, 'html.parser')# turn that HTML into something you can search and extract data from.
+
+    coord = []   
+
+    rows = converted_to_read.find_all('tr')[1:] # Skip the header row
+    for row in rows:
+     cells = row.find_all('td')
+     cleaned = [cell.text.strip() for cell in cells]
+     if len(cleaned) == 3:  # Ensure there are exactly 3 columns
+        x = int(cleaned[0])
+        char = cleaned[1]
+        y = int(cleaned[2])
+        coord.append((x, y, char))
     
+    max_x = max(p[0] for p in coord)
+    max_y = max(p[1] for p in coord)
+    grid = [[' ' for _ in range(max_x + 1)] for _ in range(max_y + 1)]
 
-    def rent(self):
-        if self.is_available:
-            self.is_available = False
-            print(f"{self.brand} {self.model} has been rented")
-        else:
-            print(f"{self.brand} {self.model} is not available")
+    for x, y, char in coord:
+     grid[y][x] = char
 
-    def return_vehicle(self):
-        self.is_available = True
-        print(f"{self.brand} {self.model} has been returned and is now available.")
+    for row in grid:
+     print(''.join(row)) 
 
 
-    def calculate_rental_cost(self,days):    
-        return self.rental_rate_per_day * days
 
 
-car1 = Vehicle("Toyota", "Camry", True, 50)
 
-car1.rent()                    # Toyota Camry has been rented.
-print(car1.is_available)      # False
 
-cost = car1.calculate_rental_cost(3)
-print(f"Total cost: ${cost}") # Total cost: $150
-
-car1.return_vehicle()         # Toyota Camry has been returned...
-print(car1.is_available)      # True
-
-class Car(Vehicle):
-     
-
+   
+decode_doc("https://docs.google.com/document/d/e/2PACX-1vTER-wL5E8YC9pxDx43gk8eIds59GtUUk4nJo_ZWagbnrH0NFvMXIw6VWFLpf5tWTZIT9P9oLIoFJ6A/pub")

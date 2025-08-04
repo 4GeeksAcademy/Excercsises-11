@@ -1456,3 +1456,122 @@
 // let nums = [1,1,1,3,3,4,3,2,4,2]
 // let result = checkArray(nums)
 // console.log(result);
+// #===============================================================================================================================
+//1)
+// function FindDouble(array){
+//     let sortedArray = array.sort((a,b) => a - b);
+//     for (let i=0; i < sortedArray.length - 1 ; i += 2){
+//         const current = sortedArray[i]
+//         const next = sortedArray[i + 1]
+//         if(current !== next){
+//             return current
+//         }
+//     }
+//     return sortedArray[sortedArray.length - 1]   
+// }
+
+// let  nums = [2,2,1]
+// let result  = FindDouble(nums)
+// console.log(result);
+
+
+//------------------------------------------------------------------------------------------------------------------------------
+//2)
+// function findDouble(array){
+//     let result = 0
+//     for( let num of array){
+//         result ^= num;
+//     }
+//     return result
+// }
+
+// let  nums = [2,2,1,6,5,6,5,9,8,1,9]
+// let result  = findDouble(nums)
+// console.log(result);
+
+//===============================================================================================================================
+//   Intersection of Two Arrays II
+
+// Solution
+// Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must appear as many times as it shows in both arrays and you may return the result in any order.
+
+ 
+
+// Example 1:
+
+// Input: nums1 = [1,2,2,1], nums2 = [2,2]
+// Output: [2,2]
+// Example 2:
+
+// Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+// Output: [4,9]
+// Explanation: [9,4] is also accepted.
+ 
+
+// Constraints:
+
+// 1 <= nums1.length, nums2.length <= 1000
+// 0 <= nums1[i], nums2[i] <= 1000
+ 
+
+// Follow up:
+
+// What if the given array is already sorted? How would you optimize your algorithm?
+// What if nums1's size is small compared to nums2's size? Which algorithm is better?
+// What if elements of nums2 are stored on disk, and the memory is limited such that you cannot load all elements into the memory at once?
+// #------------------------------------------------------------------------------------------------------------------------------
+//1)
+// function intersect(nums1, nums2) {
+//     nums1.sort((a,b) => a - b);
+//     nums2.sort((a,b) => a - b);
+
+//     let pointer1 = 0
+//     let pointer2 = 0
+
+//     const result = []
+
+//     while(pointer1 < nums1.length && pointer2 < nums2.length){
+//         if(nums1[pointer1] === nums2[pointer2]){
+//             result.push(nums1[pointer1])
+//             pointer1 ++;
+//             pointer2 ++;
+//         }
+//         else if(nums1[pointer1] < nums2[pointer2]){
+//             pointer1 ++;
+//         }
+//         else{
+//             pointer2++;
+//         }
+//     }
+//     return result 
+    
+// }
+
+// let nums1 = [1,2,2,1]
+// let nums2 = [2,2]
+// result = intersect(nums1,nums2)
+// console.log(result);
+
+//===============================================================================================================================
+//2)
+function intersec(nums1,nums2){
+    let freqOfNums1 = {};
+    let result = [];
+
+    for (let num of nums1){
+        freqOfNums1[num] = (freqOfNums1[num] || 0) + 1;
+    }
+
+    for (let num of nums2){
+        if(freqOfNums1[num] > 0){
+            result.push(num);
+            freqOfNums1[num] --
+        }       
+    }
+    return result
+}
+
+let nums1 = [1,2,2,1]
+let nums2 = [2,2]
+let result = intersec(nums1,nums2)
+console.log(result);

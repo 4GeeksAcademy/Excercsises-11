@@ -1554,24 +1554,132 @@
 
 //===============================================================================================================================
 //2)
-function intersec(nums1,nums2){
-    let freqOfNums1 = {};
-    let result = [];
+// function intersec(nums1,nums2){
+//     let freqOfNums1 = {};
+//     let result = [];
 
-    for (let num of nums1){
-        freqOfNums1[num] = (freqOfNums1[num] || 0) + 1;
-    }
+//     for (let num of nums1){
+//         freqOfNums1[num] = (freqOfNums1[num] || 0) + 1;
+//     }
 
-    for (let num of nums2){
-        if(freqOfNums1[num] > 0){
-            result.push(num);
-            freqOfNums1[num] --
-        }       
+//     for (let num of nums2){
+//         if(freqOfNums1[num] > 0){
+//             result.push(num);
+//             freqOfNums1[num] --
+//         }       
+//     }
+//     return result
+// }
+
+// let nums1 = [1,2,2,1]
+// let nums2 = [2,2]
+// let result = intersec(nums1,nums2)
+// console.log(result);
+
+//------------------------------------------------------------------------------------------------------------------------------
+//   Plus One
+
+// Solution
+// You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer. The digits are ordered from most significant to least significant in left-to-right order. The large integer does not contain any leading 0's.
+
+// Increment the large integer by one and return the resulting array of digits.
+
+ 
+
+// Example 1:
+
+// Input: digits = [1,2,3]
+// Output: [1,2,4]
+// Explanation: The array represents the integer 123.
+// Incrementing by one gives 123 + 1 = 124.
+// Thus, the result should be [1,2,4].
+// Example 2:
+
+// Input: digits = [4,3,2,1]
+// Output: [4,3,2,2]
+// Explanation: The array represents the integer 4321.
+// Incrementing by one gives 4321 + 1 = 4322.
+// Thus, the result should be [4,3,2,2].
+// Example 3:
+
+// Input: digits = [9]
+// Output: [1,0]
+// Explanation: The array represents the integer 9.
+// Incrementing by one gives 9 + 1 = 10.
+// Thus, the result should be [1,0].
+ 
+
+// Constraints:
+
+// 1 <= digits.length <= 100
+// 0 <= digits[i] <= 9
+// digits does not contain any leading 0's.
+//------------------------------------------------------------------------------------------------------------------------------
+// function incrementByOne (arr){
+//     for(let i= arr.length -1; i >= 0; i--){
+//        if(arr[i] < 9){
+//         arr[i] ++ 
+//         return arr;       
+//        }
+//        arr[i] = 0                        
+//     }
+//     arr.unshift(1);
+//     return arr;
+// }
+// const digits = [9,9]
+// const result = incrementByOne(digits)
+// console.log(result);
+// ===============================================================================================================================
+//   Move Zeroes
+
+// Solution
+// Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+
+// Note that you must do this in-place without making a copy of the array.
+
+ 
+
+// Example 1:
+
+// Input: nums = [0,1,0,3,12]
+// Output: [1,3,12,0,0]
+// Example 2:
+
+// Input: nums = [0]
+// Output: [0]
+ 
+
+// Constraints:
+
+// 1 <= nums.length <= 104
+// -231 <= nums[i] <= 231 - 1
+ 
+
+// Follow up: Could you minimize the total number of operations done?
+//===============================================================================================================================
+function moveZeros(arr){
+    let pointer = 0
+
+    for(let i=0; i < arr.length; i++){
+        if(arr[i] !== 0){
+            arr[pointer] = arr[i];
+            pointer ++;          
+            
+        }
     }
-    return result
+    console.log(arr);
+    
+
+    for(let i = pointer; i < arr.length; i++){
+        arr[i] = 0;
+    }
+    return arr
+
 }
 
-let nums1 = [1,2,2,1]
-let nums2 = [2,2]
-let result = intersec(nums1,nums2)
+
+
+let nums = [0,1,0,3,12]
+// let reslut = [1,3,12,0,0]
+let result = moveZeros(nums)
 console.log(result);

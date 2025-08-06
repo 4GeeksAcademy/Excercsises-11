@@ -1330,41 +1330,237 @@ import copy
 # bike.return_vehicle()
 # print(bike)
 
+# ===============================================================================================================================
+
+# def decode_doc(url):
+#     import requests
+#     from bs4 import BeautifulSoup
+
+#     response = requests.get(url)  # fetch the raw HTML content from the internet.
+#     converted_to_read = BeautifulSoup(response.content, 'html.parser')# turn that HTML into something you can search and extract data from.
+
+#     coord = []
+
+#     rows = converted_to_read.find_all('tr')[1:] # Skip the header row
+#     for row in rows:
+#      cells = row.find_all('td')
+#      cleaned = [cell.text.strip() for cell in cells]
+#      if len(cleaned) == 3:  # Ensure there are exactly 3 columns
+#         x = int(cleaned[0])
+#         char = cleaned[1]
+#         y = int(cleaned[2])
+#         coord.append((x, y, char))
+
+#     max_x = max(p[0] for p in coord)
+#     max_y = max(p[1] for p in coord)
+#     grid = [[' ' for _ in range(max_x + 1)] for _ in range(max_y + 1)]
+
+#     for x, y, char in coord:
+#      grid[y][x] = char
+
+#     for row in grid:
+#      print(''.join(row))
 
 
-def decode_doc(url):
-    import requests
-    from bs4 import BeautifulSoup
+# decode_doc("https://docs.google.com/document/d/e/2PACX-1vTER-wL5E8YC9pxDx43gk8eIds59GtUUk4nJo_ZWagbnrH0NFvMXIw6VWFLpf5tWTZIT9P9oLIoFJ6A/pub")
 
-    response = requests.get(url)  # fetch the raw HTML content from the internet.
-    converted_to_read = BeautifulSoup(response.content, 'html.parser')# turn that HTML into something you can search and extract data from.
+# ===============================================================================================================================
+#   Intersection of Two Arrays II
 
-    coord = []   
-
-    rows = converted_to_read.find_all('tr')[1:] # Skip the header row
-    for row in rows:
-     cells = row.find_all('td')
-     cleaned = [cell.text.strip() for cell in cells]
-     if len(cleaned) == 3:  # Ensure there are exactly 3 columns
-        x = int(cleaned[0])
-        char = cleaned[1]
-        y = int(cleaned[2])
-        coord.append((x, y, char))
-    
-    max_x = max(p[0] for p in coord)
-    max_y = max(p[1] for p in coord)
-    grid = [[' ' for _ in range(max_x + 1)] for _ in range(max_y + 1)]
-
-    for x, y, char in coord:
-     grid[y][x] = char
-
-    for row in grid:
-     print(''.join(row)) 
+# Solution
+# Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must appear as many times as it shows in both arrays and you may return the result in any order.
 
 
+# Example 1:
+
+# Input: nums1 = [1,2,2,1], nums2 = [2,2]
+# Output: [2,2]
+# Example 2:
+
+# Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+# Output: [4,9]
+# Explanation: [9,4] is also accepted.
 
 
+# Constraints:
+
+# 1 <= nums1.length, nums2.length <= 1000
+# 0 <= nums1[i], nums2[i] <= 1000
 
 
-   
-decode_doc("https://docs.google.com/document/d/e/2PACX-1vTER-wL5E8YC9pxDx43gk8eIds59GtUUk4nJo_ZWagbnrH0NFvMXIw6VWFLpf5tWTZIT9P9oLIoFJ6A/pub")
+# Follow up:
+
+# What if the given array is already sorted? How would you optimize your algorithm?
+# What if nums1's size is small compared to nums2's size? Which algorithm is better?
+# What if elements of nums2 are stored on disk, and the memory is limited such that you cannot load all elements into the memory at once?
+
+# #1)
+# def intersection_arr(arr1,arr2):
+#     dict_arr1 = {}
+#     dict_arr2 = {}
+#     result = []
+
+#     for number in arr1:
+#         dict_arr1[number] = dict_arr1.get(number,0) + 1
+
+#     for number in arr2:
+#         dict_arr2[number] = dict_arr2.get(number,0) + 1
+
+#     for num in dict_arr1:
+#         if num in dict_arr2:
+#             min_count = min(dict_arr1[num],dict_arr2[num])
+#             for _ in range(min_count):
+#                 result.append(num)
+
+#     return result
+
+
+# nums1 = [4,9,5,4,4,4,9]
+# nums2 = [9,4,9,8,4,4,9,9,9]
+# result =  intersection_arr(nums1,nums2)
+# print(result)
+
+
+# ===============================================================================================================================
+# 2)
+# from collections import defaultdict
+# def intersection(arr1,arr2):
+#     count = defaultdict(int)
+#     result = []
+
+#     for num in arr1:
+#         count[num] = 0
+
+#     for num in arr2:
+#         if count[num] > 0:
+#             result.append(num)
+#             count[num] -= 1
+#     return result
+# ===============================================================================================================================
+# 3)Hash Map (Frequency Counter)
+# def intersection(arr1,arr2):
+#     count = {}
+#     result = []
+
+#     for num in arr1:
+#         count[num] = count.get(num,0) + 1
+
+#     for num in arr2:
+#         if num in count and count[num] > 0:
+#             result.append(num)
+#             count[num] -= 1
+#     return result
+
+# ===============================================================================================================================
+#   Plus One
+
+# Solution
+# You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer. The digits are ordered from most significant to least significant in left-to-right order. The large integer does not contain any leading 0's.
+
+# Increment the large integer by one and return the resulting array of digits.
+
+
+# Example 1:
+
+# Input: digits = [1,2,3]
+# Output: [1,2,4]
+# Explanation: The array represents the integer 123.
+# Incrementing by one gives 123 + 1 = 124.
+# Thus, the result should be [1,2,4].
+# Example 2:
+
+# Input: digits = [4,3,2,1]
+# Output: [4,3,2,2]
+# Explanation: The array represents the integer 4321.
+# Incrementing by one gives 4321 + 1 = 4322.
+# Thus, the result should be [4,3,2,2].
+# Example 3:
+
+# Input: digits = [9]
+# Output: [1,0]
+# Explanation: The array represents the integer 9.
+# Incrementing by one gives 9 + 1 = 10.
+# Thus, the result should be [1,0].
+
+
+# Constraints:
+
+# 1 <= digits.length <= 100
+# 0 <= digits[i] <= 9
+# digits does not contain any leading 0's.
+
+# ===============================================================================================================================
+# 1)
+# def add_digit(arr):
+#     for i in range(len(arr) - 1, -1, -1):
+#         if arr[i] < 9:
+#             arr[i] += 1
+#             return arr
+#         arr[i] = 0
+#     return [1] + arr
+
+# digits = [1,2,3]
+# reslut = add_digit(digits)
+# print(reslut)
+# ===============================================================================================================================
+#   Move Zeroes
+
+# Solution
+# Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+
+# Note that you must do this in-place without making a copy of the array.
+
+
+# Example 1:
+
+# Input: nums = [0,1,0,3,12]
+# Output: [1,3,12,0,0]
+# Example 2:
+
+# Input: nums = [0]
+# Output: [0]
+
+
+# Constraints:
+
+# 1 <= nums.length <= 104
+# -231 <= nums[i] <= 231 - 1
+
+
+# Follow up: Could you minimize the total number of operations done?
+# ===============================================================================================================================
+# 1))
+# def move_zeros(arr):
+#     counter_of_zeros = 0
+
+#     for i in range(len(arr)):
+#         if arr[i] == 0:
+#             counter_of_zeros += 1
+#         elif counter_of_zeros > 1:
+#             arr[i - counter_of_zeros] = arr[i]
+#             arr[i] = 0
+#     return arr
+
+
+# nums = [0, 1, 0, 3, 12]
+# result = move_zeros(nums)
+# print(result)
+# # ===============================================================================================================================
+# # 2)
+# def move_zeros(arr):
+#     counter = 0
+
+#     for i in range(len(arr)):
+#         if arr[i] != 0:
+#             arr[counter] = arr[i]
+#             counter += 1
+
+#     for i in range(counter, len(arr)):
+#         arr[i] = 0
+
+#     return arr
+
+
+# nums = [0, 1, 0, 3, 12]
+# result = move_zeros(nums)
+# print(result)

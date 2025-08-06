@@ -1657,27 +1657,45 @@
 
 // Follow up: Could you minimize the total number of operations done?
 //===============================================================================================================================
-function moveZeros(arr){
-    let pointer = 0
+//1)
+// function moveZeros(arr){
+//     let pointer = 0
 
-    for(let i=0; i < arr.length; i++){
-        if(arr[i] !== 0){
-            arr[pointer] = arr[i];
-            pointer ++;          
+//     for(let i=0; i < arr.length; i++){
+//         if(arr[i] !== 0){
+//             arr[pointer] = arr[i];
+//             pointer ++;          
             
-        }
-    }
-    console.log(arr);
+//         }
+//     }
+//     console.log(arr);
     
 
-    for(let i = pointer; i < arr.length; i++){
-        arr[i] = 0;
+//     for(let i = pointer; i < arr.length; i++){
+//         arr[i] = 0;
+//     }
+//     return arr
+// }
+// let nums = [0,1,0,3,12]
+// // let reslut = [1,3,12,0,0]
+// let result = moveZeros(nums)
+// console.log(result);
+//===============================================================================================================================
+function moveZeros(arr) {
+    let counterOfZeros = 0;
+
+    for (let i=0; i < arr.length; i++){
+        if(arr[i] === 0){
+            counterOfZeros ++;
+        }
+        else if(counterOfZeros > 0){
+            arr[i - counterOfZeros] = arr[i];
+            arr[i] = 0;
+
+        }
     }
     return arr
-
 }
-
-
 
 let nums = [0,1,0,3,12]
 // let reslut = [1,3,12,0,0]

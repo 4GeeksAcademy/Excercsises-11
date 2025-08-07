@@ -1564,3 +1564,65 @@ import copy
 # nums = [0, 1, 0, 3, 12]
 # result = move_zeros(nums)
 # print(result)
+#===============================================================================================================================
+#1) Brute force  Time = O(n²)   Space =	O(1)
+# def two_sums(arr,target):
+#     for i in range(len(arr)):
+#         for j  in range(i+1, len(arr)):
+#             if arr[i] + arr[j] == target:
+#              return [i , j]
+    
+
+# nums = [2,7,11,15]
+# target = 9
+# result = two_sums(nums,target)
+# print(result)
+#===============================================================================================================================
+#2)Hash map  (Optimized – Time Complexity O(n)
+# def two_sums(arr,target):
+#     map_numbers = {}
+
+#     for i,num in enumerate(arr):
+#         complement = target - num
+#         if complement in map_numbers:
+#             return [map_numbers[complement], i]
+#         map_numbers[num] = i
+
+
+# nums = [2,7,11,15]
+# target = 9
+# result = two_sums(nums,target)
+# print(result)
+    
+#1)d
+def find_double(board):
+    rows = [set() for _ in range(9)]   
+    columns = [set() for _ in range(9)]
+    boxes = [set() for _ in range(9)]
+    
+    for i in range(len(board)):
+        for j in range(len(board[i])):
+            cell = board[i][j]
+            if cell == ".":
+                skip
+                
+
+            
+    
+    
+
+
+
+board = [
+ ["5","3",".",".","7",".",".",".","."]
+,["6",".",".","1","9","5",".",".","."]
+,[".","9","8",".",".",".",".","6","."]
+,["8",".",".",".","6",".",".",".","3"]
+,["4",".",".","8",".","3",".",".","1"]
+,["7",".",".",".","2",".",".",".","6"]
+,[".","6",".",".",".",".","2","8","."]
+,[".",".",".","4","1","9",".",".","5"]
+,[".",".",".",".","8",".",".","7","9"]
+]
+result = find_double(board)
+# print(result)

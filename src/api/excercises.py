@@ -1595,34 +1595,48 @@ import copy
 # print(result)
     
 #1)d
-def find_double(board):
-    rows = [set() for _ in range(9)]   
-    columns = [set() for _ in range(9)]
-    boxes = [set() for _ in range(9)]
+# def find_double(board):
+#     rows = [set() for _ in range(9)]   
+#     columns = [set() for _ in range(9)]
+#     boxes = [set() for _ in range(9)]
     
-    for i in range(len(board)):
-        for j in range(len(board[i])):
-            cell = board[i][j]
-            if cell == ".":
-                skip
-                
+#     for i in range(len(board)):
+#         for j in range(len(board[i])):
+#             cell = board[i][j]
+#             if cell == ".":
+#                 continue
+#             if cell  in rows[i]:
+#              return False
+#             rows[i].add(cell)
 
+#             if cell in columns[j]:
+#                return False
+#             columns[j].add(cell)
+
+#             box_number = i // 3 * 3 + j // 3
+#             if cell in boxes[box_number]:
+#                 return False
+#             boxes[box_number].add(cell)
+#     return True                   
+                      
+# board = [
+#  ["5","5",".",".","7",".",".",".","."]
+# ,["6",".",".","1","9","5",".",".","."]
+# ,[".","9","8",".",".",".",".","6","."]
+# ,["8",".",".",".","6",".",".",".","3"]
+# ,["4",".",".","8",".","3",".",".","1"]
+# ,["7",".",".",".","2",".",".",".","6"]
+# ,[".","6",".",".",".",".","2","8","."]
+# ,[".",".",".","4","1","9",".",".","5"]
+# ,[".",".",".",".","8",".",".","7","9"]
+# ]
+# result = find_double(board)
+# print(result)    
             
+            
+        
+  
     
-    
 
 
 
-board = [
- ["5","3",".",".","7",".",".",".","."]
-,["6",".",".","1","9","5",".",".","."]
-,[".","9","8",".",".",".",".","6","."]
-,["8",".",".",".","6",".",".",".","3"]
-,["4",".",".","8",".","3",".",".","1"]
-,["7",".",".",".","2",".",".",".","6"]
-,[".","6",".",".",".",".","2","8","."]
-,[".",".",".","4","1","9",".",".","5"]
-,[".",".",".",".","8",".",".","7","9"]
-]
-result = find_double(board)
-# print(result)

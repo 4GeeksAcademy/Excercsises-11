@@ -1594,7 +1594,7 @@ import copy
 # result = two_sums(nums,target)
 # print(result)
     
-#1)d
+# 1)d
 # def find_double(board):
 #     rows = [set() for _ in range(9)]   
 #     columns = [set() for _ in range(9)]
@@ -1631,10 +1631,48 @@ import copy
 # ,[".",".",".",".","8",".",".","7","9"]
 # ]
 # result = find_double(board)
-# print(result)    
-            
-            
-        
+# print(result)
+
+
+#===============================================================================================================================
+#1)
+# def first_non_repeating(str):
+#    n = len(str)
+#    for i in range(n):
+#       unique = True
+#       for j in range(n):
+#          if i != j and str[i] == str[j]:
+#             unique = False
+#             break          
+#       if unique:
+#             return i
+#    return -1  
+
+# s = "agfagf"
+# print(first_non_repeating(s)) 
+#===============================================================================================================================
+#2)
+# from collections import Counter
+
+# def first_non_repeating(str):
+#     freq = Counter(str)
+#     for i,value in enumerate(s):
+#         if freq[value] == 1:
+#             return i
+#     return -1    
+
+
+
+
+# s = "agfagf"
+# first_non_repeating(s)
+# print(first_non_repeating(s)) 
+
+
+         
+                      
+                    
+                 
   
     
 

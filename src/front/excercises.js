@@ -1446,9 +1446,9 @@
 // function checkArray(nums){
 //   let setOfNumbers = new Set()
 //   for(let num of nums){
-//     if(setOfNumbers.has(num))return true 
-//     setOfNumbers.add(num) 
-      
+//     if(setOfNumbers.has(num))return true
+//     setOfNumbers.add(num)
+
 //   }
 //   return false;
 // }
@@ -1467,13 +1467,12 @@
 //             return current
 //         }
 //     }
-//     return sortedArray[sortedArray.length - 1]   
+//     return sortedArray[sortedArray.length - 1]
 // }
 
 // let  nums = [2,2,1]
 // let result  = FindDouble(nums)
 // console.log(result);
-
 
 //------------------------------------------------------------------------------------------------------------------------------
 //2)
@@ -1495,8 +1494,6 @@
 // Solution
 // Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must appear as many times as it shows in both arrays and you may return the result in any order.
 
- 
-
 // Example 1:
 
 // Input: nums1 = [1,2,2,1], nums2 = [2,2]
@@ -1506,13 +1503,11 @@
 // Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
 // Output: [4,9]
 // Explanation: [9,4] is also accepted.
- 
 
 // Constraints:
 
 // 1 <= nums1.length, nums2.length <= 1000
 // 0 <= nums1[i], nums2[i] <= 1000
- 
 
 // Follow up:
 
@@ -1543,8 +1538,8 @@
 //             pointer2++;
 //         }
 //     }
-//     return result 
-    
+//     return result
+
 // }
 
 // let nums1 = [1,2,2,1]
@@ -1566,7 +1561,7 @@
 //         if(freqOfNums1[num] > 0){
 //             result.push(num);
 //             freqOfNums1[num] --
-//         }       
+//         }
 //     }
 //     return result
 // }
@@ -1583,8 +1578,6 @@
 // You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer. The digits are ordered from most significant to least significant in left-to-right order. The large integer does not contain any leading 0's.
 
 // Increment the large integer by one and return the resulting array of digits.
-
- 
 
 // Example 1:
 
@@ -1607,7 +1600,6 @@
 // Explanation: The array represents the integer 9.
 // Incrementing by one gives 9 + 1 = 10.
 // Thus, the result should be [1,0].
- 
 
 // Constraints:
 
@@ -1618,10 +1610,10 @@
 // function incrementByOne (arr){
 //     for(let i= arr.length -1; i >= 0; i--){
 //        if(arr[i] < 9){
-//         arr[i] ++ 
-//         return arr;       
+//         arr[i] ++
+//         return arr;
 //        }
-//        arr[i] = 0                        
+//        arr[i] = 0
 //     }
 //     arr.unshift(1);
 //     return arr;
@@ -1637,8 +1629,6 @@
 
 // Note that you must do this in-place without making a copy of the array.
 
- 
-
 // Example 1:
 
 // Input: nums = [0,1,0,3,12]
@@ -1647,13 +1637,11 @@
 
 // Input: nums = [0]
 // Output: [0]
- 
 
 // Constraints:
 
 // 1 <= nums.length <= 104
 // -231 <= nums[i] <= 231 - 1
- 
 
 // Follow up: Could you minimize the total number of operations done?
 //===============================================================================================================================
@@ -1664,12 +1652,11 @@
 //     for(let i=0; i < arr.length; i++){
 //         if(arr[i] !== 0){
 //             arr[pointer] = arr[i];
-//             pointer ++;          
-            
+//             pointer ++;
+
 //         }
 //     }
 //     console.log(arr);
-    
 
 //     for(let i = pointer; i < arr.length; i++){
 //         arr[i] = 0;
@@ -1681,23 +1668,230 @@
 // let result = moveZeros(nums)
 // console.log(result);
 //===============================================================================================================================
-function moveZeros(arr) {
-    let counterOfZeros = 0;
+// function moveZeros(arr) {
+//     let counterOfZeros = 0;
 
-    for (let i=0; i < arr.length; i++){
-        if(arr[i] === 0){
-            counterOfZeros ++;
+//     for (let i=0; i < arr.length; i++){
+//         if(arr[i] === 0){
+//             counterOfZeros ++;
+//         }
+//         else if(counterOfZeros > 0){
+//             arr[i - counterOfZeros] = arr[i];
+//             arr[i] = 0;
+
+//         }
+//     }
+//     return arr
+// }
+
+// let nums = [0,1,0,3,12]
+// // let reslut = [1,3,12,0,0]
+// let result = moveZeros(nums)
+// console.log(result);
+
+//===============================================================================================================================
+//   Two Sum
+
+// Solution
+// Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+
+// You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+// You can return the answer in any order.
+
+// Example 1:
+
+// Input: nums = [2,7,11,15], target = 9
+// Output: [0,1]
+// Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+// Example 2:
+
+// Input: nums = [3,2,4], target = 6
+// Output: [1,2]
+// Example 3:
+
+// Input: nums = [3,3], target = 6
+// Output: [0,1]
+
+// Constraints:
+
+// 2 <= nums.length <= 104
+// -109 <= nums[i] <= 109
+// -109 <= target <= 109
+// Only one valid answer exists.
+
+//===============================================================================================================================
+//1) (Optimized Hash Map)
+// function twoSum(nums,target){
+//     const hashMap = {};
+
+//     for (let i = 0; i < nums.length; i++){
+//         const num = nums[i]
+//         const restant = target - num
+
+//         if(restant in hashMap){
+//             return [hashMap[restant], i];
+//         }
+//         hashMap[num] = i ;
+//     }
+// }
+
+// let nums = [3,2,4]
+// let target = 6
+// let result = twoSum(nums,target)
+// console.log(result);
+
+//===============================================================================================================================
+//2)
+// function twoSum(nums, target) {
+//   for (let i = 0; i < nums.length; i++) {
+//     console.log(`Index: ${i}, value: ${nums[i]}`);
+//     for (let j = i + 1; j < nums.length; j++) {
+//       if (nums[i] + nums[j] == target) {
+//         return [i, j];
+//       }
+//     }
+//   }
+// }
+
+// let nums = [3, 2, 4];
+// let target = 6;
+// let result = twoSum(nums, target);
+// console.log(result);
+
+//===============================================================================================================================
+//   Valid Sudoku
+
+// Solution
+// Determine if a 9 x 9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules:
+
+// Each row must contain the digits 1-9 without repetition.
+// Each column must contain the digits 1-9 without repetition.
+// Each of the nine 3 x 3 sub-boxes of the grid must contain the digits 1-9 without repetition.
+// Note:
+
+// A Sudoku board (partially filled) could be valid but is not necessarily solvable.
+// Only the filled cells need to be validated according to the mentioned rules.
+ 
+
+// Example 1:
+
+
+// Input: board = 
+// [["5","3",".",".","7",".",".",".","."]
+// ,["6",".",".","1","9","5",".",".","."]
+// ,[".","9","8",".",".",".",".","6","."]
+// ,["8",".",".",".","6",".",".",".","3"]
+// ,["4",".",".","8",".","3",".",".","1"]
+// ,["7",".",".",".","2",".",".",".","6"]
+// ,[".","6",".",".",".",".","2","8","."]
+// ,[".",".",".","4","1","9",".",".","5"]
+// ,[".",".",".",".","8",".",".","7","9"]]
+// Output: true
+// Example 2:
+
+// Input: board = 
+// [["8","3",".",".","7",".",".",".","."]
+// ,["6",".",".","1","9","5",".",".","."]
+// ,[".","9","8",".",".",".",".","6","."]
+// ,["8",".",".",".","6",".",".",".","3"]
+// ,["4",".",".","8",".","3",".",".","1"]
+// ,["7",".",".",".","2",".",".",".","6"]
+// ,[".","6",".",".",".",".","2","8","."]
+// ,[".",".",".","4","1","9",".",".","5"]
+// ,[".",".",".",".","8",".",".","7","9"]]
+// Output: false
+// Explanation: Same as Example 1, except with the 5 in the top left corner being modified to 8. Since there are two 8's in the top left 3x3 sub-box, it is invalid.
+ 
+
+// Constraints:
+
+// board.length == 9
+// board[i].length == 9
+// board[i][j] is a digit 1-9 or '.'.
+
+
+//------------------------------------------------------------------------------------------------------------------------------
+//   First Unique Character in a String
+
+// Solution
+// Given a string s, find the first non-repeating character in it and return its index. If it does not exist, return -1.
+
+ 
+
+// Example 1:
+
+// Input: s = "leetcode"
+
+// Output: 0
+
+// Explanation:
+
+// The character 'l' at index 0 is the first character that does not occur at any other index.
+
+// Example 2:
+
+// Input: s = "loveleetcode"
+
+// Output: 2
+
+// Example 3:
+
+// Input: s = "aabb"
+
+// Output: -1
+
+ 
+
+// Constraints:
+
+// 1 <= s.length <= 105
+// s consists of only lowercase English letters.
+
+//1)
+// function findUnique(string){
+//     const fixedArray = new Array(26).fill(0);
+//     const base = "a".charCodeAt(0)
+
+//     for (let i = 0; i < string.length; i++ ){
+//         const idx = string.charCodeAt(i) - base
+//         fixedArray[idx]++;
+//     }
+//     for ( let i = 0; i < string.length; i++){
+//         const idx = string.charCodeAt(i) - base
+//         if (fixedArray[idx] === 1){
+//             return i
+//         }
+//     }
+//     return -1 
+// }
+
+// let s = "loveleetcode"
+// // findUnique(s)
+// console.log(findUnique(s))
+//------------------------------------------------------------------------------------------------------------------------------
+//2)
+function findUnique(str){
+    const freq = {};
+
+    for(let letter of str){
+        if (letter in freq){
+            freq[letter] += 1
         }
-        else if(counterOfZeros > 0){
-            arr[i - counterOfZeros] = arr[i];
-            arr[i] = 0;
-
+        else{
+            freq[letter] = 1
         }
     }
-    return arr
+    for ( let i = 0; i < str.length; i++){
+        if(freq[str[i]] === 1) return i ;
+    }
+    return -1  
+
 }
 
-let nums = [0,1,0,3,12]
-// let reslut = [1,3,12,0,0]
-let result = moveZeros(nums)
-console.log(result);
+
+
+
+let s = "loveleetcode"
+// findUnique(s)
+console.log(findUnique(s))

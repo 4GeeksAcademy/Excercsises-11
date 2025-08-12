@@ -1,5 +1,7 @@
 //   Reverse Integer
 
+const { Simulate } = require("react-dom/test-utils");
+
 // const { elementType } = require("prop-types");
 
 // Solution
@@ -1871,27 +1873,85 @@
 // console.log(findUnique(s))
 //------------------------------------------------------------------------------------------------------------------------------
 //2)
-function findUnique(str){
-    const freq = {};
+// function findUnique(str){
+//     const freq = {};
 
-    for(let letter of str){
-        if (letter in freq){
-            freq[letter] += 1
-        }
-        else{
-            freq[letter] = 1
-        }
-    }
-    for ( let i = 0; i < str.length; i++){
-        if(freq[str[i]] === 1) return i ;
-    }
-    return -1  
+//     for(let letter of str){
+//         if (letter in freq){
+//             freq[letter] += 1
+//         }
+//         else{
+//             freq[letter] = 1
+//         }
+//     }
+//     for ( let i = 0; i < str.length; i++){
+//         if(freq[str[i]] === 1) return i ;
+//     }
+//     return -1  
 
-}
-
-
+// }
 
 
-let s = "loveleetcode"
-// findUnique(s)
-console.log(findUnique(s))
+
+
+// let s = "loveleetcode"
+// // findUnique(s)
+// console.log(findUnique(s))
+
+//===============================================================================================================================
+
+//   Valid Anagram
+
+// Solution
+// Given two strings s and t, return true if t is an anagram of s, and false otherwise.
+
+ 
+
+// Example 1:
+
+// Input: s = "anagram", t = "nagaram"
+
+// Output: true
+
+// Example 2:
+
+// Input: s = "rat", t = "car"
+
+// Output: false
+
+ 
+
+// Constraints:
+
+// 1 <= s.length, t.length <= 5 * 104
+// s and t consist of lowercase English letters.
+ 
+
+// Follow up: What if the inputs contain Unicode characters? How would you adapt your solution to such a case?
+//===============================================================================================================================
+//1)
+// function findAnagram(s1,s2){
+//     if(s1.length !== s2.length)return false;        
+   
+//     const frequencyOfS1 = {};
+
+//     for(let char of s1){
+//         frequencyOfS1[char] = (frequencyOfS1[char] || 0) + 1;
+//     }
+
+//     for (let char2 of s2){
+//         if(!frequencyOfS1[char2])return false;
+//         frequencyOfS1[char2]--;
+//     }
+
+//     for(let key in frequencyOfS1){
+//         if(frequencyOfS1[key] > 0)return false
+//     }
+//     return true
+
+
+// }
+// let s = "rat"
+// let t = "car"
+ console.log(findAnagram(s,t));
+ 

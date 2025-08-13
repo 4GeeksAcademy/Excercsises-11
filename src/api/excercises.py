@@ -1668,13 +1668,152 @@ import copy
 # first_non_repeating(s)
 # print(first_non_repeating(s)) 
 
+#===============================================================================================================================      
+                                         
+                  
+#       Valid Anagram
 
-         
-                      
-                    
-                 
-  
+# Solution
+# Given two strings s and t, return true if t is an anagram of s, and false otherwise.
+
+ 
+
+# Example 1:
+
+# Input: s = "anagram", t = "nagaram"
+
+# Output: true
+
+# Example 2:
+
+# Input: s = "rat", t = "car"
+
+# Output: false
+
+ 
+
+# Constraints:
+
+# 1 <= s.length, t.length <= 5 * 104
+# s and t consist of lowercase English letters.
+ 
+
+# Follow up: What if the inputs contain Unicode characters? How would you adapt your solution to such a case?
+
+#===============================================================================================================================
+
+#1)
+# from collections import Counter
+
+
+
+# def find_anagram(s1,s2):
+#     return Counter(s1) == Counter(s2)
+
+# s = "rat"
+# t = "tar"
+# print(find_anagram(s,t))
+#===============================================================================================================================
+
+#2)
+
+# def find_anagram(s1,s2):
+#     if len(s1) != len(s2):
+#         return False
     
+#     freq_s1 = {}
+#     for char in s1:
+#         freq_s1[char] = freq_s1.get(char,0) + 1
+
+#     for char in s2:
+#         if char not in freq_s1:
+#             return False
+#         freq_s1[char] -= 1
+#         if freq_s1[char] < 0:
+#             return False
+
+#     for count in freq_s1.values():
+#         if count > 0:
+#             return False
+            
+#     return True   
 
 
+# s = "rat"
+# t = "tar"
+# print(find_anagram(s,t))    
+# //===============================================================================================================================
+#   Valid Palindrome
 
+# Solution
+# A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.
+
+# Given a string s, return true if it is a palindrome, or false otherwise.
+
+ 
+
+# Example 1:
+
+# Input: s = "A man, a plan, a canal: Panama"
+# Output: true
+# Explanation: "amanaplanacanalpanama" is a palindrome.
+# Example 2:
+
+# Input: s = "race a car"
+# Output: false
+# Explanation: "raceacar" is not a palindrome.
+# Example 3:
+
+# Input: s = " "
+# Output: true
+# Explanation: s is an empty string "" after removing non-alphanumeric characters.
+# Since an empty string reads the same forward and backward, it is a palindrome.
+ 
+
+# Constraints:
+
+# 1 <= s.length <= 2 * 105
+# s consists only of printable ASCII characters.
+#===============================================================================================================================
+# 1)  build cleaned string + reverse
+
+# def is_palindrome(s):
+#     cleaned = "".join(ch.lower() for ch in s if ch.isalnum())
+#     return cleaned == cleaned[::-1]  
+    
+# s = "A man, a plan, a canal: Panama"
+# # result = is_palindrome(s)
+# print(is_palindrome("A man, a plan, a canal: Panama"))  # expect True
+# print(is_palindrome("race a car"))                      # expect False
+# print(is_palindrome("0P"))                              # expect False
+# print(is_palindrome(".,,"))                             # expect True
+# print(is_palindrome("a"))                               # expect True
+# # //===============================================================================================================================
+# # 2)Two Pointers (Skip & Compare):
+
+# def is_palindrome(s):
+#     i = 0
+#     j = len(s) - 1
+
+#     while i < j:
+#         while i < j and not s[i].isalnum():
+#             i +=1
+
+#         while i < j and not s[j].isalnum():
+#             j -=1 
+
+#         if s[i].lower() != s[j].lower():
+#             return False
+
+#         i += 1
+#         j -= 1
+
+#     return True        
+
+# s = "A man, a plan, a canal: Panama"
+# # result = is_palindrome(s)
+# print(is_palindrome("A man, a plan, a canal: Panama"))  # expect True
+# print(is_palindrome("race a car"))                      # expect False
+# print(is_palindrome("0P"))                              # expect False
+# print(is_palindrome(".,,"))                             # expect True
+# print(is_palindrome("a"))                               # expect True

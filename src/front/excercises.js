@@ -26,7 +26,6 @@ const { Simulate } = require("react-dom/test-utils");
 
 // -231 <= x <= 231 - 1
 
-// #------------------------------------------------------------------------------------------------------------------------------
 
 // function reverseString(num) {
 //   const maxRange = Math.pow(2, 31) - 1;
@@ -1952,6 +1951,57 @@ const { Simulate } = require("react-dom/test-utils");
 
 // }
 // let s = "rat"
-// let t = "car"
- console.log(findAnagram(s,t));
- 
+// // let t = "car"
+//  console.log(findAnagram(s,t));
+
+ //===============================================================================================================================
+//  1)Solution 1 — Clean & Reverse
+ function isPalindrome(s){
+    let lefPointer = 0
+    let rigthPointer = s.length - 1;
+
+    const isAlphaNum = ch => /[a-z0-9]/i.test(ch);
+
+    while(lefPointer<rigthPointer){
+        while(lefPointer < rigthPointer && !isAlphaNum(s[lefPointer])){
+            lefPointer++;
+        }
+        while(lefPointer < rigthPointer && !isAlphaNum(s[rigthPointer])){
+            rigthPointer--;
+        }
+        if(s[lefPointer].toLowerCase() !== s[rigthPointer].toLowerCase()){
+            return false
+        }
+
+        lefPointer++;
+        rigthPointer--;
+    }
+    return true
+
+ }
+console.log(isPalindrome("A man, a plan, a canal: Panama")); // true
+console.log(isPalindrome("race a car"));                     // false
+console.log(isPalindrome("0P"));                             // false
+console.log(isPalindrome(".,,"));                            // true
+console.log(isPalindrome("a"));                              // true
+console.log(isPalindrome("   "));                            // true                               
+//===============================================================================================================================
+
+//2)Solution 2 — Two Pointers
+
+function isPalindrome(s){
+    const cleaned = s
+    .toLowerCase()
+    .split("")
+    .filter(ch => /[a-z0-9]/.test(ch))
+    .join("");
+
+    const reversed = cleaned.split("").reverse().join("");
+    return reversed === cleaned
+}
+console.log(isPalindrome("A man, a plan, a canal: Panama")); // true
+console.log(isPalindrome("race a car"));                     // false
+console.log(isPalindrome("0P"));                             // false
+console.log(isPalindrome(".,,"));                            // true
+console.log(isPalindrome("a"));                              // true
+console.log(isPalindrome("   "));                            // true                               

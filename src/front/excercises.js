@@ -26,7 +26,6 @@ const { Simulate } = require("react-dom/test-utils");
 
 // -231 <= x <= 231 - 1
 
-
 // function reverseString(num) {
 //   const maxRange = Math.pow(2, 31) - 1;
 //   const minRange = -Math.pow(2, 31);
@@ -1665,7 +1664,7 @@ const { Simulate } = require("react-dom/test-utils");
 //     return arr
 // }
 // let nums = [0,1,0,3,12]
-// // let reslut = [1,3,12,0,0]
+// // let result = [1,3,12,0,0]
 // let result = moveZeros(nums)
 // console.log(result);
 //===============================================================================================================================
@@ -1686,7 +1685,7 @@ const { Simulate } = require("react-dom/test-utils");
 // }
 
 // let nums = [0,1,0,3,12]
-// // let reslut = [1,3,12,0,0]
+// // let result = [1,3,12,0,0]
 // let result = moveZeros(nums)
 // console.log(result);
 
@@ -1773,12 +1772,10 @@ const { Simulate } = require("react-dom/test-utils");
 
 // A Sudoku board (partially filled) could be valid but is not necessarily solvable.
 // Only the filled cells need to be validated according to the mentioned rules.
- 
 
 // Example 1:
 
-
-// Input: board = 
+// Input: board =
 // [["5","3",".",".","7",".",".",".","."]
 // ,["6",".",".","1","9","5",".",".","."]
 // ,[".","9","8",".",".",".",".","6","."]
@@ -1791,7 +1788,7 @@ const { Simulate } = require("react-dom/test-utils");
 // Output: true
 // Example 2:
 
-// Input: board = 
+// Input: board =
 // [["8","3",".",".","7",".",".",".","."]
 // ,["6",".",".","1","9","5",".",".","."]
 // ,[".","9","8",".",".",".",".","6","."]
@@ -1803,7 +1800,6 @@ const { Simulate } = require("react-dom/test-utils");
 // ,[".",".",".",".","8",".",".","7","9"]]
 // Output: false
 // Explanation: Same as Example 1, except with the 5 in the top left corner being modified to 8. Since there are two 8's in the top left 3x3 sub-box, it is invalid.
- 
 
 // Constraints:
 
@@ -1811,14 +1807,11 @@ const { Simulate } = require("react-dom/test-utils");
 // board[i].length == 9
 // board[i][j] is a digit 1-9 or '.'.
 
-
 //------------------------------------------------------------------------------------------------------------------------------
 //   First Unique Character in a String
 
 // Solution
 // Given a string s, find the first non-repeating character in it and return its index. If it does not exist, return -1.
-
- 
 
 // Example 1:
 
@@ -1842,8 +1835,6 @@ const { Simulate } = require("react-dom/test-utils");
 
 // Output: -1
 
- 
-
 // Constraints:
 
 // 1 <= s.length <= 105
@@ -1864,7 +1855,7 @@ const { Simulate } = require("react-dom/test-utils");
 //             return i
 //         }
 //     }
-//     return -1 
+//     return -1
 // }
 
 // let s = "loveleetcode"
@@ -1886,12 +1877,9 @@ const { Simulate } = require("react-dom/test-utils");
 //     for ( let i = 0; i < str.length; i++){
 //         if(freq[str[i]] === 1) return i ;
 //     }
-//     return -1  
+//     return -1
 
 // }
-
-
-
 
 // let s = "loveleetcode"
 // // findUnique(s)
@@ -1903,8 +1891,6 @@ const { Simulate } = require("react-dom/test-utils");
 
 // Solution
 // Given two strings s and t, return true if t is an anagram of s, and false otherwise.
-
- 
 
 // Example 1:
 
@@ -1918,20 +1904,17 @@ const { Simulate } = require("react-dom/test-utils");
 
 // Output: false
 
- 
-
 // Constraints:
 
 // 1 <= s.length, t.length <= 5 * 104
 // s and t consist of lowercase English letters.
- 
 
 // Follow up: What if the inputs contain Unicode characters? How would you adapt your solution to such a case?
 //===============================================================================================================================
 //1)
 // function findAnagram(s1,s2){
-//     if(s1.length !== s2.length)return false;        
-   
+//     if(s1.length !== s2.length)return false;
+
 //     const frequencyOfS1 = {};
 
 //     for(let char of s1){
@@ -1948,60 +1931,152 @@ const { Simulate } = require("react-dom/test-utils");
 //     }
 //     return true
 
-
 // }
 // let s = "rat"
 // // let t = "car"
 //  console.log(findAnagram(s,t));
 
- //===============================================================================================================================
-//  1)Solution 1 — Clean & Reverse
- function isPalindrome(s){
-    let lefPointer = 0
-    let rigthPointer = s.length - 1;
-
-    const isAlphaNum = ch => /[a-z0-9]/i.test(ch);
-
-    while(lefPointer<rigthPointer){
-        while(lefPointer < rigthPointer && !isAlphaNum(s[lefPointer])){
-            lefPointer++;
-        }
-        while(lefPointer < rigthPointer && !isAlphaNum(s[rigthPointer])){
-            rigthPointer--;
-        }
-        if(s[lefPointer].toLowerCase() !== s[rigthPointer].toLowerCase()){
-            return false
-        }
-
-        lefPointer++;
-        rigthPointer--;
-    }
-    return true
-
- }
-console.log(isPalindrome("A man, a plan, a canal: Panama")); // true
-console.log(isPalindrome("race a car"));                     // false
-console.log(isPalindrome("0P"));                             // false
-console.log(isPalindrome(".,,"));                            // true
-console.log(isPalindrome("a"));                              // true
-console.log(isPalindrome("   "));                            // true                               
 //===============================================================================================================================
+//  1)Solution 1 — Clean & Reverse
+//  function isPalindrome(s){
+//     let lefPointer = 0
+//     let rigthPointer = s.length - 1;
 
-//2)Solution 2 — Two Pointers
+//     const isAlphaNum = ch => /[a-z0-9]/i.test(ch);
 
-function isPalindrome(s){
-    const cleaned = s
-    .toLowerCase()
-    .split("")
-    .filter(ch => /[a-z0-9]/.test(ch))
-    .join("");
+//     while(lefPointer<rigthPointer){
+//         while(lefPointer < rigthPointer && !isAlphaNum(s[lefPointer])){
+//             lefPointer++;
+//         }
+//         while(lefPointer < rigthPointer && !isAlphaNum(s[rigthPointer])){
+//             rigthPointer--;
+//         }
+//         if(s[lefPointer].toLowerCase() !== s[rigthPointer].toLowerCase()){
+//             return false
+//         }
 
-    const reversed = cleaned.split("").reverse().join("");
-    return reversed === cleaned
-}
-console.log(isPalindrome("A man, a plan, a canal: Panama")); // true
-console.log(isPalindrome("race a car"));                     // false
-console.log(isPalindrome("0P"));                             // false
-console.log(isPalindrome(".,,"));                            // true
-console.log(isPalindrome("a"));                              // true
-console.log(isPalindrome("   "));                            // true                               
+//         lefPointer++;
+//         rigthPointer--;
+//     }
+//     return true
+
+//  }
+// console.log(isPalindrome("A man, a plan, a canal: Panama")); // true
+// console.log(isPalindrome("race a car"));                     // false
+// console.log(isPalindrome("0P"));                             // false
+// console.log(isPalindrome(".,,"));                            // true
+// console.log(isPalindrome("a"));                              // true
+// console.log(isPalindrome("   "));                            // true
+// //===============================================================================================================================
+
+// //2)Solution 2 — Two Pointers
+
+// function isPalindrome(s){
+//     const cleaned = s
+//     .toLowerCase()
+//     .split("")
+//     .filter(ch => /[a-z0-9]/.test(ch))
+//     .join("");
+
+//     const reversed = cleaned.split("").reverse().join("");
+//     return reversed === cleaned
+// }
+// console.log(isPalindrome("A man, a plan, a canal: Panama")); // true
+// console.log(isPalindrome("race a car"));                     // false
+// console.log(isPalindrome("0P"));                             // false
+// console.log(isPalindrome(".,,"));                            // true
+// console.log(isPalindrome("a"));                              // true
+// console.log(isPalindrome("   "));                            // true
+//===============================================================================================================================
+// function checkString(string){
+//     let i = 0
+//     let sign = 1
+
+//     while (i < string.length && string[i] == " "){
+//         i++;
+//     }
+//     if(i < string.length && (string[i] === "-" || string[i] === "+")){
+//         sign = string[i] === "-" ? -1 : 1;
+//         i++;
+//     }
+//     while(i < string.length && string[i] == "0" ){
+//         i++;
+//     }
+
+//     if(i >= string.length || string[i] < "0" || string[i] > "9"){
+//         return 0
+//     }
+
+//     let newStr = "";
+//     while( i < string.length && string[i] >= "0" && string[i] <= "9"){
+//         newStr += string[i];
+//         i++;
+//     }
+
+//     let newNum = sign * Number(newStr)
+
+//     const INT_MIN = -(2 ** 31);
+//     const INT_MAX = (2 ** 31) - 1 ;
+
+//     if(newNum < INT_MIN)return INT_MIN;
+//     if(newNum > INT_MAX)return INT_MAX;
+
+//     return newNum
+
+// }
+// console.log(checkString("42"));               // 42
+// console.log(checkString("   -042"));          // -42
+// console.log(checkString("1337c0d3"));         // 1337
+// console.log(checkString("0-1"));              // 0
+// console.log(checkString("words and 987"));    // 0
+// console.log(checkString("000abc"));           // 0
+// console.log(checkString("21474836460"));      // 2147483647 (clamped)
+// console.log(checkString("-21474836490"));     // -2147483648 (clamped)
+// console.log(checkString("   +000"));          // 0
+// console.log(checkString("   +000 123"));      // 0  (stop at space)
+
+//===============================================================================================================================
+// function checkString(s) {
+//   let i = 0; 
+//   const n = s.length;
+//   let sign = 1;
+//   let result = 0;
+
+//   while (i < n && s.charCodeAt(i) === 32) i++;
+
+//   if (i < n && (s[i] === "-" || s[i] === "+")) {
+//     sign = s[i] === "-" ? -1 : 1;
+//     i++;
+//   }
+//   const ABS_LIMIT = sign === 1 ? 2147483647 : 2147483648;
+//   const CUT = Math.trunc(ABS_LIMIT/10);
+//   const LIM = ABS_LIMIT % 10;
+
+//   while(i<n){
+//     const code = s.charCodeAt(i)
+
+//     if (code < 48 || code > 57)break;
+    
+//     const d = code - 48;
+
+//     if(result > CUT || (result === CUT && d > LIM)){
+//         return sign === 1 ? 2147483647 : -2147483648;
+//     }
+//     result = result * 10 + d;
+//     i++;
+//   }
+// return sign === 1 ? result : -result
+  
+// }
+
+// console.log(checkString("42")); // 42
+// console.log(checkString("   -042")); // -42
+// console.log(checkString("1337c0d3")); // 1337
+// console.log(checkString("0-1")); // 0
+// console.log(checkString("words and 987")); // 0
+// console.log(checkString("000abc")); // 0
+// console.log(checkString("21474836460")); // 2147483647 (clamped)
+// console.log(checkString("-21474836490")); // -2147483648 (clamped)
+// console.log(checkString("   +000")); // 0
+// console.log(checkString("   +000 123")); // 0  (stop at space)
+

@@ -1817,3 +1817,174 @@ import copy
 # print(is_palindrome("0P"))                              # expect False
 # print(is_palindrome(".,,"))                             # expect True
 # print(is_palindrome("a"))                               # expect True
+
+
+
+
+# // #===============================================================================================================================
+# //   String to Integer (atoi)
+
+# // Solution
+# // Implement the myAtoi(string s) function, which converts a string to a 32-bit signed integer.
+
+# // The algorithm for myAtoi(string s) is as follows:
+
+# // Whitespace: Ignore any leading whitespace (" ").
+# // Signedness: Determine the sign by checking if the next character is '-' or '+', assuming positivity if neither present.
+# // Conversion: Read the integer by skipping leading zeros until a non-digit character is encountered or the end of the string is reached. If no digits were read, then the result is 0.
+# // Rounding: If the integer is out of the 32-bit signed integer range [-231, 231 - 1], then round the integer to remain in the range. Specifically, integers less than -231 should be rounded to -231, and integers greater than 231 - 1 should be rounded to 231 - 1.
+# // Return the integer as the final result.
+
+ 
+
+# // Example 1:
+
+# // Input: s = "42"
+
+# // Output: 42
+
+# // Explanation:
+
+# // The underlined characters are what is read in and the caret is the current reader position.
+# // Step 1: "42" (no characters read because there is no leading whitespace)
+# //          ^
+# // Step 2: "42" (no characters read because there is neither a '-' nor '+')
+# //          ^
+# // Step 3: "42" ("42" is read in)
+# //            ^
+# // Example 2:
+
+# // Input: s = " -042"
+
+# // Output: -42
+
+# // Explanation:
+
+# // Step 1: "   -042" (leading whitespace is read and ignored)
+# //             ^
+# // Step 2: "   -042" ('-' is read, so the result should be negative)
+# //              ^
+# // Step 3: "   -042" ("042" is read in, leading zeros ignored in the result)
+# //                ^
+# // Example 3:
+
+# // Input: s = "1337c0d3"
+
+# // Output: 1337
+
+# // Explanation:
+
+# // Step 1: "1337c0d3" (no characters read because there is no leading whitespace)
+# //          ^
+# // Step 2: "1337c0d3" (no characters read because there is neither a '-' nor '+')
+# //          ^
+# // Step 3: "1337c0d3" ("1337" is read in; reading stops because the next character is a non-digit)
+# //              ^
+# // Example 4:
+
+# // Input: s = "0-1"
+
+# // Output: 0
+
+# // Explanation:
+
+# // Step 1: "0-1" (no characters read because there is no leading whitespace)
+# //          ^
+# // Step 2: "0-1" (no characters read because there is neither a '-' nor '+')
+# //          ^
+# // Step 3: "0-1" ("0" is read in; reading stops because the next character is a non-digit)
+# //           ^
+# // Example 5:
+
+# // Input: s = "words and 987"
+
+# // Output: 0
+
+# // Explanation:
+
+# // Reading stops at the first non-digit character 'w'.
+
+ 
+
+# // Constraints:
+
+# // 0 <= s.length <= 200
+# // s consists of English letters (lower-case and upper-case), digits (0-9), ' ', '+', '-', and '.'.
+
+# def fix_string(s):
+#     i = 0
+#     result = 0
+#     n = len(s)
+#     sign = 1
+
+#     while i < n and ord(s[i] == 32):
+#         i += 1
+
+#     if i < n and (s[i] == "-" or s[i] == "+"):
+#         sign = -1 if s[i] == "-" else 1
+#         i += 1
+
+#     ABS_LIMIT =  2147483647  if sign == 1 else 2147483648    
+#     CUT = ABS_LIMIT // 10
+#     LIMIT = ABS_LIMIT % 10
+
+#     while i < n:
+#         code = ord(s[i])
+#         if code < 48 or code > 57:
+#             break
+
+#         d = code - 48
+
+#         if result > CUT or (result == CUT and d > LIMIT):
+#             return 2147483647 if sign == 1 else -2147483648
+        
+#         result = result * 10 + d
+#         i += 1
+
+       
+# print(fix_string("   -042"))         # -42
+# print(fix_string("1337c0d3"))        # 1337
+# print(fix_string("0-1"))             # 0
+# print(fix_string("words and 987"))   # 0
+# print(fix_string("000abc"))          # 0
+# print(fix_string("21474836460"))     # 2147483647 (clamped)
+# print(fix_string("-21474836490"))    # -2147483648 (clamped)
+# print(fix_string("   +000"))         # 0
+# print(fix_string("   +000 123"))     # 0
+#===============================================================================================================================
+#   Implement strStr()
+
+# Solution
+# Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+
+ 
+
+# Example 1:
+
+# Input: haystack = "sadbutsad", needle = "sad"
+# Output: 0
+# Explanation: "sad" occurs at index 0 and 6.
+# The first occurrence is at index 0, so we return 0.
+# Example 2:
+
+# Input: haystack = "leetcode", needle = "leeto"
+# Output: -1
+# Explanation: "leeto" did not occur in "leetcode", so we return -1.
+ 
+
+# Constraints:
+
+# 1 <= haystack.length, needle.length <= 104
+# haystack and needle consist of only lowercase English characters.
+# #===============================================================================================================================
+# def strStr(haystack, needle):
+#     n,m = len(haystack), len(needle)
+
+#     if m == 0:
+#         return 0
+    
+#     for i in range(n - m + 1):
+
+
+
+

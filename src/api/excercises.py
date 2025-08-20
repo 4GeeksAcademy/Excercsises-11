@@ -1977,14 +1977,210 @@ import copy
 # 1 <= haystack.length, needle.length <= 104
 # haystack and needle consist of only lowercase English characters.
 # #===============================================================================================================================
+# #1)
 # def strStr(haystack, needle):
 #     n,m = len(haystack), len(needle)
 
 #     if m == 0:
 #         return 0
     
-#     for i in range(n - m + 1):
+#     for i in range(n - m + 1):        
+#         if haystack[i:i+m] == needle:
+#             return i
+          
+#     return -1          
 
 
 
+# haystack = "abcdeasfde"
+# needle = "de"
+# # //===============================================================================================================================
+# #2)
+# def strStr(haystack, needle):
+#     return haystack.find(needle)
 
+
+#===============================================================================================================================
+
+#   Delete Node in a Linked List
+
+# Solution
+# There is a singly-linked list head and we want to delete a node node in it.
+
+# You are given the node to be deleted node. You will not be given access to the first node of head.
+
+# All the values of the linked list are unique, and it is guaranteed that the given node node is not the last node in the linked list.
+
+# Delete the given node. Note that by deleting the node, we do not mean removing it from memory. We mean:
+
+# The value of the given node should not exist in the linked list.
+# The number of nodes in the linked list should decrease by one.
+# All the values before node should be in the same order.
+# All the values after node should be in the same order.
+# Custom testing:
+
+# For the input, you should provide the entire linked list head and the node to be given node. node should not be the last node of the list and should be an actual node in the list.
+# We will build the linked list and pass the node to your function.
+# The output will be the entire list after calling your function.
+ 
+
+# Example 1:
+
+
+# Input: head = [4,5,1,9], node = 5
+# Output: [4,1,9]
+# Explanation: You are given the second node with value 5, the linked list should become 4 -> 1 -> 9 after calling your function.
+# Example 2:
+
+
+# Input: head = [4,5,1,9], node = 1
+# Output: [4,5,9]
+# Explanation: You are given the third node with value 1, the linked list should become 4 -> 5 -> 9 after calling your function.
+ 
+
+# Constraints:
+
+# The number of the nodes in the given list is in the range [2, 1000].
+# -1000 <= Node.val <= 1000
+# The value of each node in the list is unique.
+# The node to be deleted is in the list and is not a tail node.
+
+#===============================================================================================================================
+#1)
+# class ListNode:
+#     def __init__(self, val=0, next = None):
+#         self.val = val
+#         self.next = next
+
+# head = ListNode(4)
+# head.next = ListNode(5)
+# head.next.next = ListNode(1)
+# head.next.next.next = ListNode(9)
+
+# def delete_node(node):
+#     next = node.next
+#     node.val = next.val
+#     node.next = next.next
+
+
+# def print_list(head):
+#     vals = []
+#     while head:
+#         vals.append(head.val)
+#         head = head.next
+#     print(" -> ".join(map(str, vals)))
+
+# print("Before deletion:")
+# print_list(head)
+
+# delete_node(head.next)  # delete the node with value 5
+
+# print("After deletion:")
+# print_list(head)
+#===============================================================================================================================
+#   Remove Nth Node From End of List
+
+# Solution
+# Given the head of a linked list, remove the nth node from the end of the list and return its head.
+
+ 
+
+# Example 1:
+
+
+# Input: head = [1,2,3,4,5], n = 2
+# Output: [1,2,3,5]
+# Example 2:
+
+# Input: head = [1], n = 1
+# Output: []
+# Example 3:
+
+# Input: head = [1,2], n = 1
+# Output: [1]
+ 
+
+# Constraints:
+
+# The number of nodes in the list is sz.
+# 1 <= sz <= 30
+# 0 <= Node.val <= 100
+# 1 <= n <= sz
+ 
+
+# Follow up: Could you do this in one pass?
+#===============================================================================================================================
+# class ListNode:
+#     def __init__(self,val=0, next=None):
+#         self.val = val
+#         self.next = next 
+
+# def build_list(values):
+#     """Create a linked list from a Python list and return head."""
+#     if not values:
+#         return None
+#     head = ListNode(values[0])
+#     curr = head
+#     for v in values[1:]:
+#         curr.next = ListNode(v)
+#         curr = curr.next
+#     return head
+
+# def to_list(head):
+#     """Convert a linked list back to a Python list for easy viewing."""
+#     out = []
+#     while head:
+#         out.append(head.val)
+#         head = head.next
+#     return out
+
+# def print_list(head, label="list"):
+#     print(label, "→", " -> ".join(map(str, to_list(head))) if head else "[]")
+
+
+# def removeNthFromEnd(head,n):
+#     length = 0
+#     node = head
+
+#     while node:
+#         length += 1
+#         node = node.next
+        
+#     index_to_remove  = length - n
+
+#     if index_to_remove == 0:
+#         return head.next
+    
+#     curr = head
+#     for _ in range(index_to_remove - 1):
+#         curr = curr.next
+#     curr.next = curr.next.next  
+
+#     return head
+        
+
+
+
+# # Example 1
+# head = build_list([1,2,3,4,5])
+# print_list(head, "before")
+# head = removeNthFromEnd(head, 2)
+# print_list(head, "after n=2")     # expect 1 -> 2 -> 3 -> 5
+
+# # Example 2
+# head = build_list([1])
+# print_list(head, "before")
+# head = removeNthFromEnd(head, 1)
+# print_list(head, "after n=1")     # expect []
+
+# # Example 3
+# head = build_list([1,2])
+# print_list(head, "before")
+# head = removeNthFromEnd(head, 1)
+# print_list(head, "after n=1")     # expect 1
+
+# # Extra head-removal check
+# head = build_list([1,2,3])
+# print_list(head, "before")
+# head = removeNthFromEnd(head, 3)
+# print_list(head, "after n=3")     # expect 2 -> 3

@@ -1,5 +1,6 @@
 //   Reverse Integer
 
+const { node } = require("prop-types");
 const { Simulate } = require("react-dom/test-utils");
 
 // const { elementType } = require("prop-types");
@@ -2037,7 +2038,7 @@ const { Simulate } = require("react-dom/test-utils");
 
 //===============================================================================================================================
 // function checkString(s) {
-//   let i = 0; 
+//   let i = 0;
 //   const n = s.length;
 //   let sign = 1;
 //   let result = 0;
@@ -2056,7 +2057,7 @@ const { Simulate } = require("react-dom/test-utils");
 //     const code = s.charCodeAt(i)
 
 //     if (code < 48 || code > 57)break;
-    
+
 //     const d = code - 48;
 
 //     if(result > CUT || (result === CUT && d > LIM)){
@@ -2066,7 +2067,7 @@ const { Simulate } = require("react-dom/test-utils");
 //     i++;
 //   }
 // return sign === 1 ? result : -result
-  
+
 // }
 
 // console.log(checkString("42")); // 42
@@ -2080,3 +2081,258 @@ const { Simulate } = require("react-dom/test-utils");
 // console.log(checkString("   +000")); // 0
 // console.log(checkString("   +000 123")); // 0  (stop at space)
 
+//===============================================================================================================================
+//1)
+// function findMatch(haystack ,needle){
+//     const n = haystack.length;
+//     const m = needle.length;
+//     const limit = n - m
+
+//     if (m === 0){
+//         return 0
+//     }
+
+//     for(let i = 0; i <= limit; i++){
+//         if (haystack.slice(i, i + m) === needle) return i
+//     }
+
+//     return -1
+
+// }
+
+// let haystack = "sadbutsad"
+// let needle = "sad"
+// console.log(findMatch(haystack,needle));
+// //==========================================================================================================================
+// //2)
+// function findMatch(haystack ,needle){
+//         const n = haystack.length;
+//         const m = needle.length;
+//         const limit = n - m
+
+//         if (m === 0){
+//             return 0
+//         }
+
+//         for (let i=0; i <= limit; i++){
+//             let match = true;
+
+//             for(let j =0; j < m; j++){
+//                 if(haystack[i + j] !== needle[j]){
+//                     match = false;
+//                     break;
+//                 }
+//             }
+//             if(match) return i;
+//         }
+//         return -1
+
+// }
+// haystack = "sadbutsad"
+// needle   = "sad"
+// console.log(findMatch(haystack,needle));
+
+//===============================================================================================================================
+//   Delete Node in a Linked List
+
+// Solution
+// There is a singly-linked list head and we want to delete a node node in it.
+
+// You are given the node to be deleted node. You will not be given access to the first node of head.
+
+// All the values of the linked list are unique, and it is guaranteed that the given node node is not the last node in the linked list.
+
+// Delete the given node. Note that by deleting the node, we do not mean removing it from memory. We mean:
+
+// The value of the given node should not exist in the linked list.
+// The number of nodes in the linked list should decrease by one.
+// All the values before node should be in the same order.
+// All the values after node should be in the same order.
+// Custom testing:
+
+// For the input, you should provide the entire linked list head and the node to be given node. node should not be the last node of the list and should be an actual node in the list.
+// We will build the linked list and pass the node to your function.
+// The output will be the entire list after calling your function.
+
+// Example 1:
+
+// Input: head = [4,5,1,9], node = 5
+// Output: [4,1,9]
+// Explanation: You are given the second node with value 5, the linked list should become 4 -> 1 -> 9 after calling your function.
+// Example 2:
+
+// Input: head = [4,5,1,9], node = 1
+// Output: [4,5,9]
+// Explanation: You are given the third node with value 1, the linked list should become 4 -> 5 -> 9 after calling your function.
+
+// Constraints:
+
+// The number of the nodes in the given list is in the range [2, 1000].
+// -1000 <= Node.val <= 1000
+// The value of each node in the list is unique.
+// The node to be deleted is in the list and is not a tail node.
+//===============================================================================================================================
+//1)
+// function deleteNode(node){
+//     next = node.next
+//     node.val = next.val
+//     node.next = next.next
+
+// }
+
+// class ListNode {
+//     constructor(val) {
+//         this.val = val;
+//         this.next = null;
+//     }
+// }
+
+// function deleteNode(node) {
+//     let next = node.next;
+//     node.val = next.val;
+//     node.next = next.next;
+// }
+
+// function printList(head) {
+//     let arr = [];
+//     while (head) {
+//         arr.push(head.val);
+//         head = head.next;
+//     }
+//     console.log(arr.join(" -> "));
+// }
+
+// // Build [4,5,1,9]
+// let head = new ListNode(4);
+// head.next = new ListNode(5);
+// head.next.next = new ListNode(1);
+// head.next.next.next = new ListNode(9);
+
+// console.log("Before:");
+// printList(head);
+
+// deleteNode(head.next); // delete node with value 5
+
+// console.log("After:");
+// printList(head);
+
+//===============================================================================================================================  Remove Nth Node From End of List
+
+// Solution
+// Given the head of a linked list, remove the nth node from the end of the list and return its head.
+
+// Example 1:
+
+// Input: head = [1,2,3,4,5], n = 2
+// Output: [1,2,3,5]
+// Example 2:
+
+// Input: head = [1], n = 1
+// Output: []
+// Example 3:
+
+// Input: head = [1,2], n = 1
+// Output: [1]
+
+// Constraints:
+
+// The number of nodes in the list is sz.
+// 1 <= sz <= 30
+// 0 <= Node.val <= 100
+// 1 <= n <= sz
+
+// Follow up: Could you do this in one pass?
+
+// class ListNode {
+//   constructor(val = 0, next = null) {
+//     this.val = val;
+//     this.next = next;
+//   }
+// }
+
+// function buildList(arr) {
+//   if (arr.length === 0) return null;
+
+//   let head = new ListNode(arr[0]);
+//   let curr = head;
+
+//   for (let i = 1; i < arr.length; i++) {
+//     curr.next = new ListNode(arr[i]);
+//     curr = curr.next;
+//   }
+//   return head;
+// }
+// let head = buildList([1, 2, 3, 4, 5]);
+// console.dir(head, { depth: null });
+
+// function deleteGivenN(nodes,n){
+//     if (nodes == null) return null;
+//     if ( n <= 0 )return nodes;
+
+//     let length = 0;
+//     let countNodes = nodes
+
+//     while (countNodes){
+//         length ++;
+//         countNodes = countNodes.next
+//     }
+
+//     let indexToRemove = length - n;
+
+//     if (indexToRemove === 0 ){
+//         return nodes.next;
+//     }
+
+//     let curr = nodes;
+//     for(let i = 0 ; i < indexToRemove - 1; i++){
+//         curr = curr.next
+//     }
+//     curr.next = curr.next ? curr.next.next : null;
+
+//     return nodes
+
+// }
+//===============================================================================================================================
+// Given the head of a singly linked list, reverse the list, and return the reversed list.
+
+ 
+
+// Example 1:
+
+
+// Input: head = [1,2,3,4,5]
+// Output: [5,4,3,2,1]
+// Example 2:
+
+
+// Input: head = [1,2]
+// Output: [2,1]
+// Example 3:
+
+// Input: head = []
+// Output: []
+ 
+
+// Constraints:
+
+// The number of nodes in the list is the range [0, 5000].
+// -5000 <= Node.val <= 5000
+ 
+
+// Follow up: A linked list can be reversed either iteratively or recursively. Could you implement both?
+
+//------------------------------------------------------------------------------------------------------------------------------
+function reverseList(list){
+    let prev = null;
+    let curr = list;
+
+    while(curr){
+        let nextNode = curr.next;
+        curr.next = prev
+        prev = curr;
+        curr = nextNode
+    }
+    return prev
+
+}
+let list = [4,5,3,9,4]

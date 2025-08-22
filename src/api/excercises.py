@@ -2184,3 +2184,7 @@ import copy
 # print_list(head, "before")
 # head = removeNthFromEnd(head, 3)
 # print_list(head, "after n=3")     # expect 2 -> 3
+# //===============================================================================================================================
+class merge_objs(self,val=0,next=null):
+    self.val = val
+    self.next = next

@@ -1,7 +1,10 @@
 //   Reverse Integer
 
 const { node } = require("prop-types");
-const { Simulate } = require("react-dom/test-utils");
+const { captureOwnerStack } = require("react");
+
+// const { node } = require("prop-types");
+// const { Simulate } = require("react-dom/test-utils");
 
 // const { elementType } = require("prop-types");
 
@@ -2295,15 +2298,11 @@ const { Simulate } = require("react-dom/test-utils");
 //===============================================================================================================================
 // Given the head of a singly linked list, reverse the list, and return the reversed list.
 
- 
-
 // Example 1:
-
 
 // Input: head = [1,2,3,4,5]
 // Output: [5,4,3,2,1]
 // Example 2:
-
 
 // Input: head = [1,2]
 // Output: [2,1]
@@ -2311,28 +2310,141 @@ const { Simulate } = require("react-dom/test-utils");
 
 // Input: head = []
 // Output: []
- 
 
 // Constraints:
 
 // The number of nodes in the list is the range [0, 5000].
 // -5000 <= Node.val <= 5000
- 
 
 // Follow up: A linked list can be reversed either iteratively or recursively. Could you implement both?
 
 //------------------------------------------------------------------------------------------------------------------------------
-function reverseList(list){
-    let prev = null;
-    let curr = list;
+//1)
+// function reverseList(list){
+//     let prev = null;
+//     let curr = list;
 
-    while(curr){
-        let nextNode = curr.next;
-        curr.next = prev
-        prev = curr;
-        curr = nextNode
-    }
-    return prev
+//     while(curr){
+//         let nextNode = curr.next;
+//         curr.next = prev
+//         prev = curr;
+//         curr = nextNode
+//     }
+//     return prev
 
-}
-let list = [4,5,3,9,4]
+// }
+// let list = [4,5,3,9,4]
+//===============================================================================================================================
+//2)
+
+// class ListNode{
+//     constructor(val=0,next=null){
+//         this.val = val;
+//         this.next = next;
+//     }
+// }
+// function buildList(arr){
+//     if(arr.length === 0)return null;
+//     let head = new ListNode(arr[0]);
+//     let curr = head;
+
+//     for(let i = 1; i < arr.length; i++){
+//         curr.next = new ListNode(arr[i]);
+//         curr = curr.next
+//     }
+//     return head;
+// }
+
+// function reverseList(list){
+//     if(!list || !list.next){
+//         return list
+//     }
+//     let recallFunction = reverseList(list.next);
+
+//     list.next.next = list;
+//     list.next = null;
+
+//     return recallFunction
+
+// }
+// // Test
+// let head = buildList([4,5,3,9,4]);
+// console.dir(head, { depth: null });
+
+// let reversed = reverseList(head);
+// console.dir(reversed, { depth: null });
+
+//===============================================================================================================================
+//   Merge Two Sorted Lists
+
+// Solution
+// You are given the heads of two sorted linked lists list1 and list2.
+
+// Merge the two lists into one sorted list. The list should be made by splicing together the nodes of the first two lists.
+
+// Return the head of the merged linked list.
+
+// Example 1:
+
+// Input: list1 = [1,2,4], list2 = [1,3,4]
+// Output: [1,1,2,3,4,4]
+// Example 2:
+
+// Input: list1 = [], list2 = []
+// Output: []
+// Example 3:
+
+// Input: list1 = [], list2 = [0]
+// Output: [0]
+
+// Constraints:
+
+// The number of nodes in both lists is in the range [0, 50].
+// -100 <= Node.val <= 100
+// Both list1 and list2 are sorted in non-decreasing order.
+//------------------------------------------------------------------------------------------------------------------------------
+// class Node {
+//   constructor(val = 0, next = null) {
+//     this.val = val;
+//     this.next = next;
+//   }
+// }
+
+// function buildList(arr) {
+//   if (arr.length === 0) {
+//     return null;
+//   }
+//   let newList = new Node(arr[0]);
+//   let curr = newList;
+
+//   for (let i = 1; i < arr.length; i++) {
+//     curr.next = new Node(arr[i]);
+//     curr = curr.next;
+//   }
+//   return newList;
+// }
+// let buildNodes1 = [1, 2, 8, 9, 3];
+// let buildNodes2 = [1, 2, 8, 9, 3];
+// let nodes1 = buildList(buildNodes1);
+// let nodes2 = buildList(buildNodes2);
+// console.log(nodes1);
+// console.log(nodes2);
+
+// function mergeObjs(nodeList1, nodeList2) {
+//   let dummyNode = new Node(-1);
+//   let tail = dummyNode;
+
+//   while (nodeList1 !== null && nodeList2 !== null) {
+//     if (nodeList1.val <= nodeList2.val) {
+//       tail.next = nodeList1;
+//       nodeList1 = nodeList1.next;
+//     }
+//     else{
+//         tail.next = nodeList2;
+//         nodeList2 = nodeList2.next;
+//     }
+//     tail = tail.next
+//   }
+//   tail.next = nodeList1 || nodeList2
+//   return dummyNode.next
+// }

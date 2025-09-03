@@ -1564,21 +1564,21 @@
 # nums = [0, 1, 0, 3, 12]
 # result = move_zeros(nums)
 # print(result)
-#===============================================================================================================================
-#1) Brute force  Time = O(n²)   Space =	O(1)
+# ===============================================================================================================================
+# 1) Brute force  Time = O(n²)   Space =	O(1)
 # def two_sums(arr,target):
 #     for i in range(len(arr)):
 #         for j  in range(i+1, len(arr)):
 #             if arr[i] + arr[j] == target:
 #              return [i , j]
-    
+
 
 # nums = [2,7,11,15]
 # target = 9
 # result = two_sums(nums,target)
 # print(result)
-#===============================================================================================================================
-#2)Hash map  (Optimized – Time Complexity O(n)
+# ===============================================================================================================================
+# 2)Hash map  (Optimized – Time Complexity O(n)
 # def two_sums(arr,target):
 #     map_numbers = {}
 
@@ -1593,13 +1593,13 @@
 # target = 9
 # result = two_sums(nums,target)
 # print(result)
-    
+
 # 1)d
 # def find_double(board):
-#     rows = [set() for _ in range(9)]   
+#     rows = [set() for _ in range(9)]
 #     columns = [set() for _ in range(9)]
 #     boxes = [set() for _ in range(9)]
-    
+
 #     for i in range(len(board)):
 #         for j in range(len(board[i])):
 #             cell = board[i][j]
@@ -1617,8 +1617,8 @@
 #             if cell in boxes[box_number]:
 #                 return False
 #             boxes[box_number].add(cell)
-#     return True                   
-                      
+#     return True
+
 # board = [
 #  ["5","5",".",".","7",".",".",".","."]
 # ,["6",".",".","1","9","5",".",".","."]
@@ -1634,8 +1634,8 @@
 # print(result)
 
 
-#===============================================================================================================================
-#1)
+# ===============================================================================================================================
+# 1)
 # def first_non_repeating(str):
 #    n = len(str)
 #    for i in range(n):
@@ -1643,15 +1643,15 @@
 #       for j in range(n):
 #          if i != j and str[i] == str[j]:
 #             unique = False
-#             break          
+#             break
 #       if unique:
 #             return i
-#    return -1  
+#    return -1
 
 # s = "agfagf"
-# print(first_non_repeating(s)) 
-#===============================================================================================================================
-#2)
+# print(first_non_repeating(s))
+# ===============================================================================================================================
+# 2)
 # from collections import Counter
 
 # def first_non_repeating(str):
@@ -1659,24 +1659,21 @@
 #     for i,value in enumerate(s):
 #         if freq[value] == 1:
 #             return i
-#     return -1    
-
-
+#     return -1
 
 
 # s = "agfagf"
 # first_non_repeating(s)
-# print(first_non_repeating(s)) 
+# print(first_non_repeating(s))
 
-#===============================================================================================================================      
-                                         
-                  
+# ===============================================================================================================================
+
+
 #       Valid Anagram
 
 # Solution
 # Given two strings s and t, return true if t is an anagram of s, and false otherwise.
 
- 
 
 # Example 1:
 
@@ -1690,21 +1687,19 @@
 
 # Output: false
 
- 
 
 # Constraints:
 
 # 1 <= s.length, t.length <= 5 * 104
 # s and t consist of lowercase English letters.
- 
+
 
 # Follow up: What if the inputs contain Unicode characters? How would you adapt your solution to such a case?
 
-#===============================================================================================================================
+# ===============================================================================================================================
 
-#1)
+# 1)
 # from collections import Counter
-
 
 
 # def find_anagram(s1,s2):
@@ -1713,14 +1708,14 @@
 # s = "rat"
 # t = "tar"
 # print(find_anagram(s,t))
-#===============================================================================================================================
+# ===============================================================================================================================
 
-#2)
+# 2)
 
 # def find_anagram(s1,s2):
 #     if len(s1) != len(s2):
 #         return False
-    
+
 #     freq_s1 = {}
 #     for char in s1:
 #         freq_s1[char] = freq_s1.get(char,0) + 1
@@ -1735,13 +1730,13 @@
 #     for count in freq_s1.values():
 #         if count > 0:
 #             return False
-            
-#     return True   
+
+#     return True
 
 
 # s = "rat"
 # t = "tar"
-# print(find_anagram(s,t))    
+# print(find_anagram(s,t))
 # //===============================================================================================================================
 #   Valid Palindrome
 
@@ -1750,7 +1745,6 @@
 
 # Given a string s, return true if it is a palindrome, or false otherwise.
 
- 
 
 # Example 1:
 
@@ -1768,19 +1762,19 @@
 # Output: true
 # Explanation: s is an empty string "" after removing non-alphanumeric characters.
 # Since an empty string reads the same forward and backward, it is a palindrome.
- 
+
 
 # Constraints:
 
 # 1 <= s.length <= 2 * 105
 # s consists only of printable ASCII characters.
-#===============================================================================================================================
+# ===============================================================================================================================
 # 1)  build cleaned string + reverse
 
 # def is_palindrome(s):
 #     cleaned = "".join(ch.lower() for ch in s if ch.isalnum())
-#     return cleaned == cleaned[::-1]  
-    
+#     return cleaned == cleaned[::-1]
+
 # s = "A man, a plan, a canal: Panama"
 # # result = is_palindrome(s)
 # print(is_palindrome("A man, a plan, a canal: Panama"))  # expect True
@@ -1800,7 +1794,7 @@
 #             i +=1
 
 #         while i < j and not s[j].isalnum():
-#             j -=1 
+#             j -=1
 
 #         if s[i].lower() != s[j].lower():
 #             return False
@@ -1808,7 +1802,7 @@
 #         i += 1
 #         j -= 1
 
-#     return True        
+#     return True
 
 # s = "A man, a plan, a canal: Panama"
 # # result = is_palindrome(s)
@@ -1817,8 +1811,6 @@
 # print(is_palindrome("0P"))                              # expect False
 # print(is_palindrome(".,,"))                             # expect True
 # print(is_palindrome("a"))                               # expect True
-
-
 
 
 # // #===============================================================================================================================
@@ -1835,7 +1827,6 @@
 # // Rounding: If the integer is out of the 32-bit signed integer range [-231, 231 - 1], then round the integer to remain in the range. Specifically, integers less than -231 should be rounded to -231, and integers greater than 231 - 1 should be rounded to 231 - 1.
 # // Return the integer as the final result.
 
- 
 
 # // Example 1:
 
@@ -1904,7 +1895,6 @@
 
 # // Reading stops at the first non-digit character 'w'.
 
- 
 
 # // Constraints:
 
@@ -1924,7 +1914,7 @@
 #         sign = -1 if s[i] == "-" else 1
 #         i += 1
 
-#     ABS_LIMIT =  2147483647  if sign == 1 else 2147483648    
+#     ABS_LIMIT =  2147483647  if sign == 1 else 2147483648
 #     CUT = ABS_LIMIT // 10
 #     LIMIT = ABS_LIMIT % 10
 
@@ -1937,11 +1927,11 @@
 
 #         if result > CUT or (result == CUT and d > LIMIT):
 #             return 2147483647 if sign == 1 else -2147483648
-        
+
 #         result = result * 10 + d
 #         i += 1
 
-       
+
 # print(fix_string("   -042"))         # -42
 # print(fix_string("1337c0d3"))        # 1337
 # print(fix_string("0-1"))             # 0
@@ -1951,13 +1941,12 @@
 # print(fix_string("-21474836490"))    # -2147483648 (clamped)
 # print(fix_string("   +000"))         # 0
 # print(fix_string("   +000 123"))     # 0
-#===============================================================================================================================
+# ===============================================================================================================================
 #   Implement strStr()
 
 # Solution
 # Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
 
- 
 
 # Example 1:
 
@@ -1970,7 +1959,7 @@
 # Input: haystack = "leetcode", needle = "leeto"
 # Output: -1
 # Explanation: "leeto" did not occur in "leetcode", so we return -1.
- 
+
 
 # Constraints:
 
@@ -1983,13 +1972,12 @@
 
 #     if m == 0:
 #         return 0
-    
-#     for i in range(n - m + 1):        
+
+#     for i in range(n - m + 1):
 #         if haystack[i:i+m] == needle:
 #             return i
-          
-#     return -1          
 
+#     return -1
 
 
 # haystack = "abcdeasfde"
@@ -2000,7 +1988,7 @@
 #     return haystack.find(needle)
 
 
-#===============================================================================================================================
+# ===============================================================================================================================
 
 #   Delete Node in a Linked List
 
@@ -2022,7 +2010,7 @@
 # For the input, you should provide the entire linked list head and the node to be given node. node should not be the last node of the list and should be an actual node in the list.
 # We will build the linked list and pass the node to your function.
 # The output will be the entire list after calling your function.
- 
+
 
 # Example 1:
 
@@ -2036,7 +2024,7 @@
 # Input: head = [4,5,1,9], node = 1
 # Output: [4,5,9]
 # Explanation: You are given the third node with value 1, the linked list should become 4 -> 5 -> 9 after calling your function.
- 
+
 
 # Constraints:
 
@@ -2045,8 +2033,8 @@
 # The value of each node in the list is unique.
 # The node to be deleted is in the list and is not a tail node.
 
-#===============================================================================================================================
-#1)
+# ===============================================================================================================================
+# 1)
 # class ListNode:
 #     def __init__(self, val=0, next = None):
 #         self.val = val
@@ -2077,13 +2065,12 @@
 
 # print("After deletion:")
 # print_list(head)
-#===============================================================================================================================
+# ===============================================================================================================================
 #   Remove Nth Node From End of List
 
 # Solution
 # Given the head of a linked list, remove the nth node from the end of the list and return its head.
 
- 
 
 # Example 1:
 
@@ -2098,7 +2085,7 @@
 
 # Input: head = [1,2], n = 1
 # Output: [1]
- 
+
 
 # Constraints:
 
@@ -2106,14 +2093,14 @@
 # 1 <= sz <= 30
 # 0 <= Node.val <= 100
 # 1 <= n <= sz
- 
+
 
 # Follow up: Could you do this in one pass?
-#===============================================================================================================================
+# ===============================================================================================================================
 # class ListNode:
 #     def __init__(self,val=0, next=None):
 #         self.val = val
-#         self.next = next 
+#         self.next = next
 
 # def build_list(values):
 #     """Create a linked list from a Python list and return head."""
@@ -2145,20 +2132,18 @@
 #     while node:
 #         length += 1
 #         node = node.next
-        
+
 #     index_to_remove  = length - n
 
 #     if index_to_remove == 0:
 #         return head.next
-    
+
 #     curr = head
 #     for _ in range(index_to_remove - 1):
 #         curr = curr.next
-#     curr.next = curr.next.next  
+#     curr.next = curr.next.next
 
 #     return head
-        
-
 
 
 # # Example 1
@@ -2190,7 +2175,6 @@
 # Solution
 # Given the head of a singly linked list, return true if it is a palindrome or false otherwise.
 
- 
 
 # Example 1:
 
@@ -2202,18 +2186,18 @@
 
 # Input: head = [1,2]
 # Output: false
- 
+
 
 # Constraints:
 
 # The number of nodes in the list is in the range [1, 105].
 # 0 <= Node.val <= 9
- 
+
 
 # Follow up: Could you do it in O(n) time and O(1) space?
 # //===============================================================================================================================+
 
-#1)
+# 1)
 # def check_palindrome(head):
 #     values = []
 #     curr = head
@@ -2222,7 +2206,7 @@
 #         values.append(curr.value)
 #         curr = curr.next
 
-#     return values == values[::-1]    
+#     return values == values[::-1]
 
 
 # //===============================================================================================================================
@@ -2236,7 +2220,6 @@
 
 # // Return true if there is a cycle in the linked list. Otherwise, return false.
 
- 
 
 # // Example 1:
 
@@ -2256,20 +2239,20 @@
 # // Input: head = [1], pos = -1
 # // Output: false
 # // Explanation: There is no cycle in the linked list.
- 
+
 
 # // Constraints:
 
 # // The number of the nodes in the list is in the range [0, 104].
 # // -105 <= Node.val <= 105
 # // pos is -1 or a valid index in the linked-list.
- 
+
 
 # // Follow up: Can you solve it using O(1) (i.e. constant) memory?
 
 
 # //===============================================================================================================================
-##Linked list
+# Linked list
 
 # class LinkedList:
 #     def __init__(self,val=0, next=None):
@@ -2279,7 +2262,7 @@
 # def building_linked_list(arr):
 #     if len(arr) == 0:
 #         return None
-     
+
 #     head = LinkedList(arr[0])
 #     curr = head
 
@@ -2287,23 +2270,23 @@
 #         curr.next = LinkedList(arr[i])
 #         curr = curr.next
 
-#     return head 
+#     return head
 
 # nodes = building_linked_list([3, 2, 0, -4]);
-# print(nodes)                 
-   
+# print(nodes)
+
 # #Solution:
 # def check_cycle(head):
 #     slow,fast = head,head
 
 #     while fast and fast.next:
 #         slow = slow.next
-#         fast = fast.next.next        
+#         fast = fast.next.next
 #         if slow == fast: return True
-#     return False    
+#     return False
 # //------------------------------------------------------------------------------------------------------------------------------
 
-    
+
 #   Maximum Depth of Binary Tree
 
 # Solution
@@ -2311,7 +2294,6 @@
 
 # A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
 
- 
 
 # Example 1:
 
@@ -2322,45 +2304,162 @@
 
 # Input: root = [1,null,2]
 # Output: 2
- 
+
 
 # Constraints:
 
 # The number of nodes in the tree is in the range [0, 104].
 # -100 <= Node.val <= 100
 #  //------------------------------------------------------------------------------------------------------------------------------
-##1)DFS (Depth-First Search) Solution:
+# 1)DFS (Depth-First Search) Solution:
 
-##Blueprint to build tree.
+# Blueprint to build tree.
+# from collections import deque
+
+# class TreeNode:
+#     def __init__(self,val=0,left=None,right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+# def tree(values):
+#     if not values:
+#         return None
+
+#     root = TreeNode(values[0])
+#     q = deque([root])
+#     i = 1
+
+#     while q and i < len(values):
+#         node = q.popleft()
+
+#         #left pointer:
+#         if values[i] is not None:
+#             node.left = TreeNode(values[i])
+#             q.append(node.left)
+#         i += 1
+
+#         if i < len(values) and values[i] is not None:
+#             node.right = TreeNode(values[i])
+#             q.append(node.rigth)
+#         i += 1
+
+#         return root
+
+
+# input = [3,9,20,None,None,15,7]
+
 from collections import deque
+from typing import Optional, List, Any
+
+# ----- Node -----
+
 
 class TreeNode:
-    def __init__(self,val=0,left=None,right=None):
+    def __init__(self, val: int = 0, left: Optional['TreeNode'] = None, right: Optional['TreeNode'] = None):
         self.val = val
         self.left = left
         self.right = right
 
-def tree(values):
+    # Pretty print for debugging (so printing a node or a deque of nodes is readable)
+    def __repr__(self) -> str:
+        return f"TreeNode({self.val})"
+
+# ----- Debug helpers -----
+
+
+def print_queue(q: deque):
+    """Show only the .val of nodes currently in the queue."""
+    print("Queue:", [n.val for n in q])
+
+
+def print_tree_level_order(root: Optional[TreeNode]):
+    """Print the built tree level-by-level (values only)."""
+    if not root:
+        print("Tree: []")
+        return
+    out, q = [], deque([root])
+    while q:
+        level_vals = []
+        for _ in range(len(q)):
+            node = q.popleft()
+            level_vals.append(node.val)
+            if node.left:
+                q.append(node.left)
+            if node.right:
+                q.append(node.right)
+        out.append(level_vals)
+    print("Tree levels:", out)
+
+# ----- Build tree from level-order list with debug prints -----
+
+
+def build_tree(values: List[Any]) -> Optional[TreeNode]:
+    """
+    Build a binary tree from level-order list like [3,9,20,None,None,15,7].
+    Prints queue state at each step so you can see BFS construction.
+    """
     if not values:
         return None
-    
+
     root = TreeNode(values[0])
     q = deque([root])
     i = 1
 
-    while q and i < len(values):
-        node = q.popleft()   
+    print("Start building:")
+    print_queue(q)
 
-        #left pointer: 
+    while q and i < len(values):
+        node = q.popleft()
+        print(f"\nProcessing parent node: {node.val}")
+
+        # Left child
         if values[i] is not None:
             node.left = TreeNode(values[i])
             q.append(node.left)
-    
-        
+            print(f"  Added LEFT  child {values[i]}")
+        else:
+            print("  Skipped LEFT  child (None)")
+        i += 1
+
+        # Right child (guard i, because we just advanced it)
+        if i < len(values) and values[i] is not None:
+            node.right = TreeNode(values[i])
+            q.append(node.right)
+            print(f"  Added RIGHT child {values[i]}")
+        elif i < len(values):
+            print("  Skipped RIGHT child (None)")
+        i += 1
+
+        print_queue(q)  # show queue after processing this parent
+
+    print("\nFinished building.")
+    print_tree_level_order(root)
+    return root
+
+# ----- DFS: Maximum Depth -----
 
 
-    
+def maxDepth(root: Optional[TreeNode]) -> int:
+    if root is None:
+        return 0
+    # Postorder: compute children first, then use 1 + max(left, right)
+    return 1 + max(maxDepth(root.left), maxDepth(root.right))
 
 
+# ----- Quick demo/tests -----
+if __name__ == "__main__":
+    # Example 1 from the problem
+    root1 = build_tree([3, 9, 20, None, None, 15, 7])
+    print("Max depth (example 1) =", maxDepth(root1))  # expected 3
 
-input = [3,9,20,None,None,15,7]
+    # Example 2
+    root2 = build_tree([1, None, 2])
+    print("Max depth (example 2) =", maxDepth(root2))  # expected 2
+
+    # Extra checks
+    root3 = build_tree([])  # empty
+    print("Max depth (empty) =", maxDepth(root3))      # expected 0
+
+    root4 = build_tree([1, 2, 3, 4, 5])  # a fuller shape
+    print("Max depth (extra) =", maxDepth(root4))

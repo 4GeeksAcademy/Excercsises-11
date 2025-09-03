@@ -1,7 +1,7 @@
-import random
-import copy
+# import random
+# import copy
 
-#   Reverse Integer
+# #   Reverse Integer
 
 # Solution
 # Given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes the value to go outside the signed 32-bit integer range [-231, 231 - 1], then return 0.
@@ -2185,6 +2185,182 @@ import copy
 # head = removeNthFromEnd(head, 3)
 # print_list(head, "after n=3")     # expect 2 -> 3
 # //===============================================================================================================================
-class merge_objs(self,val=0,next=null):
-    self.val = val
-    self.next = next
+#   Palindrome Linked List
+
+# Solution
+# Given the head of a singly linked list, return true if it is a palindrome or false otherwise.
+
+ 
+
+# Example 1:
+
+
+# Input: head = [1,2,2,1]
+# Output: true
+# Example 2:
+
+
+# Input: head = [1,2]
+# Output: false
+ 
+
+# Constraints:
+
+# The number of nodes in the list is in the range [1, 105].
+# 0 <= Node.val <= 9
+ 
+
+# Follow up: Could you do it in O(n) time and O(1) space?
+# //===============================================================================================================================+
+
+#1)
+# def check_palindrome(head):
+#     values = []
+#     curr = head
+
+#     while curr:
+#         values.append(curr.value)
+#         curr = curr.next
+
+#     return values == values[::-1]    
+
+
+# //===============================================================================================================================
+
+# //   Linked List Cycle
+
+# // Solution
+# // Given head, the head of a linked list, determine if the linked list has a cycle in it.
+
+# // There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to. Note that pos is not passed as a parameter.
+
+# // Return true if there is a cycle in the linked list. Otherwise, return false.
+
+ 
+
+# // Example 1:
+
+
+# // Input: head = [3,2,0,-4], pos = 1
+# // Output: true
+# // Explanation: There is a cycle in the linked list, where the tail connects to the 1st node (0-indexed).
+# // Example 2:
+
+
+# // Input: head = [1,2], pos = 0
+# // Output: true
+# // Explanation: There is a cycle in the linked list, where the tail connects to the 0th node.
+# // Example 3:
+
+
+# // Input: head = [1], pos = -1
+# // Output: false
+# // Explanation: There is no cycle in the linked list.
+ 
+
+# // Constraints:
+
+# // The number of the nodes in the list is in the range [0, 104].
+# // -105 <= Node.val <= 105
+# // pos is -1 or a valid index in the linked-list.
+ 
+
+# // Follow up: Can you solve it using O(1) (i.e. constant) memory?
+
+
+# //===============================================================================================================================
+##Linked list
+
+# class LinkedList:
+#     def __init__(self,val=0, next=None):
+#           self.val = val
+#           self.next = next
+
+# def building_linked_list(arr):
+#     if len(arr) == 0:
+#         return None
+     
+#     head = LinkedList(arr[0])
+#     curr = head
+
+#     for i in range(1, len(arr)):
+#         curr.next = LinkedList(arr[i])
+#         curr = curr.next
+
+#     return head 
+
+# nodes = building_linked_list([3, 2, 0, -4]);
+# print(nodes)                 
+   
+# #Solution:
+# def check_cycle(head):
+#     slow,fast = head,head
+
+#     while fast and fast.next:
+#         slow = slow.next
+#         fast = fast.next.next        
+#         if slow == fast: return True
+#     return False    
+# //------------------------------------------------------------------------------------------------------------------------------
+
+    
+#   Maximum Depth of Binary Tree
+
+# Solution
+# Given the root of a binary tree, return its maximum depth.
+
+# A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
+
+ 
+
+# Example 1:
+
+
+# Input: root = [3,9,20,null,null,15,7]
+# Output: 3
+# Example 2:
+
+# Input: root = [1,null,2]
+# Output: 2
+ 
+
+# Constraints:
+
+# The number of nodes in the tree is in the range [0, 104].
+# -100 <= Node.val <= 100
+#  //------------------------------------------------------------------------------------------------------------------------------
+##1)DFS (Depth-First Search) Solution:
+
+##Blueprint to build tree.
+from collections import deque
+
+class TreeNode:
+    def __init__(self,val=0,left=None,right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def tree(values):
+    if not values:
+        return None
+    
+    root = TreeNode(values[0])
+    q = deque([root])
+    i = 1
+
+    while q and i < len(values):
+        node = q.popleft()   
+
+        #left pointer: 
+        if values[i] is not None:
+            node.left = TreeNode(values[i])
+            q.append(node.left)
+    
+        
+
+
+    
+
+
+
+input = [3,9,20,None,None,15,7]

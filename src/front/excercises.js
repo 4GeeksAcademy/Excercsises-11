@@ -1,7 +1,7 @@
 //   Reverse Integer
 
-const { node } = require("prop-types");
-const { captureOwnerStack } = require("react");
+// const { node } = require("prop-types");
+// const { captureOwnerStack } = require("react");
 
 // const { node } = require("prop-types");
 // const { Simulate } = require("react-dom/test-utils");
@@ -2448,3 +2448,125 @@ const { captureOwnerStack } = require("react");
 //   tail.next = nodeList1 || nodeList2
 //   return dummyNode.next
 // }
+
+//===============================================================================================================================
+//   Palindrome Linked List
+
+// Solution
+// Given the head of a singly linked list, return true if it is a palindrome or false otherwise.
+
+// Example 1:
+
+// Input: head = [1,2,2,1]
+// Output: true
+// Example 2:
+
+// Input: head = [1,2]
+// Output: false
+
+// Constraints:
+
+// The number of nodes in the list is in the range [1, 105].
+// 0 <= Node.val <= 9
+
+// Follow up: Could you do it in O(n) time and O(1) space?
+
+//1)
+// function checkPalindrome(head){
+//     const valuesOfList = [];
+//     let curr = head
+
+//     while (curr){
+//         valuesOfList.push(curr.val);
+//         curr = curr.next
+//     }
+
+//     let i = 0
+//     let j = valuesOfList.length - 1
+
+//     while (i < j){
+//         if (valuesOfList[i] !== valuesOfList[j]){
+//             return false
+//         }
+//         i++;
+//         j--;
+//     }
+//      return true
+// }
+
+//===============================================================================================================================
+
+//   Linked List Cycle
+
+// Solution
+// Given head, the head of a linked list, determine if the linked list has a cycle in it.
+
+// There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to. Note that pos is not passed as a parameter.
+
+// Return true if there is a cycle in the linked list. Otherwise, return false.
+
+// Example 1:
+
+// Input: head = [3,2,0,-4], pos = 1
+// Output: true
+// Explanation: There is a cycle in the linked list, where the tail connects to the 1st node (0-indexed).
+// Example 2:
+
+// Input: head = [1,2], pos = 0
+// Output: true
+// Explanation: There is a cycle in the linked list, where the tail connects to the 0th node.
+// Example 3:
+
+// Input: head = [1], pos = -1
+// Output: false
+// Explanation: There is no cycle in the linked list.
+
+// Constraints:
+
+// The number of the nodes in the list is in the range [0, 104].
+// -105 <= Node.val <= 105
+// pos is -1 or a valid index in the linked-list.
+
+// Follow up: Can you solve it using O(1) (i.e. constant) memory?
+
+//------------------------------------------------------------------------------------------------------------------------------
+//Blueprint to build the Linkedlist
+class LinkedList {
+  constructor(val = 0, next = null) {
+    this.val = val;
+    this.next = next;
+  }
+}
+//Function to execute the blueprint class with the array passed.
+function buildList(arr) {
+  if (arr.length === 0) {
+    return null;
+  }
+  let head = new LinkedList(arr[0]);
+  let curr = head;
+
+  for (let i = 1; i < arr.length; i++) {
+    curr.next = new LinkedList(arr[i]);
+    curr = curr.next;
+  }
+  return head;}
+
+//input to build the linkedlist.
+let nodes = buildList([3, 2, 0, -4]);
+console.log(nodes);
+
+//Solution:
+function checkCycles(head) {
+  let slowPointer = head;
+  let fastPointer = head;
+
+  while (fastPointer && fastPointer.next) {
+    slowPointer = slowPointer.next;
+    fastPointer = fastPointer.next.next;
+
+    if (slowPointer == fastPointer) {
+      return true;
+    }
+  }
+  return false;
+}

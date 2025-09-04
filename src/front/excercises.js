@@ -2531,42 +2531,92 @@
 
 //------------------------------------------------------------------------------------------------------------------------------
 //Blueprint to build the Linkedlist
-class LinkedList {
-  constructor(val = 0, next = null) {
-    this.val = val;
-    this.next = next;
-  }
-}
-//Function to execute the blueprint class with the array passed.
-function buildList(arr) {
-  if (arr.length === 0) {
-    return null;
-  }
-  let head = new LinkedList(arr[0]);
-  let curr = head;
+// class LinkedList {
+//   constructor(val = 0, next = null) {
+//     this.val = val;
+//     this.next = next;
+//   }
+// }
+// //Function to execute the blueprint class with the array passed.
+// function buildList(arr) {
+//   if (arr.length === 0) {
+//     return null;
+//   }
+//   let head = new LinkedList(arr[0]);
+//   let curr = head;
 
-  for (let i = 1; i < arr.length; i++) {
-    curr.next = new LinkedList(arr[i]);
-    curr = curr.next;
-  }
-  return head;}
+//   for (let i = 1; i < arr.length; i++) {
+//     curr.next = new LinkedList(arr[i]);
+//     curr = curr.next;
+//   }
+//   return head;}
 
-//input to build the linkedlist.
-let nodes = buildList([3, 2, 0, -4]);
-console.log(nodes);
+// //input to build the linkedlist.
+// let nodes = buildList([3, 2, 0, -4]);
+// console.log(nodes);
 
-//Solution:
-function checkCycles(head) {
-  let slowPointer = head;
-  let fastPointer = head;
+// //Solution:
+// function checkCycles(head) {
+//   let slowPointer = head;
+//   let fastPointer = head;
 
-  while (fastPointer && fastPointer.next) {
-    slowPointer = slowPointer.next;
-    fastPointer = fastPointer.next.next;
+//   while (fastPointer && fastPointer.next) {
+//     slowPointer = slowPointer.next;
+//     fastPointer = fastPointer.next.next;
 
-    if (slowPointer == fastPointer) {
-      return true;
-    }
-  }
-  return false;
-}
+//     if (slowPointer == fastPointer) {
+//       return true;
+//     }
+//   }
+//   return false;
+// }
+//===============================================================================================================================
+//   Maximum Depth of Binary Tree
+
+// Solution
+// Given the root of a binary tree, return its maximum depth.
+
+// A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
+
+ 
+
+// Example 1:
+
+
+// Input: root = [3,9,20,null,null,15,7]
+// Output: 3
+// Example 2:
+
+// Input: root = [1,null,2]
+// Output: 2
+ 
+
+// Constraints:
+
+// The number of nodes in the tree is in the range [0, 104].
+// -100 <= Node.val <= 100
+// Python3	
+// 1
+// # Definition for a binary tree node.
+// 2
+// # class TreeNode:
+// 3
+// #     def __init__(self, val=0, left=None, right=None):
+// 4
+// #         self.val = val
+// 5
+// #         self.left = left
+// 6
+// #         self.right = right
+// 7
+// class Solution:
+// 8
+//     def maxDepth(self, root: Optional[TreeNode]) -> int:
+// 9
+//         if root is None:
+// 10
+//          return 0
+// 11
+//         return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
+// 12
+        

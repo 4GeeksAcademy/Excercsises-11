@@ -2341,125 +2341,58 @@
 
 #         if i < len(values) and values[i] is not None:
 #             node.right = TreeNode(values[i])
-#             q.append(node.rigth)
+#             q.append(node.right)
 #         i += 1
 
-#         return root
+#     return root   
+
+# def print_levels(root):
+#     if not root:
+#         print([])
+#         return
+#     out, q = [], deque([root])
+#     while q:
+#         level, n = [], len(q)
+#         for _ in range(n):
+#             node = q.popleft()
+#             level.append(node.val)
+#             if node.left:  q.append(node.left)
+#             if node.right: q.append(node.right)
+#         out.append(level)
+#     print(out)
+
 
 
 # input = [3,9,20,None,None,15,7]
+# root1 = tree(input)
+# print(root1)
 
-from collections import deque
-from typing import Optional, List, Any
+# def maxDepth(root):
+#     if root is None:
+#         return 0
+#     return 1 + max(maxDepth(root.left), maxDepth(root.right))
 
-# ----- Node -----
+# print("Max depth =", maxDepth(root1)) 
+#------------------------------------------------------------------------------------------------------------------------------
+#2) BFS (Breadth-First Search) Solution:3
+# from collections import deque
+# def find_depth(root):
+#     if not root:
+#         return 0
+    
+#     q = deque([root])
+#     depth = 0
 
+#     while q:
+#         level_size = len(q)
+#         for _ in range(level_size):
+#             node = q.popleft()
+#             if node.left:
+#                 q.append(node.left)
+#             if node.rigth:
+#                 q.append(node.rigth)    
+#         depth += 1
+#     return depth            
 
-class TreeNode:
-    def __init__(self, val: int = 0, left: Optional['TreeNode'] = None, right: Optional['TreeNode'] = None):
-        self.val = val
-        self.left = left
-        self.right = right
+#===============================================================================================================================
 
-    # Pretty print for debugging (so printing a node or a deque of nodes is readable)
-    def __repr__(self) -> str:
-        return f"TreeNode({self.val})"
-
-# ----- Debug helpers -----
-
-
-def print_queue(q: deque):
-    """Show only the .val of nodes currently in the queue."""
-    print("Queue:", [n.val for n in q])
-
-
-def print_tree_level_order(root: Optional[TreeNode]):
-    """Print the built tree level-by-level (values only)."""
-    if not root:
-        print("Tree: []")
-        return
-    out, q = [], deque([root])
-    while q:
-        level_vals = []
-        for _ in range(len(q)):
-            node = q.popleft()
-            level_vals.append(node.val)
-            if node.left:
-                q.append(node.left)
-            if node.right:
-                q.append(node.right)
-        out.append(level_vals)
-    print("Tree levels:", out)
-
-# ----- Build tree from level-order list with debug prints -----
-
-
-def build_tree(values: List[Any]) -> Optional[TreeNode]:
-    """
-    Build a binary tree from level-order list like [3,9,20,None,None,15,7].
-    Prints queue state at each step so you can see BFS construction.
-    """
-    if not values:
-        return None
-
-    root = TreeNode(values[0])
-    q = deque([root])
-    i = 1
-
-    print("Start building:")
-    print_queue(q)
-
-    while q and i < len(values):
-        node = q.popleft()
-        print(f"\nProcessing parent node: {node.val}")
-
-        # Left child
-        if values[i] is not None:
-            node.left = TreeNode(values[i])
-            q.append(node.left)
-            print(f"  Added LEFT  child {values[i]}")
-        else:
-            print("  Skipped LEFT  child (None)")
-        i += 1
-
-        # Right child (guard i, because we just advanced it)
-        if i < len(values) and values[i] is not None:
-            node.right = TreeNode(values[i])
-            q.append(node.right)
-            print(f"  Added RIGHT child {values[i]}")
-        elif i < len(values):
-            print("  Skipped RIGHT child (None)")
-        i += 1
-
-        print_queue(q)  # show queue after processing this parent
-
-    print("\nFinished building.")
-    print_tree_level_order(root)
-    return root
-
-# ----- DFS: Maximum Depth -----
-
-
-def maxDepth(root: Optional[TreeNode]) -> int:
-    if root is None:
-        return 0
-    # Postorder: compute children first, then use 1 + max(left, right)
-    return 1 + max(maxDepth(root.left), maxDepth(root.right))
-
-
-# ----- Quick demo/tests -----
-if __name__ == "__main__":
-    # Example 1 from the problem
-    root1 = build_tree([3, 9, 20, None, None, 15, 7])
-    print("Max depth (example 1) =", maxDepth(root1))  # expected 3
-
-    # Example 2
-    root2 = build_tree([1, None, 2])
-    print("Max depth (example 2) =", maxDepth(root2))  # expected 2
-
-    # Extra checks
-    root3 = build_tree([])  # empty
-    print("Max depth (empty) =", maxDepth(root3))      # expected 0
-
-    root4 = build_tree([1, 2, 3, 4, 5])  # a fuller shape
-    print("Max depth (extra) =", maxDepth(root4))

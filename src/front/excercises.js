@@ -2578,10 +2578,7 @@
 
 // A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
 
- 
-
 // Example 1:
-
 
 // Input: root = [3,9,20,null,null,15,7]
 // Output: 3
@@ -2589,13 +2586,12 @@
 
 // Input: root = [1,null,2]
 // Output: 2
- 
 
 // Constraints:
 
 // The number of nodes in the tree is in the range [0, 104].
 // -100 <= Node.val <= 100
-// Python3	
+// Python3
 // 1
 // # Definition for a binary tree node.
 // 2
@@ -2619,4 +2615,74 @@
 // 11
 //         return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
 // 12
+//------------------------------------------------------------------------------------------------------------------------------
+
+class TreeNode {
+  constructor(val = 0, left = null, right = null) {
+    this.val = val;
+    this.left = left;
+    this.right = right;
+  }
+}
+
+function createTree(values) {
+  if (!Array.isArray(values) || values.length == 0 || values[0] == null)
+    return null;
+  const root = new TreeNode(values[0]);
+  const q = [root];
+  let i = 1;
+
+  while (i < values.length && q.length > 0) {
+    const node = q.shift();
+
+    if (i < values.length && values[i] !== null && values[i] !== undefined) {
+      node.left = new TreeNode(values[i]);
+      q.push(node.left);
+    }
+    i++;
+
+    if (i < values.length && values[i] !== null && values[i] !== undefined) {
+      node.right = new TreeNode(values[i]);
+      q.push(node.right);
+    }
+    i++;
+  }
+
+  return root;
+}
+const root = createTree([3, 9, 20, null, null, 15, 7]);
+console.log(root);
+
+//1)DFS(Rercursive,postorder)
+function findDepth(head) {
+  if (head === null) return 0;
+  const lefSubNode = findDepth(head.left);
+  const rightSubNode = findDepth(head.right);
+
+  return 1 + Math.max(lefSubNode, rightSubNode);
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+//2)BFS
+function findDepth(head){
+    if (head === null) return 0
+    let  q = [head]
+    let  depth = 0
+    
+
+    while (q.length > 0){        
+        let levelNode = q.length
         
+        for(let i=0; i < levelNode; i++){
+           let node = q.shift()
+           if(node.left){
+            q.push(node.left)
+        }
+           if(node.right){
+             q.push(node.right)                        
+        }        
+        } 
+        depth++;   
+    }
+    return depth
+}

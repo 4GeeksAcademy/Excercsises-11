@@ -2344,7 +2344,7 @@
 #             q.append(node.right)
 #         i += 1
 
-#     return root   
+#     return root
 
 # def print_levels(root):
 #     if not root:
@@ -2362,7 +2362,6 @@
 #     print(out)
 
 
-
 # input = [3,9,20,None,None,15,7]
 # root1 = tree(input)
 # print(root1)
@@ -2372,14 +2371,14 @@
 #         return 0
 #     return 1 + max(maxDepth(root.left), maxDepth(root.right))
 
-# print("Max depth =", maxDepth(root1)) 
-#------------------------------------------------------------------------------------------------------------------------------
-#2) BFS (Breadth-First Search) Solution:3
+# print("Max depth =", maxDepth(root1))
+# ------------------------------------------------------------------------------------------------------------------------------
+# 2) BFS (Breadth-First Search) Solution:3
 # from collections import deque
 # def find_depth(root):
 #     if not root:
 #         return 0
-    
+
 #     q = deque([root])
 #     depth = 0
 
@@ -2390,9 +2389,249 @@
 #             if node.left:
 #                 q.append(node.left)
 #             if node.rigth:
-#                 q.append(node.rigth)    
+#                 q.append(node.rigth)
 #         depth += 1
-#     return depth            
+#     return depth
+
+# ===============================================================================================================================
+#   Validate Binary Search Tree
+
+# Solution
+# Given the root of a binary tree, determine if it is a valid binary search tree (BST).
+
+# A valid BST is defined as follows:
+
+# The left subtree of a node contains only nodes with keys strictly less than the node's key.
+# The right subtree of a node contains only nodes with keys strictly greater than the node's key.
+# Both the left and right subtrees must also be binary search trees.
+
+
+# Example 1:
+
+
+# Input: root = [2,1,3]
+# Output: true
+# Example 2:
+
+
+# Input: root = [5,1,4,null,null,3,6]
+# Output: false
+# Explanation: The root node's value is 5 but its right child's value is 4.
+
+
+# Constraints:
+
+# The number of nodes in the tree is in the range [1, 104].
+# -231 <= Node.val <= 231 - 1
+# ------------------------------------------------------------------------------------------------------------------------------
+# # 1)DFS
+# def helper(curr_node, min_value, max_value):
+#         if curr_node is None:
+#             return True
+
+#         if not (min_value < curr_node.val < max_value): return False
+
+#         left_side = helper(curr_node.left, min_value, curr_node.val)
+#         right_side = helper(curr_node.right,curr_node.val,max_value)
+
+#         return left_side and right_side
+    
+# //------------------------------------------------------------------------------------------------------------------------------    
+#2)
+# def valid_tree(root):
+#     stack = []
+#     prev = None
+#     curr = root
+
+#     while curr or stack:
+#          while curr:
+#               stack.append(curr)
+#               curr = curr.left
+
+#     curr = stack.pop()          
+#     if prev is not None and curr.val > prev:
+#          return False
+        
+#     prev = curr.val    
+#     curr = curr.right
+
+#     return True
+         
+#===============================================================================================================================
+
+#   Symmetric Tree
+
+# Solution
+# Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
+
+ 
+
+# Example 1:
+
+
+# Input: root = [1,2,2,3,4,4,3]
+# Output: true
+# Example 2:
+
+
+# Input: root = [1,2,2,null,3,null,3]
+# Output: false
+ 
+
+# Constraints:
+
+# The number of nodes in the tree is in the range [1, 1000].
+# -100 <= Node.val <= 100
+#------------------------------------------------------------------------------------------------------------------------------
+##1)
+# def is_symmetruc(root):
+#     def mirror(a,b):
+#         if a is None and b is None:
+#             return True
+#         if a is None or b is None:
+#             return False
+#         if a.val != b.val:
+#             return False
+#         return mirror(a.left,b.right) and mirror(a.right,b.left)
+#     return True if root is None else mirror(root.left,root.right)
+#------------------------------------------------------------------------------------------------------------------------------
+##2)
+# def is_symmetric(root):
+#     if root is None:
+#         return True
+#     queue_pairs = [(root.left, root.right)]
+
+#     while queue_pairs:
+#         a, b = queue_pairs.pop()
+
+#         if a is None and b is None: continue
+#         if a is None or b is None: return False
+#         if a.val != b.val: return False
+
+#         queue_pairs.append((a.left,b.right))
+#         queue_pairs.append((a.right,b.left))
+#     return True    
+
+
+#===============================================================================================================================   
+
+#   Binary Tree Level Order Traversal
+
+# Solution
+# Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).
+
+ 
+
+# Example 1:
+
+
+# Input: root = [3,9,20,null,null,15,7]
+# Output: [[3],[9,20],[15,7]]
+# Example 2:
+
+# Input: root = [1]
+# Output: [[1]]
+# Example 3:
+
+# Input: root = []
+# Output: []
+ 
+
+# Constraints:
+
+# The number of nodes in the tree is in the range [0, 2000].
+# -1000 <= Node.val <= 1000
+#    Hide Hint #1  
+#------------------------------------------------------------------------------------------------------------------------------
+#1)
+# def node_per_level(root):
+    # if root is None: return []
+    # q = [root] ## list of the nodes to visit and count.
+    # head = 0 ## pointer to visit such nodes in q.
+    # res = [] ## we will push the nodes per level.
+
+    # while head < len(q):
+    #     levelsize = len(q) - head
+    #     nodes_level = []
+
+    #     for i in range(levelsize):
+    #         node = q[head]
+    #         head += 1
+    #         nodes_level.append(node.val)
+
+    #         if node.left: q.append(node.left)
+    #         if node.right: q.append(node.right)
+
+    #     res.append(nodes_level)
+
+    # return res    
+#------------------------------------------------------------------------------------------------------------------------------
+#2)
+# def recursion_levels(root):
+
+#     res = []
+
+#     def dfs(node,depth):
+#         if node == None: return
+#         if len(res) == depth: res.append([])
+
+#         res[depth].append(node.val)
+#         dfs(node.left, depth + 1)
+#         dfs(node.right, depth + 1)
+
+#     dfs(root,0)
+#     return res    
 
 #===============================================================================================================================
+#1) Recursive
+# class TreeNode:
+#     def __init__(self, val = 0, left = None, right = None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+ 
+# def sortedArray(nums):
+#     def helper(left,right):
+#         if left > right: return None
+
+#         mid = (left + right) // 2
+#         node = TreeNode(nums[mid])
+#         node.left = helper(left, mid - 1)
+#         node.right = helper(mid + 1, right)
+#         return node
+#     return helper(0, len(nums) - 1)
+
+# root1 = sortedArray([-10, -3, 0, 5, 9])
+# root2 = sortedArray([1, 3])
+# root3 = sortedArray([42])
+
+#------------------------------------------------------------------------------------------------------------------------------
+#2)
+
+class TreeNode:
+    def __init__(self, val = 0, left = None, right = None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def balanced_tree(nums):
+    if not nums: return None
+
+    #root from full range
+    l,r = 0 , len(nums) - 1
+    mid = (l + r) // 2 
+    root = TreeNode(nums[mid])
+
+    #stacks holds right subtrees to do later
+    stack = []
+    if mid + 1 <= r:
+        stack.append((root,mid + 1,r))
+
+    # Move down to build its left subtree next
+    curr = root 
+    l,r = 0, mid -1
+    
+       
+
+
 

@@ -2617,72 +2617,344 @@
 // 12
 //------------------------------------------------------------------------------------------------------------------------------
 
-class TreeNode {
-  constructor(val = 0, left = null, right = null) {
-    this.val = val;
-    this.left = left;
-    this.right = right;
-  }
-}
+// class TreeNode {
+//   constructor(val = 0, left = null, right = null) {
+//     this.val = val;
+//     this.left = left;
+//     this.right = right;
+//   }
+// }
 
-function createTree(values) {
-  if (!Array.isArray(values) || values.length == 0 || values[0] == null)
-    return null;
-  const root = new TreeNode(values[0]);
-  const q = [root];
-  let i = 1;
+// function createTree(values) {
+//   if (!Array.isArray(values) || values.length == 0 || values[0] == null)
+//     return null;
+//   const root = new TreeNode(values[0]);
+//   const q = [root];
+//   let i = 1;
 
-  while (i < values.length && q.length > 0) {
-    const node = q.shift();
+//   while (i < values.length && q.length > 0) {
+//     const node = q.shift();
 
-    if (i < values.length && values[i] !== null && values[i] !== undefined) {
-      node.left = new TreeNode(values[i]);
-      q.push(node.left);
-    }
-    i++;
+//     if (i < values.length && values[i] !== null && values[i] !== undefined) {
+//       node.left = new TreeNode(values[i]);
+//       q.push(node.left);
+//     }
+//     i++;
 
-    if (i < values.length && values[i] !== null && values[i] !== undefined) {
-      node.right = new TreeNode(values[i]);
-      q.push(node.right);
-    }
-    i++;
-  }
+//     if (i < values.length && values[i] !== null && values[i] !== undefined) {
+//       node.right = new TreeNode(values[i]);
+//       q.push(node.right);
+//     }
+//     i++;
+//   }
 
-  return root;
-}
-const root = createTree([3, 9, 20, null, null, 15, 7]);
-console.log(root);
+//   return root;
+// }
+// const root = createTree([3, 9, 20, null, null, 15, 7]);
+// console.log(root);
 
-//1)DFS(Rercursive,postorder)
-function findDepth(head) {
-  if (head === null) return 0;
-  const lefSubNode = findDepth(head.left);
-  const rightSubNode = findDepth(head.right);
+// //1)DFS(Rercursive,postorder)
+// function findDepth(head) {
+//   if (head === null) return 0;
+//   const lefSubNode = findDepth(head.left);
+//   const rightSubNode = findDepth(head.right);
 
-  return 1 + Math.max(lefSubNode, rightSubNode);
-}
+//   return 1 + Math.max(lefSubNode, rightSubNode);
+// }
 
 //------------------------------------------------------------------------------------------------------------------------------
 //2)BFS
-function findDepth(head){
-    if (head === null) return 0
-    let  q = [head]
-    let  depth = 0
+// function findDepth(head){
+//     if (head === null) return 0
+//     let  q = [head]
+//     let  depth = 0
+
+//     while (q.length > 0){
+//         let levelNode = q.length
+
+//         for(let i=0; i < levelNode; i++){
+//            let node = q.shift()
+//            if(node.left){
+//             q.push(node.left)
+//         }
+//            if(node.right){
+//              q.push(node.right)
+//         }
+//         }
+//         depth++;
+//     }
+//     return depth
+// }
+//===============================================================================================================================
+//   Validate Binary Search Tree
+
+// Solution
+// Given the root of a binary tree, determine if it is a valid binary search tree (BST).
+
+// A valid BST is defined as follows:
+
+// The left subtree of a node contains only nodes with keys strictly less than the node's key.
+// The right subtree of a node contains only nodes with keys strictly greater than the node's key.
+// Both the left and right subtrees must also be binary search trees.
+
+// Example 1:
+
+// Input: root = [2,1,3]
+// Output: true
+// Example 2:
+
+// Input: root = [5,1,4,null,null,3,6]
+// Output: false
+// Explanation: The root node's value is 5 but its right child's value is 4.
+
+// Constraints:
+
+// The number of nodes in the tree is in the range [1, 104].
+// -231 <= Node.val <= 231 - 1
+//------------------------------------------------------------------------------------------------------------------------------
+//1)
+// function isValidBst(root) {
+//   function helper(node, low, high) {
+//     if (node === null) {
+//       return true;
+//     }
+//     if (low !== null && node.val <= low) return false;
+//     if (high !== null && node.val >= high) return false; // gate on high
+
+//     return (
+//       helper(node.left, low, node.val) && helper(node.right, node.val, high)
+//     );
+//   }
+//   return helper(root, null, null);
+// }
+//------------------------------------------------------------------------------------------------------------------------------
+//2)
+// function isValidBst(root){
+//   const stack = [];
+//   let curr = root;
+//   let prev = null;
+
+//   while(curr || stack.length){
+//     while(curr){
+//       stack.push(curr);
+//       curr = curr.left;
+//     }
+//     curr = stack.pop()
+
+//     if (prev !== null && curr.val <= prev) return false;   
+//     prev = curr.val
+
+//     curr = curr.right;
+
+//   }
+//   return true
+// }
+//===============================================================================================================================
+
+//   Symmetric Tree
+
+// Solution
+// Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
+
+ 
+
+// Example 1:
+
+
+// Input: root = [1,2,2,3,4,4,3]
+// Output: true
+// Example 2:
+
+
+// Input: root = [1,2,2,null,3,null,3]
+// Output: false
+ 
+
+// Constraints:
+
+// The number of nodes in the tree is in the range [1, 1000].
+// -100 <= Node.val <= 100
+ 
+
+// Follow up: Could you solve it both recursively and iteratively?
+//------------------------------------------------------------------------------------------------------------------------------
+//1)✅ Recursive strategy (mirror DFS)
+// function call (root){
+//     function mirror(a,b){
+
+//         if (a === null && b === null) return true;
+//         if(a === null || b === null)  return false;
+//         if (a.val !== b.val) return false;
+
+//         return mirror(a.left,b.right) && mirror(a.right,b.left)
+        
+//     }
+//     if(root === null) return true;
+//     return  mirror(root.left,root.right)
+// }
+//------------------------------------------------------------------------------------------------------------------------------
+//2)
+// function mirror(root){
+//     if (root === null)return true;
+
+//     const stack = [[root.left,root.right]];
+    
+//     while (stack.length){
+//         const [a,b] = stack.pop();
+
+//         if (a === null && b === null) continue;
+//         if(a === null || b === null) return false;
+//         if(a.val !== b.val) return false;
+        
+//         stack.push([a.left,b.right])
+//         stack.push([a.right,b.left])
+
+//     }
+//     return true
+// }
+// // #===============================================================================================================================
+//   Binary Tree Level Order Traversal
+
+// Solution
+// Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).
+
+ 
+
+// Example 1:
+
+
+// Input: root = [3,9,20,null,null,15,7]
+// Output: [[3],[9,20],[15,7]]
+// Example 2:
+
+// Input: root = [1]
+// Output: [[1]]
+// Example 3:
+
+// Input: root = []
+// Output: []
+ 
+
+// Constraints:
+
+// The number of nodes in the tree is in the range [0, 2000].
+// -1000 <= Node.val <= 1000
+//    Hide Hint #1  
+// Use a queue to perform BFS.
+//------------------------------------------------------------------------------------------------------------------------------
+//1)
+// function findLevel(root){
+//     if (root === null)return [];
+//     const res = [];
+//     const q = [root];
+//     let head = 0;
+
+//     while (head < q.length){
+//         const levelSize = q.length - head;
+//         const level = [];
+
+//         for(let i = 0; i < levelSize; i++){
+//             const node = q[head++];
+//             level.push(node.val);
+            
+//             if (node.left !== null) q.push(node.left);
+//             if (node.right !== null) q.push(node.right)
+//         }
+//     res.push(level);
+//     }
+//     return res
+// }
+//------------------------------------------------------------------------------------------------------------------------------
+//2)
+// function levelOrderDFS(root){
+//     const res = [];
+//     function dfs(node,depth){
+//         if (node === null) return;
+//         if (res.length === depth)res.push([]);
+
+//         res[depth].push(node.val);
+//         dfs(node.left,depth + 1);
+//         dfs(node.right,depth + 1);
+
+//     }
+//     dfs(root,0);
+//     return res
+// }
+
+//===============================================================================================================================
+//   Convert Sorted Array to Binary Search Tree
+
+// Solution
+// Given an integer array nums where the elements are sorted in ascending order, convert it to a height-balanced binary search tree.
+
+ 
+
+// Example 1:
+
+
+// Input: nums = [-10,-3,0,5,9]
+// Output: [0,-3,9,-10,null,5]
+// Explanation: [0,-10,5,null,-3,null,9] is also accepted:
+
+// Example 2:
+
+
+// Input: nums = [1,3]
+// Output: [3,1]
+// Explanation: [1,null,3] and [3,1] are both height-balanced BSTs.
+ 
+
+// Constraints:
+
+// 1 <= nums.length <= 104
+// -104 <= nums[i] <= 104
+// nums is sorted in a strictly increasing order.
+//------------------------------------------------------------------------------------------------------------------------------
+//1) Recursion:
+
+// class TreeNode{
+//     constructor(val = 0, left = null, right = null){
+//         this.val = val;
+//         this.left = left;
+//         this.right = right;
+
+//     }
+// }
+
+// function buildTreeNode(nums){
+
+//     if (!Array.isArray(nums) || nums.length === 0) return null;
+
+//     function structureTreeNode(left,right){
+
+//         if (left > right)return null ;
+
+//         let middle = Math.floor((left + right) / 2);
+//         let node = new TreeNode(nums[middle]);
+//         node.left = structureTreeNode(left, middle - 1);
+//         node.right = structureTreeNode( middle + 1, right);
+        
+//         return node;
+//     }
+//     return structureTreeNode(0, nums.lenght - 1);
+// }
+
+//------------------------------------------------------------------------------------------------------------------------------
+//2) 
+
+class TreeNode{
+    constructor(val = 0, left = null, right = null){
+        this.val = val;
+        this.left = left;
+        this.right = right;
+
+    }
+}
+
+function buildTreeNode(nums){
+    if(!nums)return null
+
     
 
-    while (q.length > 0){        
-        let levelNode = q.length
-        
-        for(let i=0; i < levelNode; i++){
-           let node = q.shift()
-           if(node.left){
-            q.push(node.left)
-        }
-           if(node.right){
-             q.push(node.right)                        
-        }        
-        } 
-        depth++;   
-    }
-    return depth
+
 }

@@ -2608,28 +2608,62 @@
 #------------------------------------------------------------------------------------------------------------------------------
 #2)
 
-class TreeNode:
-    def __init__(self, val = 0, left = None, right = None):
-        self.val = val
-        self.left = left
-        self.right = right
+# class TreeNode:
+#     def __init__(self, val = 0, left = None, right = None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 
-def balanced_tree(nums):
-    if not nums: return None
+# def balanced_tree(nums):
+#     if not nums: return None
 
-    #root from full range
-    l,r = 0 , len(nums) - 1
-    mid = (l + r) // 2 
-    root = TreeNode(nums[mid])
+#     #root from full range
+#     l,r = 0 , len(nums) - 1
+#     mid = (l + r) // 2 
+#     root = TreeNode(nums[mid])
 
-    #stacks holds right subtrees to do later
-    stack = []
-    if mid + 1 <= r:
-        stack.append((root,mid + 1,r))
+#     #stacks holds right subtrees to do later
+#     stack = []
+#     if mid + 1 <= r:
+#         stack.append((root,mid + 1,r))
 
-    # Move down to build its left subtree next
-    curr = root 
-    l,r = 0, mid -1
+#     # Move down to build its left subtree next
+#     curr = root 
+#     l,r = 0, mid -1
+
+#     while True:
+#         while l <= r:
+#             m = (l + r) // 2
+#             node = TreeNode(nums[m])
+#             curr.left = node
+
+#             if m + 1 <= r:
+#                 stack.append((node,m + 1, r))
+
+#             curr = node
+#             l,r = l, m-1  
+
+#         if not stack:
+#             break
+
+#         parent, l, r = stack.pop()
+#         m = (l + r) // 2
+#         node = TreeNode(nums[m])
+#         parent.right = node
+
+#         if m+1 <= r:
+#             stack.append((node,m+1,r))
+
+#         curr = node
+#         l,r = l, m-1 
+#     return root       
+
+#===============================================================================================================================
+
+
+
+    
+
     
        
 

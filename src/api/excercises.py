@@ -2566,7 +2566,7 @@
 
     # return res    
 #------------------------------------------------------------------------------------------------------------------------------
-#2)
+#1)
 # def recursion_levels(root):
 
 #     res = []
@@ -2583,7 +2583,7 @@
 #     return res    
 
 #===============================================================================================================================
-#1) Recursive
+#1) Solution 1 — Recursive Divide-and-Conquer (DFS)
 # class TreeNode:
 #     def __init__(self, val = 0, left = None, right = None):
 #         self.val = val
@@ -2605,8 +2605,8 @@
 # root2 = sortedArray([1, 3])
 # root3 = sortedArray([42])
 
-#------------------------------------------------------------------------------------------------------------------------------
-#2)
+# #------------------------------------------------------------------------------------------------------------------------------
+# #2)Recursive Solution 2 — Iterative Stack-Based Construction (No Recursion)
 
 # class TreeNode:
 #     def __init__(self, val = 0, left = None, right = None):
@@ -2660,9 +2660,58 @@
 
 #===============================================================================================================================
 
+#   Best Time to Buy and Sell Stock
 
+# Solution
+# You are given an array prices where prices[i] is the price of a given stock on the ith day.
 
+# You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+
+# Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+
+ 
+
+# Example 1:
+
+# Input: prices = [7,1,5,3,6,4]
+# Output: 5
+# Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+# Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
+# Example 2:
+
+# Input: prices = [7,6,4,3,1]
+# Output: 0
+# Explanation: In this case, no transactions are done and the max profit = 0.
+ 
+
+# Constraints:
+
+# 1 <= prices.length <= 105
+# 0 <= prices[i] <= 104
+#------------------------------------------------------------------------------------------------------------------------------
+#1)
+def find_max_profit(prices):
+    if len(prices) < 2:
+        return 0
     
+    max_profit = 0
+    i,j = 0,1
+
+    while j < len(prices):
+        profit_today = prices[j] - prices[i]
+        max_profit = max(max_profit, profit_today)
+        
+        if prices[j] < prices[i]:
+            i = j
+        j += 1  
+
+    return max_profit   
+ 
+    
+
+prices = [7,6,4,3,1]
+result = find_max_profit(prices)
+print(result)
 
     
        

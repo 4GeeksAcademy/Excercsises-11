@@ -2842,7 +2842,7 @@
 //    Hide Hint #1  
 // Use a queue to perform BFS.
 //------------------------------------------------------------------------------------------------------------------------------
-//1)
+//1)Recursion
 // function findLevel(root){
 //     if (root === null)return [];
 //     const res = [];
@@ -2910,7 +2910,7 @@
 // -104 <= nums[i] <= 104
 // nums is sorted in a strictly increasing order.
 //------------------------------------------------------------------------------------------------------------------------------
-//1) Recursion:
+//1) Solution 1 — Recursive Divide-and-Conquer (DFS)
 
 // class TreeNode{
 //     constructor(val = 0, left = null, right = null){
@@ -2939,22 +2939,65 @@
 //     return structureTreeNode(0, nums.lenght - 1);
 // }
 
-//------------------------------------------------------------------------------------------------------------------------------
-//2) 
+// //------------------------------------------------------------------------------------------------------------------------------
+// //2) Solution 2 — Iterative Stack-Based Construction (No Recursion)
 
-class TreeNode{
-    constructor(val = 0, left = null, right = null){
-        this.val = val;
-        this.left = left;
-        this.right = right;
+// class TreeNode {
+//   constructor(val = 0, left = null, right = null) {
+//     this.val = val;
+//     this.left = left;
+//     this.right = right;
+//   }
+// }
 
-    }
-}
+// function buildTreeNode(nums) {
+//   if (!Array.isArray(nums) || nums.length === 0) return null;
 
-function buildTreeNode(nums){
-    if(!nums)return null
+//   // Build root from full range
+//   let l = 0, r = nums.length - 1;
+//   let m = Math.floor((l + r) / 2);
+//   const root = new TreeNode(nums[m]);
+
+//   // Stack holds deferred RIGHT subtrees: { parent, l, r }
+//   const stack = [];
+//   if (m + 1 <= r) stack.push({ parent: root, l: m + 1, r });
+
+//   // Walk the LEFT chain immediately
+//   let curr = root;
+//   l = 0; r = m - 1;
+
+//   while (true) {
+    
+//     while (l <= r) {
+//       m = Math.floor((l + r) / 2);
+//       const node = new TreeNode(nums[m]);
+//       curr.left = node;
+
+  
+//       if (m + 1 <= r) stack.push({ parent: node, l: m + 1, r });
+
+   
+//       curr = node;
+//       r = m - 1; 
+//     }
 
     
+//     if (stack.length === 0) break;
 
+//     const { parent, l: l2, r: r2 } = stack.pop(); 
+//     l = l2; r = r2;
 
-}
+//     m = Math.floor((l + r) / 2);
+//     const node = new TreeNode(nums[m]);
+//     parent.right = node;
+
+    
+//     if (m + 1 <= r) stack.push({ parent: node, l: m + 1, r });
+
+    
+//     curr = node;
+//     r = m - 1;
+//   }
+
+//   return root;
+// }

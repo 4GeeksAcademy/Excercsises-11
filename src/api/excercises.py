@@ -2690,28 +2690,28 @@
 # 0 <= prices[i] <= 104
 #------------------------------------------------------------------------------------------------------------------------------
 #1)
-def find_max_profit(prices):
-    if len(prices) < 2:
-        return 0
+# def find_max_profit(prices):
+#     if len(prices) < 2:
+#         return 0
     
-    max_profit = 0
-    i,j = 0,1
+#     max_profit = 0
+#     i,j = 0,1
 
-    while j < len(prices):
-        profit_today = prices[j] - prices[i]
-        max_profit = max(max_profit, profit_today)
+#     while j < len(prices):
+#         profit_today = prices[j] - prices[i]
+#         max_profit = max(max_profit, profit_today)
         
-        if prices[j] < prices[i]:
-            i = j
-        j += 1  
+#         if prices[j] < prices[i]:
+#             i = j
+#         j += 1  
 
-    return max_profit   
+#     return max_profit   
  
     
 
-prices = [7,6,4,3,1]
-result = find_max_profit(prices)
-print(result)
+# prices = [7, 1, 5, 3, 6, 4]
+# result = find_max_profit(prices)
+# print(result)
 
     
        

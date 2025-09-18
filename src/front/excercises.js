@@ -2741,7 +2741,7 @@
 //     }
 //     curr = stack.pop()
 
-//     if (prev !== null && curr.val <= prev) return false;   
+//     if (prev !== null && curr.val <= prev) return false;
 //     prev = curr.val
 
 //     curr = curr.right;
@@ -2756,25 +2756,19 @@
 // Solution
 // Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
 
- 
-
 // Example 1:
-
 
 // Input: root = [1,2,2,3,4,4,3]
 // Output: true
 // Example 2:
 
-
 // Input: root = [1,2,2,null,3,null,3]
 // Output: false
- 
 
 // Constraints:
 
 // The number of nodes in the tree is in the range [1, 1000].
 // -100 <= Node.val <= 100
- 
 
 // Follow up: Could you solve it both recursively and iteratively?
 //------------------------------------------------------------------------------------------------------------------------------
@@ -2787,7 +2781,7 @@
 //         if (a.val !== b.val) return false;
 
 //         return mirror(a.left,b.right) && mirror(a.right,b.left)
-        
+
 //     }
 //     if(root === null) return true;
 //     return  mirror(root.left,root.right)
@@ -2798,14 +2792,14 @@
 //     if (root === null)return true;
 
 //     const stack = [[root.left,root.right]];
-    
+
 //     while (stack.length){
 //         const [a,b] = stack.pop();
 
 //         if (a === null && b === null) continue;
 //         if(a === null || b === null) return false;
 //         if(a.val !== b.val) return false;
-        
+
 //         stack.push([a.left,b.right])
 //         stack.push([a.right,b.left])
 
@@ -2818,10 +2812,7 @@
 // Solution
 // Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).
 
- 
-
 // Example 1:
-
 
 // Input: root = [3,9,20,null,null,15,7]
 // Output: [[3],[9,20],[15,7]]
@@ -2833,13 +2824,12 @@
 
 // Input: root = []
 // Output: []
- 
 
 // Constraints:
 
 // The number of nodes in the tree is in the range [0, 2000].
 // -1000 <= Node.val <= 1000
-//    Hide Hint #1  
+//    Hide Hint #1
 // Use a queue to perform BFS.
 //------------------------------------------------------------------------------------------------------------------------------
 //1)Recursion
@@ -2856,7 +2846,7 @@
 //         for(let i = 0; i < levelSize; i++){
 //             const node = q[head++];
 //             level.push(node.val);
-            
+
 //             if (node.left !== null) q.push(node.left);
 //             if (node.right !== null) q.push(node.right)
 //         }
@@ -2887,10 +2877,7 @@
 // Solution
 // Given an integer array nums where the elements are sorted in ascending order, convert it to a height-balanced binary search tree.
 
- 
-
 // Example 1:
-
 
 // Input: nums = [-10,-3,0,5,9]
 // Output: [0,-3,9,-10,null,5]
@@ -2898,11 +2885,9 @@
 
 // Example 2:
 
-
 // Input: nums = [1,3]
 // Output: [3,1]
 // Explanation: [1,null,3] and [3,1] are both height-balanced BSTs.
- 
 
 // Constraints:
 
@@ -2933,7 +2918,7 @@
 //         let node = new TreeNode(nums[middle]);
 //         node.left = structureTreeNode(left, middle - 1);
 //         node.right = structureTreeNode( middle + 1, right);
-        
+
 //         return node;
 //     }
 //     return structureTreeNode(0, nums.lenght - 1);
@@ -2967,37 +2952,163 @@
 //   l = 0; r = m - 1;
 
 //   while (true) {
-    
+
 //     while (l <= r) {
 //       m = Math.floor((l + r) / 2);
 //       const node = new TreeNode(nums[m]);
 //       curr.left = node;
 
-  
 //       if (m + 1 <= r) stack.push({ parent: node, l: m + 1, r });
 
-   
 //       curr = node;
-//       r = m - 1; 
+//       r = m - 1;
 //     }
 
-    
 //     if (stack.length === 0) break;
 
-//     const { parent, l: l2, r: r2 } = stack.pop(); 
+//     const { parent, l: l2, r: r2 } = stack.pop();
 //     l = l2; r = r2;
 
 //     m = Math.floor((l + r) / 2);
 //     const node = new TreeNode(nums[m]);
 //     parent.right = node;
 
-    
 //     if (m + 1 <= r) stack.push({ parent: node, l: m + 1, r });
 
-    
 //     curr = node;
 //     r = m - 1;
 //   }
 
 //   return root;
+// }
+
+//===============================================================================================================================
+
+//   Best Time to Buy and Sell Stock
+
+// Solution
+// You are given an array prices where prices[i] is the price of a given stock on the ith day.
+
+// You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+
+// Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+
+// Example 1:
+
+// Input: prices = [7,1,5,3,6,4]
+// Output: 5
+// Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+// Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
+// Example 2:
+
+// Input: prices = [7,6,4,3,1]
+// Output: 0
+// Explanation: In this case, no transactions are done and the max profit = 0.
+
+// Constraints:
+
+// 1 <= prices.length <= 105
+// 0 <= prices[i] <= 104
+//------------------------------------------------------------------------------------------------------------------------------
+//1)two-pointer solution
+// function profit(prices) {
+//   if (prices.length < 2) {
+//     return 0;
+//   }
+//   let i = 0;
+//   let j = 1;
+//   let max_profit = 0;
+
+//   while (j < prices.length) {
+//     const profit_today = prices[j] - prices[i];
+//     if (prices[j] < prices[i]) {
+//       i = j;
+//     }
+//     max_profit = Math.max(max_profit, profit_today);
+//     j++;
+//   }
+//   return max_profit
+// }
+
+//------------------------------------------------------------------------------------------------------------------------------
+//2)Running-min greedy (one-pass DP)
+// function profit(prices){
+//     if (prices.length < 2 )return 0
+
+//     let bestPriceToBuy = prices[0];
+//     let bestProfit = 0;
+
+//     for (let i = 1; i <prices.length; i++){
+//         const p = prices[i]
+//         const profit_today = p - bestPriceToBuy;
+//         bestPriceToBuy = Math.min(bestPriceToBuy,p);
+//         bestProfit = Math.max(bestProfit,profit_today)
+//     }
+//     return bestProfit
+// }
+
+//===============================================================================================================================
+//   Maximum Subarray
+
+// Solution
+// Given an integer array nums, find the subarray with the largest sum, and return its sum.
+
+ 
+
+// Example 1:
+
+// Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
+// Output: 6
+// Explanation: The subarray [4,-1,2,1] has the largest sum 6.
+// Example 2:
+
+// Input: nums = [1]
+// Output: 1
+// Explanation: The subarray [1] has the largest sum 1.
+// Example 3:
+
+// Input: nums = [5,4,-1,7,8]
+// Output: 23
+// Explanation: The subarray [5,4,-1,7,8] has the largest sum 23.
+ 
+
+// Constraints:
+
+// 1 <= nums.length <= 105
+// -104 <= nums[i] <= 104
+ 
+
+// Follow up: If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach, which is more subtle.
+//------------------------------------------------------------------------------------------------------------------------------
+//1)
+// function maxSubArrays(nums){
+//     if (nums.length === 0 )return 0
+
+//     let bestEnding = nums[0];
+//     let bestSoFar = nums[0];
+
+//     for (let i = 1; i < nums.length; i++){
+//         const x = nums[i]
+//         bestEnding = Math.max(x, bestEnding + x);
+//         bestSoFar = Math.max(bestSoFar, bestEnding)
+//     }
+//     return bestSoFar
+// }
+
+// [4, -1, 2]
+
+//------------------------------------------------------------------------------------------------------------------------------
+//2)
+// function maxSubArrays(nums){
+//     let maxSub = nums[0];
+//     let currSum = 0; 
+
+//     for (const n of nums){
+//         if (currSum < 0){
+//             currSum = 0
+//         }
+//         currSum += n
+//         maxSub = Math.max(maxSub,currSum)
+//     }
+//     return maxSub
 // }

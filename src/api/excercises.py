@@ -2689,7 +2689,7 @@
 # 1 <= prices.length <= 105
 # 0 <= prices[i] <= 104
 #------------------------------------------------------------------------------------------------------------------------------
-#1)
+#1)Two-pointer scan
 # def find_max_profit(prices):
 #     if len(prices) < 2:
 #         return 0
@@ -2713,8 +2713,71 @@
 # result = find_max_profit(prices)
 # print(result)
 
-    
-       
+#===============================================================================================================================
+#2)one-pass dynamic programming (1-D DP)
+# def find_best_profit(prices):
+#     if len(prices) < 2: return 0
+#     best_profit = 0
+#     min_so_far = prices[0]
+
+#     for price in prices[1:]:
+#         profit_today = price - min_so_far
+#         min_so_far = min(min_so_far,price)
+#         best_profit = max(profit_today,best_profit)
+
+#     return best_profit    
+
+# prices = [7, 1, 5, 3, 6, 4]
+# result = find_max_profit(prices)
+# print(result)
+#===============================================================================================================================
+
+
+#   Maximum Subarray
+
+# Solution
+# Given an integer array nums, find the subarray with the largest sum, and return its sum.
+
+ 
+
+# Example 1:
+
+# Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
+# Output: 6
+# Explanation: The subarray [4,-1,2,1] has the largest sum 6.
+# Example 2:
+
+# Input: nums = [1]
+# Output: 1
+# Explanation: The subarray [1] has the largest sum 1.
+# Example 3:
+
+# Input: nums = [5,4,-1,7,8]
+# Output: 23
+# Explanation: The subarray [5,4,-1,7,8] has the largest sum 23.
+ 
+
+# Constraints:
+
+# 1 <= nums.length <= 105
+# -104 <= nums[i] <= 104
+ 
+
+# Follow up: If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach, which is more subtle.
+
+#------------------------------------------------------------------------------------------------------------------------------
+#1)
+# def max_subarray(nums):
+#     if (len(nums) == 0): return 0
+#     max_ending = nums[0]
+#     max_arr = nums[0]
+
+#     for i in nums[1:]:        
+#         max_ending = max(i , max_ending + i)
+#         max_arr = max(max_ending,max_arr)
+
+#     return max_arr    
+        
 
 
 

@@ -2435,9 +2435,9 @@
 #         right_side = helper(curr_node.right,curr_node.val,max_value)
 
 #         return left_side and right_side
-    
-# //------------------------------------------------------------------------------------------------------------------------------    
-#2)
+
+# //------------------------------------------------------------------------------------------------------------------------------
+# 2)
 # def valid_tree(root):
 #     stack = []
 #     prev = None
@@ -2448,23 +2448,22 @@
 #               stack.append(curr)
 #               curr = curr.left
 
-#     curr = stack.pop()          
+#     curr = stack.pop()
 #     if prev is not None and curr.val > prev:
 #          return False
-        
-#     prev = curr.val    
+
+#     prev = curr.val
 #     curr = curr.right
 
 #     return True
-         
-#===============================================================================================================================
+
+# ===============================================================================================================================
 
 #   Symmetric Tree
 
 # Solution
 # Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
 
- 
 
 # Example 1:
 
@@ -2476,14 +2475,14 @@
 
 # Input: root = [1,2,2,null,3,null,3]
 # Output: false
- 
+
 
 # Constraints:
 
 # The number of nodes in the tree is in the range [1, 1000].
 # -100 <= Node.val <= 100
-#------------------------------------------------------------------------------------------------------------------------------
-##1)
+# ------------------------------------------------------------------------------------------------------------------------------
+# 1)
 # def is_symmetruc(root):
 #     def mirror(a,b):
 #         if a is None and b is None:
@@ -2494,8 +2493,8 @@
 #             return False
 #         return mirror(a.left,b.right) and mirror(a.right,b.left)
 #     return True if root is None else mirror(root.left,root.right)
-#------------------------------------------------------------------------------------------------------------------------------
-##2)
+# ------------------------------------------------------------------------------------------------------------------------------
+# 2)
 # def is_symmetric(root):
 #     if root is None:
 #         return True
@@ -2510,17 +2509,16 @@
 
 #         queue_pairs.append((a.left,b.right))
 #         queue_pairs.append((a.right,b.left))
-#     return True    
+#     return True
 
 
-#===============================================================================================================================   
+# ===============================================================================================================================
 
 #   Binary Tree Level Order Traversal
 
 # Solution
 # Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).
 
- 
 
 # Example 1:
 
@@ -2535,38 +2533,38 @@
 
 # Input: root = []
 # Output: []
- 
+
 
 # Constraints:
 
 # The number of nodes in the tree is in the range [0, 2000].
 # -1000 <= Node.val <= 1000
-#    Hide Hint #1  
-#------------------------------------------------------------------------------------------------------------------------------
-#1)
+#    Hide Hint #1
+# ------------------------------------------------------------------------------------------------------------------------------
+# 1)
 # def node_per_level(root):
-    # if root is None: return []
-    # q = [root] ## list of the nodes to visit and count.
-    # head = 0 ## pointer to visit such nodes in q.
-    # res = [] ## we will push the nodes per level.
+# if root is None: return []
+# q = [root] ## list of the nodes to visit and count.
+# head = 0 ## pointer to visit such nodes in q.
+# res = [] ## we will push the nodes per level.
 
-    # while head < len(q):
-    #     levelsize = len(q) - head
-    #     nodes_level = []
+# while head < len(q):
+#     levelsize = len(q) - head
+#     nodes_level = []
 
-    #     for i in range(levelsize):
-    #         node = q[head]
-    #         head += 1
-    #         nodes_level.append(node.val)
+#     for i in range(levelsize):
+#         node = q[head]
+#         head += 1
+#         nodes_level.append(node.val)
 
-    #         if node.left: q.append(node.left)
-    #         if node.right: q.append(node.right)
+#         if node.left: q.append(node.left)
+#         if node.right: q.append(node.right)
 
-    #     res.append(nodes_level)
+#     res.append(nodes_level)
 
-    # return res    
-#------------------------------------------------------------------------------------------------------------------------------
-#1)
+# return res
+# ------------------------------------------------------------------------------------------------------------------------------
+# 1)
 # def recursion_levels(root):
 
 #     res = []
@@ -2580,16 +2578,16 @@
 #         dfs(node.right, depth + 1)
 
 #     dfs(root,0)
-#     return res    
+#     return res
 
-#===============================================================================================================================
-#1) Solution 1 — Recursive Divide-and-Conquer (DFS)
+# ===============================================================================================================================
+# 1) Solution 1 — Recursive Divide-and-Conquer (DFS)
 # class TreeNode:
 #     def __init__(self, val = 0, left = None, right = None):
 #         self.val = val
 #         self.left = left
 #         self.right = right
- 
+
 # def sortedArray(nums):
 #     def helper(left,right):
 #         if left > right: return None
@@ -2619,7 +2617,7 @@
 
 #     #root from full range
 #     l,r = 0 , len(nums) - 1
-#     mid = (l + r) // 2 
+#     mid = (l + r) // 2
 #     root = TreeNode(nums[mid])
 
 #     #stacks holds right subtrees to do later
@@ -2628,7 +2626,7 @@
 #         stack.append((root,mid + 1,r))
 
 #     # Move down to build its left subtree next
-#     curr = root 
+#     curr = root
 #     l,r = 0, mid -1
 
 #     while True:
@@ -2641,7 +2639,7 @@
 #                 stack.append((node,m + 1, r))
 
 #             curr = node
-#             l,r = l, m-1  
+#             l,r = l, m-1
 
 #         if not stack:
 #             break
@@ -2655,10 +2653,10 @@
 #             stack.append((node,m+1,r))
 
 #         curr = node
-#         l,r = l, m-1 
-#     return root       
+#         l,r = l, m-1
+#     return root
 
-#===============================================================================================================================
+# ===============================================================================================================================
 
 #   Best Time to Buy and Sell Stock
 
@@ -2669,7 +2667,6 @@
 
 # Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
 
- 
 
 # Example 1:
 
@@ -2682,39 +2679,38 @@
 # Input: prices = [7,6,4,3,1]
 # Output: 0
 # Explanation: In this case, no transactions are done and the max profit = 0.
- 
+
 
 # Constraints:
 
 # 1 <= prices.length <= 105
 # 0 <= prices[i] <= 104
-#------------------------------------------------------------------------------------------------------------------------------
-#1)Two-pointer scan
+# ------------------------------------------------------------------------------------------------------------------------------
+# 1)Two-pointer scan
 # def find_max_profit(prices):
 #     if len(prices) < 2:
 #         return 0
-    
+
 #     max_profit = 0
 #     i,j = 0,1
 
 #     while j < len(prices):
 #         profit_today = prices[j] - prices[i]
 #         max_profit = max(max_profit, profit_today)
-        
+
 #         if prices[j] < prices[i]:
 #             i = j
-#         j += 1  
+#         j += 1
 
-#     return max_profit   
- 
-    
+#     return max_profit
+
 
 # prices = [7, 1, 5, 3, 6, 4]
 # result = find_max_profit(prices)
 # print(result)
 
-#===============================================================================================================================
-#2)one-pass dynamic programming (1-D DP)
+# ===============================================================================================================================
+# 2)one-pass dynamic programming (1-D DP)
 # def find_best_profit(prices):
 #     if len(prices) < 2: return 0
 #     best_profit = 0
@@ -2725,12 +2721,12 @@
 #         min_so_far = min(min_so_far,price)
 #         best_profit = max(profit_today,best_profit)
 
-#     return best_profit    
+#     return best_profit
 
 # prices = [7, 1, 5, 3, 6, 4]
 # result = find_max_profit(prices)
 # print(result)
-#===============================================================================================================================
+# ===============================================================================================================================
 
 
 #   Maximum Subarray
@@ -2738,7 +2734,6 @@
 # Solution
 # Given an integer array nums, find the subarray with the largest sum, and return its sum.
 
- 
 
 # Example 1:
 
@@ -2755,31 +2750,31 @@
 # Input: nums = [5,4,-1,7,8]
 # Output: 23
 # Explanation: The subarray [5,4,-1,7,8] has the largest sum 23.
- 
+
 
 # Constraints:
 
 # 1 <= nums.length <= 105
 # -104 <= nums[i] <= 104
- 
+
 
 # Follow up: If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach, which is more subtle.
 
-#------------------------------------------------------------------------------------------------------------------------------
-#1)
+# ------------------------------------------------------------------------------------------------------------------------------
+# 1)
 # def max_subarray(nums):
 #     if (len(nums) == 0): return 0
 #     max_ending = nums[0]
 #     max_arr = nums[0]
 
-#     for i in nums[1:]:        
+#     for i in nums[1:]:
 #         max_ending = max(i , max_ending + i)
 #         max_arr = max(max_ending,max_arr)
 
-#     return max_arr    
-        
-#------------------------------------------------------------------------------------------------------------------------------
-#2)
+#     return max_arr
+
+# ------------------------------------------------------------------------------------------------------------------------------
+# 2)
 # def max_sub_arr(nums):
 #     if not nums:
 #         return 0
@@ -2793,9 +2788,9 @@
 #         curr_sum += n
 #         max_sum = max(max_sum,curr_sum)
 
-#     return max_sum    
+#     return max_sum
 
-#===============================================================================================================================
+# ===============================================================================================================================
 #   House Robber
 
 # Solution
@@ -2803,7 +2798,6 @@
 
 # Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.
 
- 
 
 # Example 1:
 
@@ -2817,52 +2811,124 @@
 # Output: 12
 # Explanation: Rob house 1 (money = 2), rob house 3 (money = 9) and rob house 5 (money = 1).
 # Total amount you can rob = 2 + 9 + 1 = 12.
- 
+
 
 # Constraints:
 
 # 1 <= nums.length <= 100
-#------------------------------------------------------------------------------------------------------------------------------
-#1)
-def better_combination(money):  
+# ------------------------------------------------------------------------------------------------------------------------------
+# 1)
+# def better_combination(money):
 
-    prev1 = 0  #up to i-1
-    prev2= 0   #up to i-2
+#     prev1 = 0  #up to i-1
+#     prev2= 0   #up to i-2
 
-    for x in money:
-        take = x + prev2 
-        skip = prev1 
-        curr = max(skip,take) 
+#     for x in money:
+#         take = x + prev2
+#         skip = prev1
+#         curr = max(skip,take)
 
-        prev2 = prev1
-        prev1 = curr
+#         prev2 = prev1
+#         prev1 = curr
 
-    return prev1        
+#     return prev1
 
-input = [2, 7, 9, 3, 1]
-result = better_combination(input)
-print(result)
+# input = [2, 7, 9, 3, 1]
+# result = better_combination(input)
+# print(result)
 
-#------------------------------------------------------------------------------------------------------------------------------
-#2)Recursion:
-def rob(nums):
-    n = len(nums)
-    memo = {}
+# ------------------------------------------------------------------------------------------------------------------------------
+# 2)Recursion:
+# def rob(nums):
+#     n = len(nums)
+#     memo = {}
 
-    def f(i):
-        if i >= n: return 0
+#     def f(i):
+#         if i >= n: return 0
 
-        if i in memo:
-            return memo[i]
-        
-        skip = f(i + 1)
-        take = nums[i] + f(i + 2)
-        memo[i] = max(skip,take)
-        return memo[i]
+#         if i in memo:
+#             return memo[i]
+
+#         skip = f(i + 1)
+#         take = nums[i] + f(i + 2)
+#         memo[i] = max(skip,take)
+#         return memo[i]
+
+#     return f(0)
+
+
+# input = [2, 7, 9, 3, 1]
+# result = rob(input)
+# print(result)
+
+# ===============================================================================================================================
+
+#   Number of 1 Bits
+
+# Solution
+# Given a positive integer n, write a function that returns the number of set bits in its binary representation (also known as the Hamming weight).
+
+
+# Example 1:
+
+# Input: n = 11
+
+# Output: 3
+
+# Explanation:
+
+# The input binary string 1011 has a total of three set bits.
+
+# Example 2:
+
+# Input: n = 128
+
+# Output: 1
+
+# Explanation:
+
+# The input binary string 10000000 has a total of one set bit.
+
+# Example 3:
+
+# Input: n = 2147483645
+
+# Output: 30
+
+# Explanation:
+
+# The input binary string 1111111111111111111111111111101 has a total of thirty set bits.
+
+
+# Constraints:
+
+# 1 <= n <= 231 - 1
+
+
+# Follow up: If this function is called many times, how would you optimize it?
+# ------------------------------------------------------------------------------------------------------------------------------
+def find_set_bits(n):
+
+    if not isinstance(n, int) or isinstance(n, bool):
+        raise TypeError("n must be a non-negative integer")
+
+    if n < 0:
+        raise ValueError("n must be non-negative")
+
+    if n == 0:
+        return 0
     
-    return f(0)
+    bits = []
+
+    while n > 0:
+        bit = n % 2  # eiter 0 or 1
+        bits.append(str(bit))
+        n //= 2
+
+    bits.reverse()
+    return "".join(bits)    
 
 
-input = [2, 7, 9, 3, 1]
-result = rob(input)
-print(result)
+num = 15
+result = find_set_bits(num)
+print(type(result))

@@ -2907,28 +2907,32 @@
 
 # Follow up: If this function is called many times, how would you optimize it?
 # ------------------------------------------------------------------------------------------------------------------------------
-def find_set_bits(n):
+# def find_set_bits(n):
 
-    if not isinstance(n, int) or isinstance(n, bool):
-        raise TypeError("n must be a non-negative integer")
+#     if not isinstance(n, int) or isinstance(n, bool):
+#         raise TypeError("n must be a non-negative integer")
 
-    if n < 0:
-        raise ValueError("n must be non-negative")
+#     if n < 0:
+#         raise ValueError("n must be non-negative")
 
-    if n == 0:
-        return 0
+#     if n == 0:
+#         return 0
     
-    bits = []
+#     bits = []
 
-    while n > 0:
-        bit = n % 2  # eiter 0 or 1
-        bits.append(str(bit))
-        n //= 2
+#     while n > 0:
+#         bit = n % 2  # eiter 0 or 1
+#         bits.append(str(bit))
+#         n //= 2
 
-    bits.reverse()
-    return "".join(bits)    
+#     bits.reverse()
+#     return "".join(bits)    
 
 
-num = 15
-result = find_set_bits(num)
-print(type(result))
+# num = 15
+# result = find_set_bits(num)
+# print(type(result))
+
+# //===============================================================================================================================
+def counter(x,y):
+    if not isinstance(x,int)

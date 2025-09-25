@@ -3053,8 +3053,6 @@
 // Solution
 // Given an integer array nums, find the subarray with the largest sum, and return its sum.
 
- 
-
 // Example 1:
 
 // Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
@@ -3070,13 +3068,11 @@
 // Input: nums = [5,4,-1,7,8]
 // Output: 23
 // Explanation: The subarray [5,4,-1,7,8] has the largest sum 23.
- 
 
 // Constraints:
 
 // 1 <= nums.length <= 105
 // -104 <= nums[i] <= 104
- 
 
 // Follow up: If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach, which is more subtle.
 //------------------------------------------------------------------------------------------------------------------------------
@@ -3101,7 +3097,7 @@
 //2)
 // function maxSubArrays(nums){
 //     let maxSub = nums[0];
-//     let currSum = 0; 
+//     let currSum = 0;
 
 //     for (const n of nums){
 //         if (currSum < 0){
@@ -3111,4 +3107,115 @@
 //         maxSub = Math.max(maxSub,currSum)
 //     }
 //     return maxSub
+// }
+
+// ===============================================================================================================================
+//   Number of 1 Bits
+
+// Solution
+// Given a positive integer n, write a function that returns the number of set bits in its binary representation (also known as the Hamming weight).
+
+// Example 1:
+
+// Input: n = 11
+
+// Output: 3
+
+// Explanation:
+
+// The input binary string 1011 has a total of three set bits.
+
+// Example 2:
+
+// Input: n = 128
+
+// Output: 1
+
+// Explanation:
+
+// The input binary string 10000000 has a total of one set bit.
+
+// Example 3:
+
+// Input: n = 2147483645
+
+// Output: 30
+
+// Explanation:
+
+// The input binary string 1111111111111111111111111111101 has a total of thirty set bits.
+
+// Constraints:
+
+// 1 <= n <= 231 - 1
+
+// Follow up: If this function is called many times, how would you optimize it?
+
+//------------------------------------------------------------------------------------------------------------------------------
+//1)
+// function bits(n){
+//     if (typeof n !== "number" || !Number.isInteger(n)) throw new TypeError("n must be an integer number");
+//     if (!Number.isSafeInteger(n)) throw new RangeError("n must be a safe integer (<= 2^53-1)");
+//     if (n < 0) throw new RangeError("n must be non-negative");
+//     if (n === 0) return '0';
+
+//     let count = 0;
+//     while ( n > 0) {
+//         count += (n & 1);
+//         n = n >>> 1;
+//     }
+//     return count
+// }
+//===============================================================================================================================
+//   Hamming Distance
+
+// Solution
+// The Hamming distance between two integers is the number of positions at which the corresponding bits are different.
+
+// Given two integers x and y, return the Hamming distance between them.
+
+// Example 1:
+
+// Input: x = 1, y = 4
+// Output: 2
+// Explanation:
+// 1   (0 0 0 1)
+// 4   (0 1 0 0)
+//        ↑   ↑
+// The above arrows point to positions where the corresponding bits are different.
+// Example 2:
+
+// Input: x = 3, y = 1
+// Output: 1
+
+// Constraints:
+
+// 0 <= x, y <= 231 - 1
+
+// Note: This question is the same as 2220: Minimum Bit Flips to Convert Number.
+
+//------------------------------------------------------------------------------------------------------------------------------
+
+//1)XOR + count 1-bits
+// function countBits(x, y) {
+//   //Make sure input is an integer
+//   if (!Number.isInteger(x) || !Number.isInteger(y)) {
+//     throw new TypeError("x and y must be integers");
+//   }
+
+//   //Set up the range of the numbers(range)
+//   //It only allows non-negative numbers and keep them in the 32bits range.
+//   const MAX = 2 ** 31 - 1;
+//   if (x < 0 || y < 0 || x > MAX || y > MAX) {
+//     throw new RangeError("x and y must be in [0, 2^31 - 1]");
+//   }
+//   if (x === y) return 0;
+
+//   let z = x ^ y;
+//   let count = 0;
+//   while (z !== 0) {
+//     count += z & 1;
+//     z >>>= 1;
+//   }
+//   return count;
 // }
